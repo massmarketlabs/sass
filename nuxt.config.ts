@@ -2,6 +2,21 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
+  css: ['~/assets/css/main.css'],
+  modules: [
+    '@nuxt/ui',
+    '@nuxt/eslint'
+  ],
+  fonts: {
+    provider: 'local'
+  },
+  icon: {
+    clientBundle: {
+      scan: {
+        globInclude: ['**\/*.{vue,jsx,tsx,md,mdc,mdx}', 'app/**/*.ts']
+      }
+    }
+  },
   future: {
     compatibilityVersion: 4
   }
