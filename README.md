@@ -25,4 +25,7 @@ Git Commit 使用 Conventional Commits
 
 ##### Documentation
 * [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction)
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+* [Better Auth](https://better-auth.vercel.app/docs)
+
+##### Reference
+* [atinux/nuxthub-better-auth](https://github.com/atinux/nuxthub-better-auth)

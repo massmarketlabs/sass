@@ -10,17 +10,28 @@
     "postinstall": "nuxt prepare",
     "serve": "node .output/server/index.mjs",
     "lint": "eslint .",
-    "lint:fix": "eslint --fix ."
+    "lint:fix": "eslint --fix .",
+    "db:generateAuth": "npx @better-auth/cli generate --config server/utils/auth.ts --output server/database/schema/auth.ts -y",
+    "db:generate": "drizzle-kit generate --config ./server/database/drizzle.config.ts",
+    "db:migrate": "drizzle-kit migrate --config ./server/database/drizzle.config.ts"
   },
   "dependencies": {
     "@iconify-json/lucide": "^1.2.28",
     "@nuxt/ui": "^3.0.0-beta.3",
-    "nuxt": "3.15.4",
+    "better-auth": "^1.2.3",
+    "dotenv": "^16.4.7",
+    "drizzle-orm": "^0.40.0",
+    "ioredis": "^5.6.0",
+    "nuxt": "3.16.0",
+    "pg": "^8.13.3",
     "vue": "latest"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.8.1",
+    "@better-auth/cli": "^1.2.3",
     "@nuxt/eslint": "^1.1.0",
+    "@types/pg": "^8.11.11",
+    "drizzle-kit": "^0.30.5",
     "eslint": "^9.22.0",
     "typescript": "^5.8.2"
   }
