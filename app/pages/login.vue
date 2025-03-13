@@ -6,21 +6,28 @@ definePageMeta({
 const auth = useAuth()
 const toast = useToast()
 
-const state = reactive({
-  email: '',
-  password: '',
+const schema = z.object({
+  email: z.string().email('Invalid email address'),
+  password: z.string().min(8, 'Password must be at least 8 characters'),
+  rememberMe: z.boolean().optional()
+})
+type Schema = z.output<typeof schema>
+
+const state = reactive<Partial<Schema>>({
+  email: undefined,
+  password: undefined,
   rememberMe: false
 })
 
 const loading = ref(false)
 
-async function signIn() {
+async function onSubmit(event: FormSubmitEvent<Schema>) {
   if (loading.value)
     return
   loading.value = true
   const { error } = await auth.signIn.email({
-    email: state.email,
-    password: state.password
+    email: event.data.email,
+    password: event.data.password
   })
   if (error) {
     toast.add({
@@ -31,7 +38,8 @@ async function signIn() {
   else {
     await navigateTo('/user')
     toast.add({
-      title: 'Login Success'
+      title: 'Login Success',
+      color: 'success'
     })
   }
   loading.value = false
@@ -39,24 +47,20 @@ async function signIn() {
 </script>
 
 <template>
-  <div class="flex flex-1 items-center justify-center">
+  <UContainer class="flex min-h-[calc(100vh-4rem)] items-center justify-center p-4">
     <UCard class="w-full max-w-md">
       <template #header>
-        <div class="text-center">
-          <UIcon
-            name="i-heroicons-user-circle"
-            class="text-4xl mb-2"
-          />
+        <div class="text-center p-4">
           <h2 class="text-xl font-semibold">
-            Welcome Back
+            Welcome to NuxtFusion
           </h2>
         </div>
       </template>
 
       <div class="space-y-4">
-        <div class="grid grid-cols-3 gap-3">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <UButton
-            color="neutral"
+            color="primary"
             variant="outline"
             icon="i-simple-icons-google"
             @click="auth.signIn.social({ provider: 'google', callbackURL: '/user' })"
@@ -64,15 +68,15 @@ async function signIn() {
             Google
           </UButton>
           <UButton
-            color="neutral"
+            color="primary"
             variant="outline"
-            icon="i-simple-icons-facebook"
-            @click="auth.signIn.social({ provider: 'facebook', callbackURL: '/user' })"
+            icon="i-simple-icons-github"
+            @click="auth.signIn.social({ provider: 'github', callbackURL: '/user' })"
           >
-            Facebook
+            Github
           </UButton>
           <UButton
-            color="neutral"
+            color="primary"
             variant="outline"
             icon="i-simple-icons-apple"
             @click="auth.signIn.social({ provider: 'apple', callbackURL: '/user' })"
@@ -81,42 +85,45 @@ async function signIn() {
           </UButton>
         </div>
 
-        <UDivider label="Or" />
+        <USeparator label="Or" />
 
         <UForm
+          :schema="schema"
           :state="state"
           class="space-y-4"
-          @submit="signIn"
+          @submit="onSubmit"
         >
           <UFormField
             label="Email"
             name="email"
+            required
           >
             <UInput
               v-model="state.email"
               type="email"
               placeholder="Email Address"
-              required
             />
           </UFormField>
 
           <UFormField
             label="Password"
             name="password"
+            required
           >
             <UInput
               v-model="state.password"
               type="password"
               placeholder="Password"
-              required
             />
           </UFormField>
 
-          <div class="flex items-center justify-between">
-            <UCheckbox
-              v-model="state.rememberMe"
-              label="Remember me"
-            />
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+            <UFormField name="rememberMe">
+              <UCheckbox
+                v-model="state.rememberMe"
+                label="Remember me"
+              />
+            </UFormField>
             <UButton
               variant="link"
               color="primary"
@@ -148,5 +155,5 @@ async function signIn() {
         </div>
       </div>
     </UCard>
-  </div>
+  </UContainer>
 </template>
