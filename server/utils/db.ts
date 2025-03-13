@@ -6,7 +6,7 @@ import * as schema from '../database/schema'
 import { pgPool } from './drivers'
 
 // use db without pg pool
-export const db = drizzle({ client: pgPool });
+export const db = drizzle({ client: pgPool })
 
 // use db with pg pool
 export const useDB = async (event?: H3Event<EventHandlerRequest>): Promise<NodePgDatabase<typeof schema>> => {

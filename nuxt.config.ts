@@ -7,6 +7,11 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@nuxt/eslint'
   ],
+  eslint: {
+    config: {
+      standalone: false
+    }
+  },
   fonts: {
     provider: 'local'
   },
@@ -24,8 +29,8 @@ export default defineNuxtConfig({
     public: {
       auth: {
         redirectUserTo: '/user',
-        redirectGuestTo: '/',
-      },
-    },
-  },
+        redirectGuestTo: '/'
+      }
+    }
+  }
 })

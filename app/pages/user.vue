@@ -12,7 +12,7 @@ onMounted(() => {
   if (error) {
     toast.add({
       color: 'error',
-      title: `${error}`,
+      title: `${error}`
     })
   }
 })

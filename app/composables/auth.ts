@@ -1,11 +1,11 @@
-import { defu } from 'defu'
-import { createAuthClient } from 'better-auth/client'
 import type {
-  InferSessionFromClient,
-  InferUserFromClient,
   ClientOptions,
+  InferSessionFromClient,
+  InferUserFromClient
 } from 'better-auth/client'
 import type { RouteLocationRaw } from 'vue-router'
+import { createAuthClient } from 'better-auth/client'
+import { defu } from 'defu'
 
 interface RuntimeAuthConfig {
   redirectUserTo: RouteLocationRaw | string
@@ -19,13 +19,13 @@ export function useAuth() {
   const client = createAuthClient({
     baseURL: url.origin,
     fetchOptions: {
-      headers,
-    },
+      headers
+    }
   })
 
   const options = defu(useRuntimeConfig().public.auth as Partial<RuntimeAuthConfig>, {
     redirectUserTo: '/',
-    redirectGuestTo: '/',
+    redirectGuestTo: '/'
   })
   const session = useState<InferSessionFromClient<ClientOptions> | null>('auth:session', () => null)
   const user = useState<InferUserFromClient<ClientOptions> | null>('auth:user', () => null)
@@ -39,8 +39,8 @@ export function useAuth() {
     sessionFetching.value = true
     const { data } = await client.getSession({
       fetchOptions: {
-        headers,
-      },
+        headers
+      }
     })
     session.value = data?.session || null
     user.value = data?.user || null
@@ -50,7 +50,8 @@ export function useAuth() {
 
   if (import.meta.client) {
     client.$store.listen('$sessionSignal', async (signal) => {
-      if (!signal) return
+      if (!signal)
+        return
       await fetchSession()
     })
   }
@@ -72,6 +73,6 @@ export function useAuth() {
     },
     options,
     fetchSession,
-    client,
+    client
   }
 }

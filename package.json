@@ -1,7 +1,7 @@
 {
   "name": "nuxt-app",
-  "private": true,
   "type": "module",
+  "private": true,
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -16,20 +16,20 @@
     "db:migrate": "drizzle-kit migrate --config ./server/database/drizzle.config.ts"
   },
   "dependencies": {
-    "@iconify-json/lucide": "^1.2.28",
-    "@nuxt/ui": "^3.0.0-beta.3",
+    "@iconify-json/lucide": "^1.2.29",
+    "@nuxt/ui": "^3.0.0",
     "better-auth": "^1.2.3",
     "dotenv": "^16.4.7",
     "drizzle-orm": "^0.40.0",
     "ioredis": "^5.6.0",
     "nuxt": "3.16.0",
-    "pg": "^8.13.3",
-    "vue": "latest"
+    "pg": "^8.14.0",
+    "vue": "^3.5.13"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^4.8.1",
+    "@antfu/eslint-config": "^4.10.1",
     "@better-auth/cli": "^1.2.3",
-    "@nuxt/eslint": "^1.1.0",
+    "@nuxt/eslint": "^1.2.0",
     "@types/pg": "^8.11.11",
     "drizzle-kit": "^0.30.5",
     "eslint": "^9.22.0",

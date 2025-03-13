@@ -21,8 +21,6 @@ npm run build
 npm run preview
 ```
 
-Git Commit 使用 Conventional Commits
-
 ##### Documentation
 * [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction)
 * [Better Auth](https://better-auth.vercel.app/docs)
