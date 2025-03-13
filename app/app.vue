@@ -1,17 +1,10 @@
-<script setup>
-const { signOut, loggedIn } = useAuth()
+<script lang="ts" setup>
 </script>
 
 <template>
   <UApp>
-    <UButton
-      v-if="loggedIn"
-      color="black"
-      @click="signOut({ redirectTo: '/' })"
-    >
-      Sign Out
-    </UButton>
-    <USeparator />
-    <NuxtPage />
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
   </UApp>
 </template>
