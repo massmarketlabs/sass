@@ -79,7 +79,7 @@ const { loggedIn, signOut, user } = useAuth()
                 {
                   label: 'Sign out',
                   icon: 'i-lucide-log-out',
-                  click: () => signOut()
+                  onSelect: () => signOut()
                 }
               ]"
             >
