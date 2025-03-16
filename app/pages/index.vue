@@ -41,6 +41,8 @@ const features = [
     description: 'Fully responsive layout for all devices'
   }
 ]
+
+const { loggedIn, signOut, user } = useAuth()
 </script>
 
 <template>
@@ -71,18 +73,45 @@ const features = [
         </div>
 
         <div class="flex items-center gap-2">
-          <UButton
-            to="/login"
-            variant="ghost"
-          >
-            Sign in
-          </UButton>
-          <UButton
-            to="/login"
-            color="primary"
-          >
-            Get started
-          </UButton>
+          <template v-if="loggedIn">
+            <UDropdownMenu
+              :items="[
+                {
+                  label: 'Sign out',
+                  icon: 'i-lucide-log-out',
+                  click: () => signOut()
+                }
+              ]"
+            >
+              <UButton
+                variant="ghost"
+                color="neutral"
+                class="flex items-center gap-2"
+              >
+                <UAvatar
+                  v-if="user?.image"
+                  :src="user?.image"
+                  :alt="user?.name"
+                  size="sm"
+                />
+                <span>{{ user?.name }}</span>
+              </UButton>
+            </UDropdownMenu>
+          </template>
+          <template v-else>
+            <UButton
+              to="/login"
+              variant="ghost"
+            >
+              Sign in
+            </UButton>
+            <UButton
+              to="/login"
+              color="primary"
+            >
+              Get started
+            </UButton>
+          </template>
         </div>
       </UContainer>
     </nav>
