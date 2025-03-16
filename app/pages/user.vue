@@ -37,21 +37,31 @@ onMounted(() => {
     <div class="space-y-6">
       <!-- User Profile Section -->
       <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-6">
-        <div class="flex items-center gap-4 mb-4">
-          <UAvatar
-            v-if="user?.image"
-            :src="user.image"
-            :alt="user?.name || ''"
-            size="lg"
-          />
-          <div>
-            <h1 class="text-2xl font-bold">
-              {{ user?.name || 'Anonymous User' }}
-            </h1>
-            <p class="text-gray-500 dark:text-gray-400">
-              {{ user?.email }}
-            </p>
+        <div class="flex justify-between items-center mb-4">
+          <div class="flex items-center gap-4">
+            <UAvatar
+              v-if="user?.image"
+              :src="user.image"
+              :alt="user?.name || ''"
+              size="lg"
+            />
+            <div>
+              <h1 class="text-2xl font-bold">
+                {{ user?.name || 'Anonymous User' }}
+              </h1>
+              <p class="text-gray-500 dark:text-gray-400">
+                {{ user?.email }}
+              </p>
+            </div>
           </div>
+          <UButton
+            to="/"
+            variant="ghost"
+            color="neutral"
+            icon="i-heroicons-arrow-left"
+          >
+            Back
+          </UButton>
         </div>
 
         <div class="grid gap-4 md:grid-cols-2">

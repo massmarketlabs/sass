@@ -77,6 +77,11 @@ const { loggedIn, signOut, user } = useAuth()
             <UDropdownMenu
               :items="[
                 {
+                  label: 'Profile',
+                  icon: 'i-lucide-user',
+                  to: '/user'
+                },
+                {
                   label: 'Sign out',
                   icon: 'i-lucide-log-out',
                   onSelect: () => signOut()
