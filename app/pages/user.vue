@@ -8,8 +8,11 @@ function hasProvider(provider: string) {
   return accounts.value?.data?.some(account => account.provider === provider)
 }
 
-function formatDate(dateString: string) {
-  return new Date(dateString).toLocaleDateString('en-US', {
+function formatDate(date: Date | undefined) {
+  if (!date) {
+    return ''
+  }
+  return new Date(date).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',

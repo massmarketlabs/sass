@@ -3,9 +3,12 @@ import type {
   InferSessionFromClient,
   InferUserFromClient
 } from 'better-auth/client'
+import type { UserWithRole } from 'better-auth/plugins'
 import type { RouteLocationRaw } from 'vue-router'
 import { createAuthClient } from 'better-auth/client'
 import { defu } from 'defu'
+
+type ExtendedUser = InferUserFromClient<ClientOptions> & UserWithRole
 
 interface RuntimeAuthConfig {
   redirectUserTo: RouteLocationRaw | string
@@ -28,7 +31,7 @@ export function useAuth() {
     redirectGuestTo: '/'
   })
   const session = useState<InferSessionFromClient<ClientOptions> | null>('auth:session', () => null)
-  const user = useState<InferUserFromClient<ClientOptions> | null>('auth:user', () => null)
+  const user = useState<ExtendedUser | null>('auth:user', () => null)
   const sessionFetching = import.meta.server ? ref(false) : useState('auth:sessionFetching', () => false)
 
   const fetchSession = async () => {
