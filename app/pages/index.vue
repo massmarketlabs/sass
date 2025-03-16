@@ -1,169 +1,112 @@
 <script setup lang="ts">
 definePageMeta({
-  auth: {
-    only: 'guest',
-    redirectUserTo: '/user'
-  }
-})
-const auth = useAuth()
-const toast = useToast()
-const tabs = [{
-  slot: 'signin',
-  label: 'Sign In',
-  icon: 'i-heroicons-user'
-}, {
-  slot: 'signup',
-  label: 'Sign Up',
-  icon: 'i-heroicons-user-plus'
-}]
-
-const state = reactive({
-  email: '',
-  password: '',
-  name: ''
+  auth: false
 })
 
-const loading = ref(false)
-
-async function signIn() {
-  if (loading.value)
-    return
-  loading.value = true
-  const { error } = await auth.signIn.email({
-    email: state.email,
-    password: state.password
-  })
-  if (error) {
-    toast.add({
-      title: error.message,
-      color: 'error'
-    })
+const features = [
+  {
+    icon: 'i-lucide-layout-template',
+    title: 'Modern Stack',
+    description: 'Built with Nuxt 3, TypeScript and Vue 3 Composition API'
+  },
+  {
+    icon: 'i-lucide-shield-check',
+    title: 'Authentication Ready',
+    description: 'Integrated with Better Auth for secure authentication'
+  },
+  {
+    icon: 'i-lucide-database',
+    title: 'Database Integration',
+    description: 'PostgreSQL with Drizzle ORM for type-safe database operations'
+  },
+  {
+    icon: 'i-lucide-palette',
+    title: 'Beautiful UI',
+    description: 'Styled with Nuxt UI and TailwindCSS for modern design'
+  },
+  {
+    icon: 'i-lucide-moon',
+    title: 'Dark Mode',
+    description: 'Built-in dark mode support for better user experience'
+  },
+  {
+    icon: 'i-lucide-smartphone',
+    title: 'Responsive Design',
+    description: 'Fully responsive layout for all devices'
   }
-  else {
-    await navigateTo('/user')
-    toast.add({
-      title: `You have been signed in!`
-    })
-  }
-  loading.value = false
-}
-
-async function signUp() {
-  if (loading.value)
-    return
-  loading.value = true
-  const { error } = await auth.signUp.email({
-    email: state.email,
-    password: state.password,
-    name: state.name
-  })
-  if (error) {
-    toast.add({
-      title: error.message,
-      color: 'error'
-    })
-  }
-  else {
-    toast.add({
-      title: `You have been signed up!`
-    })
-    await navigateTo('/user')
-  }
-  loading.value = false
-}
+]
 </script>
 
 <template>
-  <UTabs
-    :items="tabs"
-    class="max-w-md mx-auto"
-  >
-    <template #signin>
-      <UForm
-        :state="state"
-        class="flex flex-col gap-4"
-        @submit.prevent="signIn"
-      >
-        <UFormField
-          label="Email"
-          required
-        >
-          <UInput
-            v-model="state.email"
-            type="email"
-            placeholder="Email"
-          />
-        </UFormField>
-        <UFormField
-          label="Password"
-          requiredrequired
-        >
-          <UInput
-            v-model="state.password"
-            type="password"
-            placeholder="Password"
-          />
-        </UFormField>
-        <UButton
-          type="submit"
-          color="primary"
-          :loading="loading"
-          :disabled="!state.email || !state.password"
-        >
-          Sign In
-        </UButton>
-        <USeparator label="or" />
-        <UButton
-          icon="i-simple-icons-github"
-          type="button"
-          color="primary"
-          @click="auth.signIn.social({ provider: 'github', callbackURL: '/user' })"
-        >
-          Sign In with Github
-        </UButton>
-      </UForm>
-    </template>
-    <template #signup>
-      <UForm
-        :state="state"
-        class="flex flex-col gap-4"
-        @submit.prevent="signUp"
-      >
-        <UFormField
-          label="Email"
-          required
-        >
-          <UInput
-            v-model="state.email"
-            type="email"
-            placeholder="Email"
-          />
-        </UFormField>
-        <UFormField
-          label="Password"
-          requiredrequired
-        >
-          <UInput
-            v-model="state.password"
-            type="password"
-            placeholder="Password"
-          />
-        </UFormField>
-        <UFormField label="Name">
-          <UInput
-            v-model="state.name"
-            type="name"
-            placeholder="Name"
-          />
-        </UFormField>
-        <UButton
-          type="submit"
-          color="primary"
-          :loading="loading"
-        >
-          Sign Up
-        </UButton>
-      </UForm>
-    </template>
-  </UTabs>
+  <div>
+    <!-- Hero Section -->
+    <section class="bg-gray-50 dark:bg-gray-900">
+      <UContainer class="py-24">
+        <div class="text-center">
+          <h1 class="text-4xl font-bold tracking-tight sm:text-6xl mb-6">
+            NuxtFusion
+          </h1>
+          <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">
+            A modern SaaS starter kit built with Nuxt 3
+          </p>
+          <div class="flex gap-4 justify-center">
+            <UButton
+              to="/login"
+              color="primary"
+              size="lg"
+            >
+              Get Started
+            </UButton>
+            <UButton
+              to="https://github.com/your-repo/nuxtfusion"
+              target="_blank"
+              color="neutral"
+              variant="outline"
+              size="lg"
+              icon="i-simple-icons-github"
+            >
+              View on GitHub
+            </UButton>
+          </div>
+        </div>
+      </UContainer>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-24">
+      <UContainer>
+        <div class="text-center mb-16">
+          <h2 class="text-3xl font-bold">
+            Everything you need to build your SaaS
+          </h2>
+          <p class="mt-4 text-lg text-gray-600 dark:text-gray-400">
+            Start your next project with our feature-rich template
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <UCard
+            v-for="feature in features"
+            :key="feature.title"
+            class="text-center"
+          >
+            <div class="flex flex-col items-center p-6">
+              <div class="p-3 bg-primary-50 dark:bg-primary-900 rounded-full mb-4">
+                <UIcon
+                  :name="feature.icon"
+                  class="text-primary-500 w-6 h-6"
+                />
+              </div>
+              <h3 class="text-lg font-semibold mb-2">
+                {{ feature.title }}
+              </h3>
+              <p class="text-gray-600 dark:text-gray-400">
+                {{ feature.description }}
+              </p>
+            </div>
+          </UCard>
+        </div>
+      </UContainer>
+    </section>
+  </div>
 </template>

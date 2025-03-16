@@ -28,8 +28,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       auth: {
-        redirectUserTo: '/user',
-        redirectGuestTo: '/'
+        redirectUserTo: '/dashboard',
+        redirectGuestTo: '/login'
       }
     }
   },
