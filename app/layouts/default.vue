@@ -6,7 +6,7 @@ import AppNavbar from './components/AppNavbar.vue'
 <template>
   <div class="min-h-screen flex flex-col items-center relative bg-gray-100 dark:bg-gray-950">
     <AppNavbar />
-    <div class="flex flex-1">
+    <div class="flex flex-1 mt-4">
       <slot />
     </div>
     <AppFooter />

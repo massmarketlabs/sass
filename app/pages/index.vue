@@ -79,7 +79,7 @@ const { loggedIn, signOut, user } = useAuth()
                 {
                   label: 'Profile',
                   icon: 'i-lucide-user',
-                  to: '/user'
+                  to: '/profile'
                 },
                 {
                   label: 'Sign out',

@@ -3,12 +3,10 @@ import type {
   InferSessionFromClient,
   InferUserFromClient
 } from 'better-auth/client'
-import type { UserWithRole } from 'better-auth/plugins'
 import type { RouteLocationRaw } from 'vue-router'
 import { createAuthClient } from 'better-auth/client'
 import { defu } from 'defu'
 
-type ExtendedUser = InferUserFromClient<ClientOptions> & UserWithRole
 
 interface RuntimeAuthConfig {
   redirectUserTo: RouteLocationRaw | string
