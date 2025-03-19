@@ -32,13 +32,5 @@ export default defineNuxtConfig({
         redirectGuestTo: '/login'
       }
     }
-  },
-  imports: {
-    imports: [
-      {
-        from: 'zod',
-        name: 'z'
-      }
-    ]
   }
 })

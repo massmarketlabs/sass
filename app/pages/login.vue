@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import * as z from 'zod'
+
 definePageMeta({
   auth: false
 })
