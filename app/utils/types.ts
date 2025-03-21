@@ -10,3 +10,5 @@ export type ExtendedUser = InferUserFromClient<ClientOptions> & UserWithRole
 export interface StringDict<T> {
   [key: string]: T
 }
+export { z } from 'zod'
+export type { output as zodOutput } from 'zod'

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import * as z from 'zod'
-
 definePageMeta({
   auth: false
 })
@@ -13,7 +11,7 @@ const schema = z.object({
   password: z.string().min(8, 'Password must be at least 8 characters'),
   rememberMe: z.boolean().optional()
 })
-type Schema = z.output<typeof schema>
+type Schema = zodOutput<typeof schema>
 
 const state = reactive<Partial<Schema>>({
   email: undefined,

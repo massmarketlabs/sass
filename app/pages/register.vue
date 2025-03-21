@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import * as z from 'zod'
-
 definePageMeta({
   auth: false
 })
@@ -18,7 +16,7 @@ const schema = z.object({
   path: ['confirmPassword']
 })
 
-type Schema = z.output<typeof schema>
+type Schema = zodOutput<typeof schema>
 
 const state = reactive<Partial<Schema>>({
   name: undefined,
