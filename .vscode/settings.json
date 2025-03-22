@@ -9,7 +9,7 @@
   "files.associations": {
     "*.css": "tailwindcss"
   },
-  
+
   // Auto fix
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
