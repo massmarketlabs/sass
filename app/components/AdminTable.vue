@@ -4,7 +4,7 @@ const emit = defineEmits<{
 }>()
 const { t } = useI18n()
 const columns = defineModel<any[]>('columns', { required: true })
-const data = defineModel<TableData[]>('data', { required: true })
+const data = defineModel<any[]>('data', { default: [] })
 const loading = defineModel<boolean>('loading', { default: false })
 const hidePagination = defineModel<boolean>('hidePagination', { default: false })
 const page = ref<number | undefined>(1)
@@ -14,9 +14,7 @@ const total = ref(0)
 const defaultSelectedColumns: Array<string> = []
 const columnOptions: Array<any> = []
 for (const column of columns.value) {
-  if (column.accessorKey != 'id') {
-    defaultSelectedColumns.push(column.accessorKey)
-  }
+  defaultSelectedColumns.push(column.accessorKey)
   if (column.accessorKey != 'actions') {
     columnOptions.push(column)
   }

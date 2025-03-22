@@ -4,6 +4,7 @@ import type {
 } from 'better-auth/client'
 import type { RouteLocationRaw } from 'vue-router'
 import { createAuthClient } from 'better-auth/client'
+import { adminClient } from 'better-auth/client/plugins'
 import { defu } from 'defu'
 
 interface RuntimeAuthConfig {
@@ -19,7 +20,10 @@ export function useAuth() {
     baseURL: url.origin,
     fetchOptions: {
       headers
-    }
+    },
+    plugins: [
+      adminClient()
+    ]
   })
 
   const options = defu(useRuntimeConfig().public.auth as Partial<RuntimeAuthConfig>, {
@@ -27,7 +31,7 @@ export function useAuth() {
     redirectGuestTo: '/'
   })
   const session = useState<InferSessionFromClient<ClientOptions> | null>('auth:session', () => null)
-  const user = useState<ExtendedUser | null>('auth:user', () => null)
+  const user = useState<UserWithRole | null>('auth:user', () => null)
   const sessionFetching = import.meta.server ? ref(false) : useState('auth:sessionFetching', () => false)
 
   const fetchSession = async () => {
@@ -42,7 +46,7 @@ export function useAuth() {
       }
     })
     session.value = data?.session || null
-    user.value = data?.user || null
+    user.value = data?.user ? { ...data.user, role: data.user.role ?? undefined } : null
     sessionFetching.value = false
     return data
   }

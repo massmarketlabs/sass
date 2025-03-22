@@ -1,14 +1,15 @@
-import type {
-  ClientOptions,
-  InferUserFromClient
-} from 'better-auth/client'
-import type { UserWithRole } from 'better-auth/plugins'
+export type { FormSubmitEvent, NavigationMenuItem, TableColumn, TableData } from '@nuxt/ui'
 
-export type { FormSubmitEvent, NavigationMenuItem, TableData } from '@nuxt/ui'
+export type { UserWithRole } from 'better-auth/plugins'
 
-export type ExtendedUser = InferUserFromClient<ClientOptions> & UserWithRole
+export { z } from 'zod'
+export type { output as zodOutput } from 'zod'
+
+export type TranFunction = (name: string, options?: StringDict<any>) => string
+export interface SortBy {
+  column: string
+  direction: 'asc' | 'desc' | undefined
+}
 export interface StringDict<T> {
   [key: string]: T
 }
-export { z } from 'zod'
-export type { output as zodOutput } from 'zod'
