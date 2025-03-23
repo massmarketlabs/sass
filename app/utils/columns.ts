@@ -1,18 +1,10 @@
-import type { Row } from '@tanstack/vue-table'
-import { UAvatar, UBadge, UButton, UDropdownMenu, UTooltip } from '#components'
-
-export const getColumnValue = (cell: any) => {
-  const row = cell.row as Row<any>
-  const value = row.getValue<string>(cell.column.id)
-  return value
-}
-export const htmlColumn = (cell: any, el = 'span') => {
-  const value = getColumnValue(cell)
+export const htmlColumn = <T>(cell: ColumnCell<T>, el = 'span') => {
+  const value = cell.getValue() as string
   return h(el, { innerHTML: value }, [])
 }
 
-export const IDColumn = (cell: any) => {
-  const value = getColumnValue(cell)
+export const IDColumn = <T>(cell: ColumnCell<T>) => {
+  const value = cell.getValue() as string
   return h(UTooltip, {
     text: value
   }, () => h(
@@ -22,26 +14,26 @@ export const IDColumn = (cell: any) => {
   ))
 }
 
-export const timeColumn = (cell: any) => {
-  const value = getColumnValue(cell)
+export const dateColumn = <T>(cell: ColumnCell<T>) => {
+  const value = cell.getValue() as Date | string
   return formatToDatetime(value)
 }
 
-export const yesNoColumn = (cell: any, t: TranFunction) => {
-  const value = getColumnValue(cell)
+export const yesNoColumn = <T>(cell: ColumnCell<T>, t: TranFunction) => {
+  const value = cell.getValue() as boolean
   const color = value ? 'success' : 'error'
   return h(UBadge, { class: 'capitalize', variant: 'subtle', color }, () => value ? t('yes') : t('no'))
 }
 
-export const avatarColumn = (cell: any) => {
-  const value = getColumnValue(cell)
+export const avatarColumn = <T>(cell: ColumnCell<T>) => {
+  const value = cell.getValue() as string
   if (value) {
     return h(UAvatar, { src: value })
   }
 }
 
-export const isEnabledColumn = (cell: any, t: TranFunction) => {
-  const value = getColumnValue(cell)
+export const isEnabledColumn = <T>(cell: ColumnCell<T>, t: TranFunction) => {
+  const value = cell.getValue() as boolean
   const color = value ? 'success' : 'error'
   return h(UBadge, { class: 'capitalize', variant: 'subtle', color }, () => value ? t('enable') : t('disable'))
 }

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const emit = defineEmits<{
-  fetchData: []
+  refresh: []
 }>()
 const { t } = useI18n()
 const columns = defineModel<any[]>('columns', { required: true })
@@ -38,7 +38,7 @@ const setPageTotal = (value: number) => {
 
 const onChangePagination = () => {
   nextTick(() => {
-    emit('fetchData')
+    emit('refresh')
   })
 }
 
@@ -59,7 +59,7 @@ defineExpose({
         <slot name="topRight" />
         <USelect
           v-model="selectedColumns"
-          icon="i-lucide-sliders-horizontal"
+          icon="i-lucide-columns-2"
           :items="columnOptions"
           size="sm"
           multiple

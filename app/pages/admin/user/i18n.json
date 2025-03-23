@@ -22,6 +22,7 @@
   "zh": {
     "title": "用户管理",
     "columns": {
+      "avatar": "头像",
       "name": "名称",
       "email": "邮箱",
       "role": "角色",
@@ -41,6 +42,7 @@
   "ja": {
     "title": "ユーザー管理",
     "columns": {
+      "avatar": "アバター",
       "name": "名前",
       "email": "メール",
       "role": "役割",
@@ -60,6 +62,7 @@
   "fr": {
     "title": "Gestion des utilisateurs",
     "columns": {
+      "avatar": "Avatar",
       "name": "Nom",
       "email": "Email",
       "role": "Rôle",

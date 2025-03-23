@@ -6,16 +6,16 @@ const { client } = useAuth()
 
 const isLoading = ref(false)
 
-const columns: TableColumn<any, unknown>[] = [
+const columns: TableColumn<UserWithRole>[] = [
   {
     accessorKey: 'id',
     header: 'ID',
-    cell: (cell: any) => IDColumn(cell)
+    cell: IDColumn
   },
   {
     accessorKey: 'avatar',
     header: t('columns.avatar'),
-    cell: (cell: any) => avatarColumn(cell)
+    cell: avatarColumn
   },
   {
     accessorKey: 'name',
@@ -27,24 +27,31 @@ const columns: TableColumn<any, unknown>[] = [
   },
   {
     accessorKey: 'role',
-    header: t('columns.role')
-    // cell: (row: any) => h(UBadge, {
-    //   color: row.role === 'admin' ? 'primary' : 'secondary',
-    //   label: row.role
-    // })
+    header: t('columns.role'),
+    cell: cell => h(
+      UBadge,
+      {
+        color: cell.getValue() === 'admin' ? 'primary' : 'neutral',
+        variant: 'outline'
+      },
+      () => cell.getValue()
+    )
   },
   {
     accessorKey: 'status',
-    header: t('columns.status')
-    // cell: (row: any) => h(UBadge, {
-    //   color: row.banned ? 'error' : (row.emailVerified ? 'success' : 'warning'),
-    //   label: row.banned ? t('status.banned') : (row.emailVerified ? t('status.verified') : t('status.unverified'))
-    // })
+    header: t('columns.status'),
+    cell: ({ cell: { row: { original } } }) => h(
+      UBadge,
+      {
+        color: original.banned ? 'error' : (original.emailVerified ? 'success' : 'warning'),
+        label: original.banned ? t('status.banned') : (original.emailVerified ? t('status.verified') : t('status.unverified'))
+      }
+    )
   },
   {
     accessorKey: 'createdAt',
     header: t('columns.createdAt'),
-    cell: (row: any) => new Date(row.createdAt).toLocaleDateString()
+    cell: dateColumn
   }
 ]
 
@@ -52,7 +59,7 @@ const { getPageInfo, setPageTotal } = useAdminTable()
 
 const sortBy = ref<SortBy>({ column: 'createdAt', direction: 'desc' })
 
-const listUsers = async () => {
+const fetchData = async () => {
   const result = await client.admin.listUsers({
     query: {
       limit: getPageInfo().limit,
@@ -72,7 +79,7 @@ const listUsers = async () => {
 
 const { data, refresh } = await useAsyncData(
   'listUsers',
-  () => listUsers()
+  () => fetchData()
 )
 </script>
 
@@ -83,7 +90,7 @@ const { data, refresh } = await useAsyncData(
       :loading="isLoading"
       :columns="columns"
       :data="data"
-      @fetch-data="refresh"
+      @refresh="refresh"
     />
   </NuxtLayout>
 </template>
