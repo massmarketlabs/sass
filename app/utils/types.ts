@@ -1,6 +1,7 @@
+import type { TableColumn } from '@nuxt/ui'
 import type { CellContext, RowData } from '@tanstack/vue-table'
 
-export type { FormSubmitEvent, NavigationMenuItem, TableColumn, TableData } from '@nuxt/ui'
+export type { FormSubmitEvent, NavigationMenuItem, TableData } from '@nuxt/ui'
 export { default as UAvatar } from '@nuxt/ui/runtime/components/Avatar.vue'
 
 export { default as UBadge } from '@nuxt/ui/runtime/components/Badge.vue'
@@ -17,6 +18,10 @@ export type { output as zodOutput } from 'zod'
 
 export type TranFunction = (name: string, options?: StringDict<any>) => string
 export type ColumnCell<TData extends RowData, TValue = unknown> = CellContext<TData, TValue>
+export type AdminTableColumn<T extends TableData, D = unknown> = TableColumn<T, D> & {
+  accessorKey: string
+  header: string
+}
 
 export interface SortBy {
   column: string

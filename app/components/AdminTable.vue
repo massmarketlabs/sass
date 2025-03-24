@@ -1,9 +1,9 @@
-<script setup lang="ts">
+<script setup lang="ts" generic="T">
 const emit = defineEmits<{
   refresh: []
 }>()
 const { t } = useI18n()
-const columns = defineModel<any[]>('columns', { required: true })
+const columns = defineModel<AdminTableColumn<T>[]>('columns', { required: true })
 const data = defineModel<any[]>('data', { default: [] })
 const loading = defineModel<boolean>('loading', { default: false })
 const hidePagination = defineModel<boolean>('hidePagination', { default: false })

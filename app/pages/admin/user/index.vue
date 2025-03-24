@@ -6,7 +6,7 @@ const { client } = useAuth()
 
 const isLoading = ref(false)
 
-const columns: TableColumn<UserWithRole>[] = [
+const columns: AdminTableColumn<UserWithRole>[] = [
   {
     accessorKey: 'id',
     header: 'ID',
