@@ -124,7 +124,9 @@ const clickSignOut = () => {
               </div>
             </template>
           </UDrawer>
-          <ColorModeToggler />
+          <ClientOnly>
+            <ColorModeToggler />
+          </ClientOnly>
           <title>{{ pathNameItemMap[$route.path]?.label }}</title>
           <h1>{{ pathNameItemMap[$route.path]?.label }} </h1>
           <slot name="navLeft" />

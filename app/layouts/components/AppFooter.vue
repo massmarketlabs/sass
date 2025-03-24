@@ -15,7 +15,9 @@
         </div>
 
         <div class="flex items-center space-x-4">
-          <ColorModeToggler />
+          <ClientOnly>
+            <ColorModeToggler />
+          </ClientOnly>
           <UButton
             icon="i-simple-icons-github"
             variant="ghost"
