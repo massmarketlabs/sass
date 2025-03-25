@@ -1,18 +1,19 @@
 <script setup lang="ts" generic="T">
-const emit = defineEmits<{
-  refresh: []
+const { fetchData, columns, hidePagination = false } = defineProps<{
+  fetchData: FetchDataFn<T>
+  columns: AdminTableColumn<T>[]
+  hidePagination?: boolean
 }>()
-const columns = defineModel<AdminTableColumn<T>[]>('columns', { required: true })
-const data = defineModel<T[]>('data', { default: [] })
-const loading = defineModel<boolean>('loading', { default: false })
-const hidePagination = defineModel<boolean>('hidePagination', { default: false })
-const page = ref<number | undefined>(1)
-const limit = ref<number | undefined>(20)
+
+const page = ref<number>(1)
+const limit = ref<number>(20)
+const loading = ref(false)
 const total = ref(0)
+const data = ref<any[]>([])
 
 const defaultSelectedColumns: Array<string> = []
 const columnOptions: Array<AdminTableColumn<T>> = []
-for (const column of columns.value) {
+for (const column of columns) {
   defaultSelectedColumns.push(column.accessorKey)
   if (column.accessorKey != 'actions') {
     columnOptions.push(column)
@@ -22,7 +23,7 @@ const selectedColumns = reactive(defaultSelectedColumns)
 const tableRef = useTemplateRef('table')
 
 watchEffect(() => {
-  for (const column of columns.value) {
+  for (const column of columns) {
     if (selectedColumns.includes(column.accessorKey)) {
       tableRef.value?.tableApi?.getColumn(column.accessorKey)?.toggleVisibility(true)
     } else {
@@ -45,23 +46,34 @@ const columnItems = computed(() => columnOptions.map(column => ({
         selectedColumns.splice(index, 1)
     }
   }
-}))
-)
+})))
 
-const setPageTotal = (value: number) => {
-  total.value = value
+const fetchTableData = async () => {
+  loading.value = true
+  try {
+    const result = await fetchData({
+      page: page.value,
+      limit: limit.value
+    })
+    data.value = result.data || []
+    total.value = result.total || 0
+  } finally {
+    loading.value = false
+  }
+  return true
+}
+const updatePage = (value: number) => {
+  page.value = value
+  fetchTableData()
 }
 
-const onChangePagination = () => {
-  nextTick(() => {
-    emit('refresh')
-  })
+const updateLimit = (value: number) => {
+  limit.value = value
+  fetchTableData()
 }
 
-defineExpose({
-  page,
-  limit,
-  setPageTotal
+onMounted(() => {
+  fetchTableData()
 })
 </script>
 
@@ -74,6 +86,7 @@ defineExpose({
       <template #right>
         <slot name="topRight" />
         <UDropdownMenu
+          v-if="columnOptions.length"
           arrow
           :items="columnItems"
           size="sm"
@@ -98,10 +111,11 @@ defineExpose({
     />
     <Pagination
       v-if="!hidePagination"
-      v-model:page="page"
-      v-model:limit="limit"
+      :model-value="page"
+      :limit="limit"
       :total="total"
-      @change="onChangePagination"
+      @update:model-value="updatePage"
+      @update:limit="updateLimit"
     />
   </div>
 </template>

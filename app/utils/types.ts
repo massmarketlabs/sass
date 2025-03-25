@@ -30,3 +30,15 @@ export interface SortBy {
 export interface StringDict<T> {
   [key: string]: T
 }
+
+export interface PaginationParams {
+  page: number
+  limit: number
+}
+
+export interface PaginationResult<T> {
+  data: T[]
+  total: number
+}
+
+export type FetchDataFn<T> = (params: PaginationParams) => Promise<PaginationResult<T>>

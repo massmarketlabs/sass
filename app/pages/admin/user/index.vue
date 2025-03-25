@@ -4,8 +4,6 @@
 const { t } = useI18n()
 const { client } = useAuth()
 
-const isLoading = ref(false)
-
 const columns: AdminTableColumn<UserWithRole>[] = [
   {
     accessorKey: 'id',
@@ -55,42 +53,29 @@ const columns: AdminTableColumn<UserWithRole>[] = [
   }
 ]
 
-const { getPageInfo, setPageTotal } = useAdminTable()
-
 const sortBy = ref<SortBy>({ column: 'createdAt', direction: 'desc' })
 
-const fetchData = async () => {
+const fetchData: FetchDataFn<UserWithRole> = async ({ page, limit }) => {
   const result = await client.admin.listUsers({
     query: {
-      limit: getPageInfo().limit,
-      offset: getPageInfo().offset,
+      limit,
+      offset: (page - 1) * limit,
       sortBy: sortBy.value.column,
       sortDirection: sortBy.value.direction
     }
   })
-  if (result.data) {
-    setPageTotal(result.data.total || result.data.users.length)
-    return result.data.users
-  } else {
-    setPageTotal(0)
-    return []
+  return {
+    data: result.data?.users || [],
+    total: result.data?.total || 0
   }
 }
-
-const { data, refresh } = await useAsyncData(
-  'listUsers',
-  () => fetchData()
-)
 </script>
 
 <template>
   <NuxtLayout name="admin">
     <AdminTable
-      ref="table"
-      :loading="isLoading"
       :columns="columns"
-      :data="data"
-      @refresh="refresh"
+      :fetch-data="fetchData"
     />
   </NuxtLayout>
 </template>
