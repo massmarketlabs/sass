@@ -1,8 +1,11 @@
 <i18n src="./i18n.json"></i18n>
 
 <script setup lang="ts">
+import CreateUserModal from './components/CreateUserModal.vue'
+
 const { t } = useI18n()
 const { client } = useAuth()
+const isOpen = ref(false)
 
 const columns: AdminTableColumn<UserWithRole>[] = [
   {
@@ -73,9 +76,23 @@ const fetchData: FetchDataFn<UserWithRole> = async ({ page, limit }) => {
 
 <template>
   <NuxtLayout name="admin">
+    <template #navRight>
+      <UButton
+        color="neutral"
+        variant="outline"
+        trailing-icon="i-lucide-plus"
+        @click="isOpen = true"
+      >
+        {{ t('actions.createUser') }}
+      </UButton>
+    </template>
     <AdminTable
       :columns="columns"
       :fetch-data="fetchData"
+    />
+    <CreateUserModal
+      v-model:open="isOpen"
+      :t="t"
     />
   </NuxtLayout>
 </template>

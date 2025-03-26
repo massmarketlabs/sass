@@ -14,10 +14,24 @@
       "verified": "Verified",
       "unverified": "Unverified"
     },
-    "buttons": {
-      "addUser": "Add User"
+    "actions": {
+      "createUser": "Create User",
+      "cancel": "Cancel",
+      "create": "Create"
     },
-    "empty": "No users found"
+    "modal": {
+      "createUser": "Create New User"
+    },
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "password": "Password",
+      "role": "Role"
+    },
+    "roles": {
+      "user": "User",
+      "admin": "Administrator"
+    }
   },
   "zh": {
     "title": "用户管理",
@@ -34,10 +48,24 @@
       "verified": "已验证",
       "unverified": "未验证"
     },
-    "buttons": {
-      "addUser": "添加用户"
+    "actions": {
+      "createUser": "创建用户",
+      "cancel": "取消",
+      "create": "创建"
     },
-    "empty": "暂无用户"
+    "modal": {
+      "createUser": "创建新用户"
+    },
+    "form": {
+      "name": "姓名",
+      "email": "邮箱",
+      "password": "密码",
+      "role": "角色"
+    },
+    "roles": {
+      "user": "普通用户",
+      "admin": "管理员"
+    }
   },
   "ja": {
     "title": "ユーザー管理",
@@ -54,10 +82,24 @@
       "verified": "確認済み",
       "unverified": "未確認"
     },
-    "buttons": {
-      "addUser": "ユーザー追加"
+    "actions": {
+      "createUser": "ユーザー作成",
+      "cancel": "キャンセル",
+      "create": "作成"
     },
-    "empty": "ユーザーが見つかりません"
+    "modal": {
+      "createUser": "新規ユーザー作成"
+    },
+    "form": {
+      "name": "名前",
+      "email": "メールアドレス",
+      "password": "パスワード",
+      "role": "役割"
+    },
+    "roles": {
+      "user": "ユーザー",
+      "admin": "管理者"
+    }
   },
   "fr": {
     "title": "Gestion des utilisateurs",
@@ -74,9 +116,23 @@
       "verified": "Vérifié",
       "unverified": "Non vérifié"
     },
-    "buttons": {
-      "addUser": "Ajouter un utilisateur"
+    "actions": {
+      "createUser": "Créer un utilisateur",
+      "cancel": "Annuler",
+      "create": "Créer"
     },
-    "empty": "Aucun utilisateur trouvé"
+    "modal": {
+      "createUser": "Créer un nouvel utilisateur"
+    },
+    "form": {
+      "name": "Nom",
+      "email": "Email",
+      "password": "Mot de passe",
+      "role": "Rôle"
+    },
+    "roles": {
+      "user": "Utilisateur",
+      "admin": "Administrateur"
+    }
   }
 }
