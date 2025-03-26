@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const { t } = usei18n()
+const { t } = useI18n()
 
 const navigation = [
   { name: 'Features', href: '/#features' },
