@@ -18,7 +18,7 @@ export default {
   yes: 'Yes',
   no: 'No',
   app: {
-    name: 'NuxtFusion',
+    name: 'NuxSaaS',
     slogan: 'Mordern SaaS Starter Template'
   },
   menu: {

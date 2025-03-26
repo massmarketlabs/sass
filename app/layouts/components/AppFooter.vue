@@ -1,10 +1,14 @@
+<script lang="ts" setup>
+const { t } = usei18n()
+</script>
+
 <template>
   <footer class="w-full border-t border-gray-200 dark:border-gray-800 py-4">
     <div class="container mx-auto px-4">
       <div class="flex flex-col md:flex-row justify-between items-center gap-4">
         <div class="flex items-center space-x-2">
           <UIcon name="i-lucide-code" />
-          <span>NuxtFusion</span>
+          <span>{{ t('app.name') }}</span>
           <USeparator
             orientation="vertical"
             class="hidden md:block"
@@ -22,7 +26,7 @@
             icon="i-simple-icons-github"
             variant="ghost"
             color="neutral"
-            href="https://github.com/Cyanhall/NuxtFusion"
+            href="https://github.com/NuxSaaS/NuxSaaS"
             target="_blank"
             rel="noopener noreferrer"
           />

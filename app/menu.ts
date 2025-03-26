@@ -33,7 +33,7 @@ export const getMenus = (t: (name: string) => string): NavigationMenuItem[][] =>
         label: 'GitHub',
         icon: 'i-lucide-github',
         badge: '1k',
-        to: 'https://github.com/Cyanhall/NuxtFusion',
+        to: 'https://github.com/NuxSaaS/NuxSaaS',
         target: '_blank'
       },
       {

@@ -44,7 +44,7 @@ const features = [
       <UContainer class="py-24">
         <div class="text-center">
           <h1 class="text-4xl font-bold tracking-tight sm:text-6xl mb-6">
-            NuxtFusion
+            NuxSaaS
           </h1>
           <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">
             A modern SaaS starter kit built with Nuxt 3
@@ -58,7 +58,7 @@ const features = [
               Get Started
             </UButton>
             <UButton
-              to="https://github.com/your-repo/nuxtfusion"
+              to="https://github.com/NuxSaaS/NuxSaaS"
               target="_blank"
               color="neutral"
               variant="outline"

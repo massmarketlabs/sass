@@ -52,7 +52,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       <template #header>
         <div class="text-center p-4">
           <h2 class="text-xl font-semibold">
-            Welcome to NuxtFusion
+            Welcome to NuxSaaS
           </h2>
         </div>
       </template>

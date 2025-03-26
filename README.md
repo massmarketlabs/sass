@@ -1,4 +1,4 @@
-# NuxtFusion
+# NuxSaaS
 
 ## Env
 ```bash

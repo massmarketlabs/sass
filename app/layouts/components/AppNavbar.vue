@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+const { t } = usei18n()
+
 const navigation = [
   { name: 'Features', href: '/#features' },
   { name: 'Documentation', href: '/docs' },
@@ -20,7 +22,7 @@ const { loggedIn, signOut, user } = useAuth()
           name="i-lucide-zap"
           class="h-6 w-6 text-primary-500"
         />
-        <span class="font-bold text-xl">NuxtFusion</span>
+        <span class="font-bold text-xl">{{ t('app.name') }}</span>
       </NuxtLink>
 
       <div class="hidden md:flex items-center gap-8">
