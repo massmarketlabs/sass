@@ -123,7 +123,10 @@ const clickSignOut = () => {
         </div>
       </div>
     </aside>
-    <div class="p-2 h-screen sm:ml-64 bg-white dark:bg-gray-900">
+    <div
+      class="p-2 h-screen bg-white dark:bg-gray-900"
+      :class="[isCollapsed ? 'sm:ml-15' : 'sm:ml-64']"
+    >
       <ThreeColumn class="mb-2">
         <template #left>
           <UDrawer
@@ -155,9 +158,6 @@ const clickSignOut = () => {
             variant="ghost"
             @click="isCollapsed = !isCollapsed"
           />
-          <ClientOnly>
-            <ColorModeToggler />
-          </ClientOnly>
           <title>{{ pathNameItemMap[$route.path]?.label }}</title>
           <h1>{{ pathNameItemMap[$route.path]?.label }} </h1>
           <slot name="navLeft" />
@@ -167,6 +167,9 @@ const clickSignOut = () => {
         </template>
         <template #right>
           <slot name="navRight" />
+          <ClientOnly>
+            <ColorModeToggler />
+          </ClientOnly>
         </template>
       </ThreeColumn>
       <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
