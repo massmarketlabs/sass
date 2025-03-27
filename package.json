@@ -18,7 +18,7 @@
   "dependencies": {
     "@nuxt/ui": "^3.0.1",
     "@nuxtjs/i18n": "^9.4.0",
-    "better-auth": "^1.2.4",
+    "better-auth": "^1.2.5",
     "date-fns": "^4.1.0",
     "dotenv": "^16.4.7",
     "drizzle-orm": "0.41.0",
@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.11.0",
-    "@better-auth/cli": "^1.2.4",
+    "@better-auth/cli": "^1.2.5",
     "@iconify-json/lucide": "^1.2.32",
     "@iconify-json/simple-icons": "^1.2.29",
     "@nuxt/eslint": "^1.2.0",
