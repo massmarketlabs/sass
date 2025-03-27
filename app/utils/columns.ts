@@ -38,7 +38,7 @@ export const isEnabledColumn = <T>(cell: ColumnCell<T>, t: TranFunction) => {
   return h(UBadge, { class: 'capitalize', variant: 'subtle', color }, () => value ? t('enable') : t('disable'))
 }
 
-export const actionColumn = (row: Row<any>, getRowItems: (row: Row<any>) => any[]) => {
+export const actionColumn = <T>(row: Row<T>, getRowItems: (row: Row<T>) => any[]) => {
   return h(
     'div',
     { class: 'text-right' },

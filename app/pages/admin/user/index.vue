@@ -5,7 +5,9 @@ import CreateUserModal from './components/CreateUserModal.vue'
 
 const { t } = useI18n()
 const { client } = useAuth()
-const isOpen = ref(false)
+const isUserModalOpen = ref(false)
+
+const { refresh } = useAdminTable()
 
 const columns: AdminTableColumn<UserWithRole>[] = [
   {
@@ -53,8 +55,41 @@ const columns: AdminTableColumn<UserWithRole>[] = [
     accessorKey: 'createdAt',
     header: t('columns.createdAt'),
     cell: dateColumn
+  },
+  {
+    accessorKey: 'actions',
+    header: ' ',
+    cell: ({ row }) => actionColumn(row, getRowItems)
   }
 ]
+
+function getRowItems(row: Row<UserWithRole>) {
+  const user = row.original
+  return [
+    {
+      type: 'label',
+      label: t('actions')
+    },
+    {
+      type: 'separator'
+    },
+    {
+      label: t('delete'),
+      icon: 'i-lucide-trash',
+      color: 'error',
+      async onSelect() {
+        const removeResult = await client.admin.removeUser({
+          userId: user.id
+        })
+        if (removeResult.data?.success) {
+          refresh()
+        } else {
+          console.error(removeResult.error)
+        }
+      }
+    }
+  ]
+}
 
 const sortBy = ref<SortBy>({ column: 'createdAt', direction: 'desc' })
 
@@ -72,8 +107,6 @@ const fetchData: FetchDataFn<UserWithRole> = async ({ page, limit }) => {
     total: result.data?.total || 0
   }
 }
-
-const { refresh } = useAdminTable()
 </script>
 
 <template>
@@ -83,7 +116,7 @@ const { refresh } = useAdminTable()
         color="neutral"
         variant="outline"
         trailing-icon="i-lucide-plus"
-        @click="isOpen = true"
+        @click="isUserModalOpen = true"
       >
         {{ t('actions.createUser') }}
       </UButton>
@@ -94,7 +127,7 @@ const { refresh } = useAdminTable()
       :fetch-data="fetchData"
     />
     <CreateUserModal
-      v-model:open="isOpen"
+      v-model:open="isUserModalOpen"
       :t="t"
       @created="refresh"
     />
