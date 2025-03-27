@@ -5,6 +5,7 @@ import SearchPalette from './components/SearchPalette.vue'
 const router = useRouter()
 const route = useRoute()
 const { t } = useI18n()
+const isCollapsed = ref(false)
 
 defineShortcuts({
   'g-1': () => router.push('/admin/dashboard'),
@@ -40,22 +41,36 @@ const clickSignOut = () => {
 
 <template>
   <div>
-    <aside class="fixed top-0 left-0 w-64 transition-transform hidden sm:block">
+    <aside
+      class="fixed top-0 left-0 transition-transform duration-300 hidden sm:block"
+      :class="[isCollapsed ? 'w-15' : 'w-64']"
+    >
       <div class="h-screen flex flex-col px-3 py-4 bg-gray-100 dark:bg-gray-800">
-        <a class="flex items-center ps-2.5 mb-3">
-          <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
+        <a
+          v-if="!isCollapsed"
+          class="flex items-center ps-2.5"
+        >
+          <Logo />
+          <span
+            class="self-center ml-2 text-xl font-semibold whitespace-nowrap dark:text-white"
+          >
             {{ t('app.name') }}
           </span>
         </a>
-        <div class="flex pl-2 pr-2 mb-2">
-          <SearchPalette />
+        <Logo v-if="isCollapsed" />
+        <div
+          class="flex mb-2 mt-3"
+          :class="{ 'pl-2 pr-2': !isCollapsed }"
+        >
+          <SearchPalette :collapsed="isCollapsed" />
         </div>
         <UNavigationMenu
           :items="menus"
+          :collapsed="isCollapsed"
           orientation="vertical"
           class="data-[orientation=vertical]:w-full flex-1 overflow-y-auto"
         />
-        <div class="flex flex-col pl-2 pr-2">
+        <div class="flex flex-col pl-1 pr-2">
           <USeparator />
           <UTooltip
             :ui="{ content: 'w-54 flex flex-col h-auto p-0 gap-0' }"
@@ -83,17 +98,26 @@ const clickSignOut = () => {
                 Sign Out
               </UButton>
             </template>
-            <div>
-              <div class="w-full flex items-center justify-between p-2">
-                <div>
-                  <UAvatar
-                    src="https://avatars.githubusercontent.com/u/64819679?s=48&v=4"
-                    size="xs"
-                  />
-                  <span class="text-xs ml-2">Name</span>
-                </div>
-                <UIcon name="i-lucide-ellipsis-vertical" />
+            <div
+              class="w-full flex items-center justify-between mt-2"
+              :class="{ 'p-2': !isCollapsed }"
+            >
+              <div>
+                <UAvatar
+                  src="https://avatars.githubusercontent.com/u/64819679?s=48&v=4"
+                  size="xs"
+                />
+                <span
+                  v-if="!isCollapsed"
+                  class="text-xs ml-2"
+                >
+                  Name
+                </span>
               </div>
+              <UIcon
+                v-if="!isCollapsed"
+                name="i-lucide-ellipsis-vertical"
+              />
             </div>
           </UTooltip>
         </div>
@@ -124,6 +148,13 @@ const clickSignOut = () => {
               </div>
             </template>
           </UDrawer>
+          <UButton
+            :icon="isCollapsed ? 'i-lucide-panel-left-open' : 'i-lucide-panel-left-close'"
+            class="w-8 h-8"
+            color="neutral"
+            variant="ghost"
+            @click="isCollapsed = !isCollapsed"
+          />
           <ClientOnly>
             <ColorModeToggler />
           </ClientOnly>

@@ -2,6 +2,7 @@
 const colorMode = useColorMode()
 const { t } = useI18n()
 const router = useRouter()
+const collapsed = defineModel('collapsed', { default: false })
 
 const groups = ref([
   {
@@ -88,15 +89,23 @@ function onSelectPalette(item: any) {
 <template>
   <UModal v-model:open="isOpen">
     <UButton
-      class="w-full"
+      :class="{ 'w-full': !collapsed }"
       size="sm"
       icon="i-lucide-search"
       color="neutral"
       variant="outline"
       @click="isOpen = true"
     >
-      <span class="w-full text-left">{{ `${t('search')}...` }}</span>
-      <template #trailing>
+      <span
+        v-if="!collapsed"
+        class="w-full text-left"
+      >
+        {{ `${t('search')}...` }}
+      </span>
+      <template
+        v-if="!collapsed"
+        #trailing
+      >
         <UKbd value="shift" />
         <UKbd value="G" />
       </template>
