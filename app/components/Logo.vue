@@ -1,6 +1,6 @@
 <template>
   <UAvatar
-    src="/favicon.ico"
+    src="/logo.png"
     alt="Logo"
   />
 </template>
