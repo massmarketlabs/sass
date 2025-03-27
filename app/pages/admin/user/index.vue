@@ -31,14 +31,43 @@ const columns: AdminTableColumn<UserWithRole>[] = [
   {
     accessorKey: 'role',
     header: t('columns.role'),
-    cell: cell => h(
-      UBadge,
-      {
-        color: cell.getValue() === 'admin' ? 'primary' : 'neutral',
-        variant: 'outline'
-      },
-      () => cell.getValue()
-    )
+    cell: ({ row }) => {
+      const roles = ['user', 'admin'] as const
+      const items = roles.map(role => ({
+        label: t(`roles.${role}`),
+        type: 'checkbox' as const,
+        checked: row.original.role === role,
+        onUpdateChecked: async () => {
+          const result = await client.admin.setRole({
+            userId: row.original.id,
+            role
+          })
+          if (result.data?.user) {
+            refresh()
+          } else {
+            console.error(result.error)
+          }
+        }
+      }))
+      return h(
+        UDropdownMenu as any,
+        {
+          items,
+          arrow: true
+        },
+        () => h(
+          UButton,
+          {
+            color: row.original.role === 'admin' ? 'primary' : 'neutral',
+            variant: 'outline',
+            size: 'xs',
+            icon: 'i-lucide-chevron-down',
+            trailing: true
+          },
+          () => t(`roles.${row.original.role}`)
+        )
+      )
+    }
   },
   {
     accessorKey: 'status',
@@ -114,8 +143,8 @@ const fetchData: FetchDataFn<UserWithRole> = async ({ page, limit }) => {
     <template #navRight>
       <UButton
         color="neutral"
+        icon="i-lucide-plus"
         variant="outline"
-        trailing-icon="i-lucide-plus"
         @click="isUserModalOpen = true"
       >
         {{ t('actions.createUser') }}
