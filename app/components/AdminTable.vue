@@ -75,6 +75,10 @@ const updateLimit = (value: number) => {
 onMounted(() => {
   fetchTableData()
 })
+
+defineExpose({
+  fetchTableData
+})
 </script>
 
 <template>

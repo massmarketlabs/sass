@@ -72,6 +72,8 @@ const fetchData: FetchDataFn<UserWithRole> = async ({ page, limit }) => {
     total: result.data?.total || 0
   }
 }
+
+const { refresh } = useAdminTable()
 </script>
 
 <template>
@@ -87,12 +89,14 @@ const fetchData: FetchDataFn<UserWithRole> = async ({ page, limit }) => {
       </UButton>
     </template>
     <AdminTable
+      ref="table"
       :columns="columns"
       :fetch-data="fetchData"
     />
     <CreateUserModal
       v-model:open="isOpen"
       :t="t"
+      @created="refresh"
     />
   </NuxtLayout>
 </template>
