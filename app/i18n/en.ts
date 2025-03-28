@@ -22,6 +22,8 @@ export default {
     slogan: 'Mordern SaaS Starter Template'
   },
   menu: {
-    users: 'Users'
+    users: 'Users',
+    maintenance: 'Maintenance',
+    dbPoolStatus: 'Database Pool Status'
   }
 }

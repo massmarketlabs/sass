@@ -12,6 +12,17 @@ export const getMenus = (t: (name: string) => string): NavigationMenuItem[][] =>
         to: '/admin/user'
       },
       {
+        label: t('menu.maintenance'),
+        icon: 'i-lucide-wrench',
+        children: [
+          {
+            label: t('menu.dbPoolStatus'),
+            icon: 'i-lucide-database',
+            to: '/admin/maintenance/dbPool'
+          }
+        ]
+      },
+      {
         label: 'Composables',
         icon: 'i-lucide-database',
         defaultOpen: false,
