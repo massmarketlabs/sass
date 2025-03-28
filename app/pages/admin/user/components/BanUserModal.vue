@@ -26,7 +26,7 @@ const { client } = useAuth()
 
 const banPeriods = [
   { value: -1, label: 'permanent' },
-  { value: 10, label: '1_day' },
+  { value: 60 * 60 * 24, label: '1_day' },
   { value: 60 * 60 * 24 * 7, label: '7_days' },
   { value: 60 * 60 * 24 * 30, label: '30_days' }
 ].map((item) => {

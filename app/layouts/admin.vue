@@ -42,7 +42,7 @@ const clickSignOut = () => {
 <template>
   <div>
     <aside
-      class="fixed top-0 left-0 transition-transform duration-300 hidden sm:block"
+      class="fixed top-0 left-0 transition-all duration-300 hidden sm:block"
       :class="[isCollapsed ? 'w-15' : 'w-64']"
     >
       <div class="h-screen flex flex-col px-3 py-4 bg-gray-100 dark:bg-gray-800">
@@ -99,10 +99,10 @@ const clickSignOut = () => {
               </UButton>
             </template>
             <div
-              class="w-full flex items-center justify-between mt-2"
-              :class="{ 'p-2': !isCollapsed }"
+              class="w-full flex items-center justify-between mt-2 pt-2 pb-2"
+              :class="{ 'pl-2 pr-2': !isCollapsed }"
             >
-              <div>
+              <div class="flex items-center">
                 <UAvatar
                   src="https://avatars.githubusercontent.com/u/64819679?s=48&v=4"
                   size="xs"
