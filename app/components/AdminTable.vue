@@ -60,7 +60,6 @@ const fetchTableData = async () => {
   } finally {
     loading.value = false
   }
-  return true
 }
 const updatePage = (value: number) => {
   page.value = value
@@ -89,6 +88,13 @@ defineExpose({
       </template>
       <template #right>
         <slot name="topRight" />
+        <UButton
+          color="neutral"
+          variant="outline"
+          icon="i-lucide-refresh-cw"
+          size="sm"
+          @click="fetchTableData()"
+        />
         <UDropdownMenu
           v-if="columnOptions.length"
           arrow
@@ -96,7 +102,7 @@ defineExpose({
           size="sm"
         >
           <UButton
-            color="primary"
+            color="neutral"
             variant="outline"
             icon="i-lucide-columns-2"
             size="sm"
