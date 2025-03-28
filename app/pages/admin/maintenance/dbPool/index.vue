@@ -2,7 +2,7 @@
 
 <script setup lang="ts">
 const { t } = useI18n()
-const { data: poolStats } = await useFetch('/api/system/db-stats')
+const { data: poolStats } = await useFetch('/api/maintenance/db-stats')
 </script>
 
 <template>
