@@ -1,11 +1,14 @@
 <i18n src="./i18n.json"></i18n>
 
 <script setup lang="ts">
+import BanUserModal from './components/BanUserModal.vue'
 import CreateUserModal from './components/CreateUserModal.vue'
 
 const { t } = useI18n()
 const { client } = useAuth()
 const isUserModalOpen = ref(false)
+const isBanModalOpen = ref(false)
+const selectedUserId = ref('')
 
 const { refresh } = useAdminTable()
 
@@ -103,6 +106,24 @@ function getRowItems(row: Row<UserWithRole>) {
       type: 'separator'
     },
     {
+      label: user.banned ? t('actions.unban') : t('actions.ban'),
+      icon: 'i-lucide-ban',
+      color: user.banned ? 'success' : 'error',
+      async onSelect() {
+        if (user.banned) {
+          const result = await client.admin.unbanUser({
+            userId: user.id
+          })
+          if (result.data?.user) {
+            refresh()
+          }
+        } else {
+          selectedUserId.value = user.id
+          isBanModalOpen.value = true
+        }
+      }
+    },
+    {
       label: t('delete'),
       icon: 'i-lucide-trash',
       color: 'error',
@@ -159,6 +180,12 @@ const fetchData: FetchDataFn<UserWithRole> = async ({ page, limit }) => {
       v-model:open="isUserModalOpen"
       :t="t"
       @created="refresh"
+    />
+    <BanUserModal
+      v-model:open="isBanModalOpen"
+      :user-id="selectedUserId"
+      :t="t"
+      @banned="refresh"
     />
   </NuxtLayout>
 </template>

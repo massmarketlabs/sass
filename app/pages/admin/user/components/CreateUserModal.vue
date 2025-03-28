@@ -109,7 +109,7 @@ const onCancel = () => {
             variant="soft"
             @click="onCancel"
           >
-            {{ t('actions.cancel') }}
+            {{ t('cancel') }}
           </UButton>
           <UButton
             type="submit"
