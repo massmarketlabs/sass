@@ -1,0 +1,38 @@
+{
+  "en": {
+    "menu": {
+      "search": "Search",
+      "dashboard": "Dashboard",
+      "users": "Users",
+      "maintenance": "Maintenance",
+      "dbPoolStatus": "DB Pool Status"
+    }
+  },
+  "zh": {
+    "menu": {
+      "search": "搜索",
+      "dashboard": "仪表板",
+      "users": "用户",
+      "maintenance": "系统维护",
+      "dbPoolStatus": "数据库连接池状态"
+    }
+  },
+  "ja": {
+    "menu": {
+      "search": "検索",
+      "dashboard": "ダッシュボード",
+      "users": "ユーザー",
+      "maintenance": "メンテナンス",
+      "dbPoolStatus": "DBプール状態"
+    }
+  },
+  "fr": {
+    "menu": {
+      "search": "Rechercher",
+      "dashboard": "Tableau de bord",
+      "users": "Utilisateurs",
+      "maintenance": "Maintenance",
+      "dbPoolStatus": "État du pool DB"
+    }
+  }
+}

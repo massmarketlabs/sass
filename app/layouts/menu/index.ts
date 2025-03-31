@@ -2,7 +2,7 @@ export const getMenus = (t: (name: string) => string): NavigationMenuItem[][] =>
   return [
     [
       {
-        label: 'Dashboard',
+        label: t('menu.dashboard'),
         icon: 'i-lucide-layout-dashboard',
         to: '/admin/dashboard'
       },

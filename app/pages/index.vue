@@ -3,6 +3,8 @@ definePageMeta({
   auth: false
 })
 
+const { t } = useI18n()
+
 const features = [
   {
     icon: 'i-lucide-layout-template',
@@ -44,10 +46,10 @@ const features = [
       <UContainer class="py-24">
         <div class="text-center">
           <h1 class="text-4xl font-bold tracking-tight sm:text-6xl mb-6">
-            NuxSaaS
+            {{ t('global.appName') }}
           </h1>
           <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">
-            A modern SaaS starter kit built with Nuxt 3
+            {{ t('global.appSlogan') }}
           </p>
           <div class="flex gap-4 justify-center">
             <UButton

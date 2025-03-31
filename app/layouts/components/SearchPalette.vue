@@ -1,6 +1,8 @@
 <script setup lang="ts">
+const { t } = defineProps<{
+  t: TranFunction
+}>()
 const colorMode = useColorMode()
-const { t } = useI18n()
 const router = useRouter()
 const collapsed = defineModel('collapsed', { default: false })
 
@@ -100,7 +102,7 @@ function onSelectPalette(item: any) {
         v-if="!collapsed"
         class="w-full text-left"
       >
-        {{ `${t('search')}...` }}
+        {{ `${t('menu.search')}...` }}
       </span>
       <template
         v-if="!collapsed"

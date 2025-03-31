@@ -1,0 +1,26 @@
+{
+  "en": {
+    "global": {
+      "appName": "NuxSaaS",
+      "appSlogan": "A fullstack SaaS starter kit built with Nuxt"
+    }
+  },
+  "zh": {
+    "global": {
+      "appName": "NuxSaaS",
+      "appSlogan": "基于 Nuxt 构建的全栈 SaaS 起始套件"
+    }
+  },
+  "ja": {
+    "global": {
+      "appName": "NuxSaaS",
+      "appSlogan": "Nuxt で構築されたフルスタック SaaS スターターキット"
+    }
+  },
+  "fr": {
+    "global": {
+      "appName": "NuxSaaS",
+      "appSlogan": "Kit de démarrage SaaS full-stack créé avec Nuxt"
+    }
+  }
+}

@@ -8,7 +8,7 @@ const { t } = useI18n()
       <div class="flex flex-col md:flex-row justify-between items-center gap-4">
         <div class="flex items-center space-x-2">
           <UIcon name="i-lucide-code" />
-          <span>{{ t('app.name') }}</span>
+          <span>{{ t('global.appName') }}</span>
           <USeparator
             orientation="vertical"
             class="hidden md:block"

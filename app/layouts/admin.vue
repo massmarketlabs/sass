@@ -1,6 +1,8 @@
+<i18n src="./menu/i18n.json"></i18n>
+
 <script setup lang="ts">
-import { getMenus } from '~/menu'
 import SearchPalette from './components/SearchPalette.vue'
+import { getMenus } from './menu'
 
 const router = useRouter()
 const route = useRoute()
@@ -54,7 +56,7 @@ const clickSignOut = () => {
           <span
             class="self-center ml-2 text-xl font-semibold whitespace-nowrap dark:text-white"
           >
-            {{ t('app.name') }}
+            {{ t('global.appName') }}
           </span>
         </a>
         <Logo v-if="isCollapsed" />
@@ -62,7 +64,10 @@ const clickSignOut = () => {
           class="flex mb-2 mt-3"
           :class="{ 'pl-2 pr-2': !isCollapsed }"
         >
-          <SearchPalette :collapsed="isCollapsed" />
+          <SearchPalette
+            :collapsed="isCollapsed"
+            :t="t"
+          />
         </div>
         <UNavigationMenu
           :items="menus"

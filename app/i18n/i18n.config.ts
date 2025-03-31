@@ -1,13 +1,9 @@
-import en from './en'
-import fr from './fr'
+import global from './global.json'
 
 export default defineI18nConfig(() => ({
   legacy: false,
   locale: 'en',
   fallbackWarn: false,
-  missingWarn: false,
-  messages: {
-    fr,
-    en
-  }
+  missingWarn: true,
+  messages: global
 }))
