@@ -132,7 +132,7 @@ const clickSignOut = () => {
       class="p-2 h-screen bg-white dark:bg-gray-900"
       :class="[isCollapsed ? 'sm:ml-15' : 'sm:ml-64']"
     >
-      <ThreeColumn class="mb-2">
+      <FlexThreeColumn class="mb-2">
         <template #left>
           <UDrawer
             class="sm:hidden"
@@ -176,7 +176,7 @@ const clickSignOut = () => {
             <ColorModeToggler />
           </ClientOnly>
         </template>
-      </ThreeColumn>
+      </FlexThreeColumn>
       <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
         <!-- <ClientOnly> -->
         <slot />

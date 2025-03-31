@@ -93,7 +93,7 @@ defineExpose({
 
 <template>
   <div>
-    <ThreeColumn>
+    <FlexThreeColumn>
       <template #left>
         <slot name="topLeft" />
       </template>
@@ -121,7 +121,7 @@ defineExpose({
           />
         </UDropdownMenu>
       </template>
-    </ThreeColumn>
+    </FlexThreeColumn>
     <UTable
       ref="table"
       :loading="loading"
