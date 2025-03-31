@@ -71,6 +71,17 @@ const updateLimit = (value: number) => {
   fetchTableData()
 }
 
+const refreshSuccess = ref(false)
+
+const handleRefresh = async () => {
+  refreshSuccess.value = false
+  await fetchTableData()
+  refreshSuccess.value = true
+  setTimeout(() => {
+    refreshSuccess.value = false
+  }, 1000)
+}
+
 onMounted(() => {
   fetchTableData()
 })
@@ -89,11 +100,12 @@ defineExpose({
       <template #right>
         <slot name="topRight" />
         <UButton
-          color="neutral"
+          :color="refreshSuccess ? 'success' : 'neutral'"
           variant="outline"
-          icon="i-lucide-refresh-cw"
+          :icon="loading ? 'i-lucide-loader-2' : (refreshSuccess ? 'i-lucide-check' : 'i-lucide-refresh-cw')"
           size="sm"
-          @click="fetchTableData()"
+          :loading="loading"
+          @click="handleRefresh"
         />
         <UDropdownMenu
           v-if="columnOptions.length"
