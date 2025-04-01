@@ -1,4 +1,8 @@
 <script setup lang="ts" generic="T">
+import type { UTableInstance } from './types'
+import ColumnControl from './components/ColumnControl.vue'
+import useColumnControl from './composables/useColumnControl'
+
 const { fetchData, columns, hidePagination = false } = defineProps<{
   fetchData: FetchDataFn<T>
   columns: AdminTableColumn<T>[]
@@ -11,42 +15,8 @@ const loading = ref(false)
 const total = ref(0)
 const data = ref<any[]>([])
 
-const defaultSelectedColumns: Array<string> = []
-const columnOptions: Array<AdminTableColumn<T>> = []
-for (const column of columns) {
-  defaultSelectedColumns.push(column.accessorKey)
-  if (column.accessorKey != 'actions') {
-    columnOptions.push(column)
-  }
-}
-const selectedColumns = reactive(defaultSelectedColumns)
-const tableRef = useTemplateRef('table')
-
-watchEffect(() => {
-  for (const column of columns) {
-    if (selectedColumns.includes(column.accessorKey)) {
-      tableRef.value?.tableApi?.getColumn(column.accessorKey)?.toggleVisibility(true)
-    } else {
-      tableRef.value?.tableApi?.getColumn(column.accessorKey)?.toggleVisibility(false)
-    }
-  }
-})
-
-const columnItems = computed(() => columnOptions.map(column => ({
-  label: column.header,
-  type: 'checkbox' as const,
-  checked: selectedColumns.includes(column.accessorKey),
-  onUpdateChecked(checked: boolean) {
-    if (checked) {
-      selectedColumns.push(column.accessorKey)
-    }
-    else {
-      const index = selectedColumns.indexOf(column.accessorKey)
-      if (index > -1)
-        selectedColumns.splice(index, 1)
-    }
-  }
-})))
+const tableRef = useTemplateRef<UTableInstance>('table')
+const { selectedColumns } = useColumnControl(columns, tableRef)
 
 const fetchTableData = async () => {
   loading.value = true
@@ -107,19 +77,29 @@ defineExpose({
           :loading="loading"
           @click="handleRefresh"
         />
-        <UDropdownMenu
-          v-if="columnOptions.length"
+        <UPopover
           arrow
-          :items="columnItems"
-          size="sm"
+          :content="{
+            align: 'end',
+            side: 'bottom',
+          }"
         >
           <UButton
             color="neutral"
             variant="outline"
-            icon="i-lucide-columns-2"
+            icon="lucide-arrow-down-up"
             size="sm"
           />
-        </UDropdownMenu>
+          <template #content>
+            <div class="p-4 round">
+              123
+            </div>
+          </template>
+        </UPopover>
+        <ColumnControl
+          v-model:model="selectedColumns"
+          :columns="columns"
+        />
       </template>
     </FlexThreeColumn>
     <UTable
