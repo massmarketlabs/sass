@@ -3,16 +3,16 @@ const { columns } = defineProps<{
   columns: AdminTableColumn<T>[]
 }>()
 
-const model = defineModel<string[]>('model', { default: [] })
+const selectedColumns = defineModel<string[]>('selectedColumns', { default: [] })
 
 const columnOptions = computed(() => columns.filter(column => column.accessorKey !== 'actions'))
 
 const columnItems = computed(() => columnOptions.value.map(column => ({
   label: column.header,
   type: 'checkbox' as const,
-  checked: model.value.includes(column.accessorKey),
+  checked: selectedColumns.value.includes(column.accessorKey),
   onUpdateChecked(checked: boolean) {
-    const newSelectedColumns = [...model.value]
+    const newSelectedColumns = [...selectedColumns.value]
     if (checked) {
       newSelectedColumns.push(column.accessorKey)
     } else {
@@ -21,7 +21,7 @@ const columnItems = computed(() => columnOptions.value.map(column => ({
         newSelectedColumns.splice(index, 1)
       }
     }
-    model.value = newSelectedColumns
+    selectedColumns.value = newSelectedColumns
   }
 })))
 </script>

@@ -92,7 +92,7 @@ defineExpose({
           :columns="columns"
         />
         <ColumnControl
-          v-model:model="selectedColumns"
+          v-model:selected-columns="selectedColumns"
           :columns="columns"
         />
       </template>
