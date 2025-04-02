@@ -158,7 +158,7 @@ const clickSignOut = () => {
           </UDrawer>
           <UButton
             :icon="isCollapsed ? 'i-lucide-panel-left-open' : 'i-lucide-panel-left-close'"
-            class="w-8 h-8"
+            class="w-8 h-8 hidden sm:block"
             color="neutral"
             variant="ghost"
             @click="isCollapsed = !isCollapsed"
