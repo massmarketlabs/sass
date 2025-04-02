@@ -1,7 +1,9 @@
 <script setup lang="ts" generic="T">
 import type { UTableInstance } from './types'
 import ColumnControl from './components/ColumnControl.vue'
+import SortControl from './components/SortControl.vue'
 import useColumnControl from './composables/useColumnControl'
+import useSortControl from './composables/useSortControl'
 
 const { fetchData, columns, hidePagination = false } = defineProps<{
   fetchData: FetchDataFn<T>
@@ -17,6 +19,7 @@ const data = ref<any[]>([])
 
 const tableRef = useTemplateRef<UTableInstance>('table')
 const { selectedColumns } = useColumnControl(columns, tableRef)
+const { sortOptions } = useSortControl(columns, tableRef)
 
 const fetchTableData = async () => {
   loading.value = true
@@ -31,6 +34,13 @@ const fetchTableData = async () => {
     loading.value = false
   }
 }
+
+watch(
+  () => sortOptions.value,
+  fetchTableData,
+  { immediate: true }
+)
+
 const updatePage = (value: number) => {
   page.value = value
   fetchTableData()
@@ -77,25 +87,10 @@ defineExpose({
           :loading="loading"
           @click="handleRefresh"
         />
-        <UPopover
-          arrow
-          :content="{
-            align: 'end',
-            side: 'bottom',
-          }"
-        >
-          <UButton
-            color="neutral"
-            variant="outline"
-            icon="lucide-arrow-down-up"
-            size="sm"
-          />
-          <template #content>
-            <div class="p-4 round">
-              123
-            </div>
-          </template>
-        </UPopover>
+        <SortControl
+          v-model:sort-options="sortOptions"
+          :columns="columns"
+        />
         <ColumnControl
           v-model:model="selectedColumns"
           :columns="columns"
