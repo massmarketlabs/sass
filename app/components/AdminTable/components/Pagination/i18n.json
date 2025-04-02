@@ -1,0 +1,30 @@
+{
+  "en": {
+    "pagination": {
+      "total": "Total",
+      "rowsPerPage": "Rows per page",
+      "pageOf": "Page {page} of {totalPage}"
+    }
+  },
+  "zh": {
+    "pagination": {
+      "total": "总计",
+      "rowsPerPage": "每页行数",
+      "pageOf": "第 {page} 页，共 {totalPage} 页"
+    }
+  },
+  "ja": {
+    "pagination": {
+      "total": "合計",
+      "rowsPerPage": "ページあたりの行数",
+      "pageOf": "{totalPage} ページ中 {page} ページ"
+    }
+  },
+  "fr": {
+    "pagination": {
+      "total": "Total",
+      "rowsPerPage": "Lignes par page",
+      "pageOf": "Page {page} sur {totalPage}"
+    }
+  }
+}

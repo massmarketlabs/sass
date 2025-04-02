@@ -1,6 +1,7 @@
 <script setup lang="ts" generic="T">
 import type { UTableInstance } from './types'
 import ColumnControl from './components/ColumnControl.vue'
+import Pagination from './components/Pagination/index.vue'
 import SortControl from './components/SortControl/index.vue'
 import useColumnControl from './composables/useColumnControl'
 import useSortControl from './composables/useSortControl'
