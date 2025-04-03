@@ -141,15 +141,11 @@ function getRowItems(row: Row<UserWithRole>) {
   ]
 }
 
-const sortBy = ref<SortBy>({ column: 'createdAt', direction: 'desc' })
-
 const fetchData: FetchDataFn<UserWithRole> = async ({ page, limit }) => {
   const result = await client.admin.listUsers({
     query: {
       limit,
-      offset: (page - 1) * limit,
-      sortBy: sortBy.value.column,
-      sortDirection: sortBy.value.direction
+      offset: (page - 1) * limit
     }
   })
   return {

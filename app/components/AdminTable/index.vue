@@ -1,10 +1,10 @@
 <script setup lang="ts" generic="T">
 import type { UTableInstance } from './types'
+import { useRoute, useRouter } from 'vue-router'
 import ColumnControl from './components/ColumnControl.vue'
 import Pagination from './components/Pagination/index.vue'
 import SortControl from './components/SortControl/index.vue'
 import useColumnControl from './composables/useColumnControl'
-import useSortControl from './composables/useSortControl'
 
 const { fetchData, columns, hidePagination = false } = defineProps<{
   fetchData: FetchDataFn<T>
@@ -12,22 +12,27 @@ const { fetchData, columns, hidePagination = false } = defineProps<{
   hidePagination?: boolean
 }>()
 
-const page = ref<number>(1)
-const limit = ref<number>(20)
+const route = useRoute()
+const router = useRouter()
+
+const page = ref<number>(Number(route.query.page) || 1)
+const limit = ref<number>(Number(route.query.limit) || 20)
 const loading = ref(false)
 const total = ref(0)
 const data = ref<any[]>([])
 
+const sortOptions = ref<SortOption[]>([])
+
 const tableRef = useTemplateRef<UTableInstance>('table')
 const { selectedColumns } = useColumnControl(columns, tableRef)
-const { sortOptions } = useSortControl(columns, tableRef)
 
 const fetchTableData = async () => {
   loading.value = true
   try {
     const result = await fetchData({
       page: page.value,
-      limit: limit.value
+      limit: limit.value,
+      sort: sortOptions.value
     })
     data.value = result.data || []
     total.value = result.total || 0
@@ -36,20 +41,38 @@ const fetchTableData = async () => {
   }
 }
 
+// Watch sortOptions and sync to URL
 watch(
   () => sortOptions.value,
-  fetchTableData,
-  { immediate: true }
+  (newSortOptions) => {
+    const query = { ...route.query }
+    if (newSortOptions.length) {
+      query.sort = JSON.stringify(newSortOptions)
+    } else {
+      delete query.sort
+    }
+    router.replace({ query })
+    fetchTableData()
+  },
+  { immediate: true, deep: true }
+)
+
+// Watch page and limit and sync to URL
+watch(
+  [page, limit],
+  ([newPage, newLimit]) => {
+    const query = { ...route.query, page: newPage, limit: newLimit }
+    router.replace({ query })
+    fetchTableData()
+  }
 )
 
 const updatePage = (value: number) => {
   page.value = value
-  fetchTableData()
 }
 
 const updateLimit = (value: number) => {
   limit.value = value
-  fetchTableData()
 }
 
 const refreshSuccess = ref(false)
@@ -64,6 +87,13 @@ const handleRefresh = async () => {
 }
 
 onMounted(() => {
+  if (route.query.sort) {
+    try {
+      sortOptions.value = JSON.parse(route.query.sort as string)
+    } catch {
+      sortOptions.value = []
+    }
+  }
   fetchTableData()
 })
 

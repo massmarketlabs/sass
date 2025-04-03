@@ -23,17 +23,19 @@ export type AdminTableColumn<T extends TableData, D = unknown> = TableColumn<T, 
   header: string
 }
 
-export interface SortBy {
-  column: string
-  direction: 'asc' | 'desc' | undefined
-}
 export interface StringDict<T> {
   [key: string]: T
 }
 
-export interface PaginationParams {
+export interface SortOption {
+  field: string
+  order: string
+}
+
+export interface FetchDataParams {
   page: number
   limit: number
+  sort: SortOption[]
 }
 
 export interface PaginationResult<T> {
@@ -41,4 +43,4 @@ export interface PaginationResult<T> {
   total: number
 }
 
-export type FetchDataFn<T> = (params: PaginationParams) => Promise<PaginationResult<T>>
+export type FetchDataFn<T> = (params: FetchDataParams) => Promise<PaginationResult<T>>
