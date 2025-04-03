@@ -49,7 +49,7 @@ const onCancel = () => {
   <UModal
     v-model:open="open"
     :close="true"
-    :title="t('modal.createUser')"
+    :title="t('user.modals.createUser')"
   >
     <template #body>
       <UForm
@@ -59,7 +59,7 @@ const onCancel = () => {
         @submit="onSubmit"
       >
         <UFormField
-          :label="t('form.name')"
+          :label="t('global.page.name')"
           name="name"
         >
           <UInput
@@ -69,7 +69,7 @@ const onCancel = () => {
         </UFormField>
 
         <UFormField
-          :label="t('form.email')"
+          :label="t('user.form.email')"
           name="email"
         >
           <UInput
@@ -79,7 +79,7 @@ const onCancel = () => {
         </UFormField>
 
         <UFormField
-          :label="t('form.password')"
+          :label="t('user.form.password')"
           name="password"
         >
           <UInput
@@ -90,15 +90,15 @@ const onCancel = () => {
         </UFormField>
 
         <UFormField
-          :label="t('form.role')"
+          :label="t('user.form.role')"
           name="role"
         >
           <USelect
             v-model="state.role"
             class="w-full"
             :items="[
-              { label: t('roles.user'), value: 'user' },
-              { label: t('roles.admin'), value: 'admin' }
+              { label: t('user.roles.user'), value: 'user' },
+              { label: t('user.roles.admin'), value: 'admin' }
             ]"
           />
         </UFormField>
@@ -109,13 +109,13 @@ const onCancel = () => {
             variant="soft"
             @click="onCancel"
           >
-            {{ t('cancel') }}
+            {{ t('global.page.cancel') }}
           </UButton>
           <UButton
             type="submit"
             color="primary"
           >
-            {{ t('actions.create') }}
+            {{ t('global.page.create') }}
           </UButton>
         </div>
       </UForm>

@@ -12,18 +12,18 @@ const selectedUserId = ref('')
 
 const { refresh } = useAdminTable()
 
-const getRowItems = (row: Row<UserWithRole>) => {
+const getActionItems = (row: Row<UserWithRole>) => {
   const user = row.original
   return [
     {
       type: 'label',
-      label: t('actions')
+      label: t('global.page.actions')
     },
     {
       type: 'separator'
     },
     {
-      label: user.banned ? t('actions.unban') : t('actions.ban'),
+      label: user.banned ? t('user.actions.unban') : t('user.actions.ban'),
       icon: 'i-lucide-ban',
       color: user.banned ? 'success' : 'error',
       async onSelect() {
@@ -41,7 +41,7 @@ const getRowItems = (row: Row<UserWithRole>) => {
       }
     },
     {
-      label: t('delete'),
+      label: t('global.page.delete'),
       icon: 'i-lucide-trash',
       color: 'error',
       async onSelect() {
@@ -62,7 +62,7 @@ const getRoleDropdownItems = (original: UserWithRole) => {
   const roles = ['user', 'admin'] as const
   return roles.map((role) => {
     return {
-      label: t(`roles.${role}`),
+      label: t(`user.roles.${role}`),
       type: 'checkbox' as const,
       checked: original.role === role,
       onUpdateChecked: async () => {
@@ -88,33 +88,33 @@ const columns: AdminTableColumn<UserWithRole>[] = [
   },
   {
     accessorKey: 'avatar',
-    header: t('columns.avatar'),
+    header: t('user.columns.avatar'),
     cell: avatarColumn
   },
   {
     accessorKey: 'name',
-    header: t('columns.name')
+    header: t('global.page.name')
   },
   {
     accessorKey: 'email',
-    header: t('columns.email')
+    header: t('user.columns.email')
   },
   {
     accessorKey: 'role',
-    header: t('columns.role')
+    header: t('user.columns.role')
   },
   {
     accessorKey: 'status',
-    header: t('columns.status')
+    header: t('global.page.status')
   },
   {
     accessorKey: 'createdAt',
-    header: t('columns.createdAt'),
+    header: t('global.page.createdAt'),
     cell: dateColumn
   },
   {
     id: 'actions',
-    cell: ({ row }) => actionColumn(row, getRowItems)
+    cell: ({ row }) => actionColumn(row, getActionItems)
   }
 ]
 
@@ -141,7 +141,7 @@ const fetchData: FetchDataFn<UserWithRole> = async ({ page, limit }) => {
         variant="outline"
         @click="isUserModalOpen = true"
       >
-        {{ t('actions.createUser') }}
+        {{ t('user.actions.createUser') }}
       </UButton>
     </template>
     <AdminTable
@@ -161,7 +161,7 @@ const fetchData: FetchDataFn<UserWithRole> = async ({ page, limit }) => {
             icon="i-lucide-chevron-down"
             trailing
           >
-            {{ t(`roles.${original.role}`) }}
+            {{ t(`user.roles.${original.role}`) }}
           </UButton>
         </UDropdownMenu>
       </template>
@@ -171,10 +171,10 @@ const fetchData: FetchDataFn<UserWithRole> = async ({ page, limit }) => {
             ? 'error'
             : (original.emailVerified ? 'success' : 'warning')"
           :label="original.banned
-            ? t('status.banned')
+            ? t('user.status.banned')
             : (original.emailVerified
-              ? t('status.verified')
-              : t('status.unverified'))"
+              ? t('user.status.verified')
+              : t('user.status.unverified'))"
         />
       </template>
     </AdminTable>

@@ -32,7 +32,7 @@ const banPeriods = [
 ].map((item) => {
   return {
     ...item,
-    label: t(`modals.ban.periods.${item.label}`)
+    label: t(`user.modals.ban.periods.${item.label}`)
   }
 })
 
@@ -58,7 +58,7 @@ const onCancel = () => {
   <UModal
     v-model:open="open"
     :close="true"
-    :title="t('modals.ban.title')"
+    :title="t('user.modals.ban.title')"
   >
     <template #body>
       <UForm
@@ -68,7 +68,7 @@ const onCancel = () => {
         @submit="onSubmit"
       >
         <UFormField
-          :label="t('modals.ban.period')"
+          :label="t('user.modals.ban.period')"
           name="banExpiresIn"
         >
           <USelect
@@ -78,12 +78,12 @@ const onCancel = () => {
           />
         </UFormField>
         <UFormField
-          :label="t('modals.ban.reason')"
+          :label="t('user.modals.ban.reason')"
           name="banReason"
         >
           <UTextarea
             v-model="state.banReason"
-            :placeholder="t('modals.ban.reasonPlaceholder')"
+            :placeholder="t('user.modals.ban.reasonPlaceholder')"
             class="w-full"
           />
         </UFormField>
@@ -94,13 +94,13 @@ const onCancel = () => {
             variant="outline"
             @click="onCancel"
           >
-            {{ t('cancel') }}
+            {{ t('global.page.cancel') }}
           </UButton>
           <UButton
             type="submit"
             color="error"
           >
-            {{ t('modals.ban.submit') }}
+            {{ t('user.modals.ban.submit') }}
           </UButton>
         </div>
       </UForm>

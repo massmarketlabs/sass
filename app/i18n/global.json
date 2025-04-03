@@ -2,25 +2,65 @@
   "en": {
     "global": {
       "appName": "NuxSaaS",
-      "appSlogan": "A fullstack SaaS starter kit built with Nuxt"
+      "appSlogan": "A fullstack SaaS starter kit built with Nuxt",
+      "page": {
+        "actions": "Actions",
+        "create": "Create",
+        "edit": "Edit",
+        "delete": "Delete",
+        "cancel": "Cancel",
+        "name": "Name",
+        "status": "Status",
+        "createdAt": "Created At"
+      }
     }
   },
   "zh": {
     "global": {
       "appName": "NuxSaaS",
-      "appSlogan": "基于 Nuxt 构建的全栈 SaaS 起始套件"
+      "appSlogan": "基于 Nuxt 构建的全栈 SaaS 起始套件",
+      "page": {
+        "actions": "操作",
+        "create": "创建",
+        "edit": "编辑",
+        "delete": "删除",
+        "cancel": "取消",
+        "name": "名称",
+        "status": "状态",
+        "createdAt": "创建时间"
+      }
     }
   },
   "ja": {
     "global": {
       "appName": "NuxSaaS",
-      "appSlogan": "Nuxt で構築されたフルスタック SaaS スターターキット"
+      "appSlogan": "Nuxt で構築されたフルスタック SaaS スターターキット",
+      "page": {
+        "actions": "アクション",
+        "create": "作成",
+        "edit": "編集",
+        "delete": "削除",
+        "cancel": "キャンセル",
+        "name": "名前",
+        "status": "状態",
+        "createdAt": "作成日時"
+      }
     }
   },
   "fr": {
     "global": {
       "appName": "NuxSaaS",
-      "appSlogan": "Kit de démarrage SaaS full-stack créé avec Nuxt"
+      "appSlogan": "Kit de démarrage SaaS full-stack créé avec Nuxt",
+      "page": {
+        "actions": "Actions",
+        "create": "Créer",
+        "edit": "Modifier",
+        "delete": "Supprimer",
+        "cancel": "Annuler",
+        "name": "Nom",
+        "status": "Statut",
+        "createdAt": "Créé le"
+      }
     }
   }
 }
