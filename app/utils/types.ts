@@ -19,8 +19,9 @@ export type { output as zodOutput } from 'zod'
 export type TranFunction = (name: string, options?: StringDict<any>) => string
 export type ColumnCell<TData extends RowData, TValue = unknown> = CellContext<TData, TValue>
 export type AdminTableColumn<T extends TableData, D = unknown> = TableColumn<T, D> & {
-  accessorKey: string
-  header: string
+  accessorKey?: string
+  header?: string
+  id?: string
 }
 
 export interface StringDict<T> {

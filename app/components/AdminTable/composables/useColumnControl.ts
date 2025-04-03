@@ -3,16 +3,17 @@ import type { UTableInstance } from '../types'
 
 export default function useColumnControl<T>(columns: AdminTableColumn<T>[], tableRef: ShallowRef<UTableInstance | null>) {
   const defaultSelectedColumns = columns
-    .map(column => column.accessorKey)
+    .map(column => (column.accessorKey || column.id)!)
   const selectedColumns = ref(defaultSelectedColumns)
 
   watchEffect(() => {
     for (const column of columns) {
-      if (selectedColumns.value.includes(column.accessorKey)) {
-        tableRef.value?.tableApi?.getColumn(column.accessorKey)?.toggleVisibility(true)
+      const columnKey = (column.accessorKey || column.id)!
+      if (selectedColumns.value.includes(columnKey)) {
+        tableRef.value?.tableApi?.getColumn(columnKey)?.toggleVisibility(true)
       }
       else {
-        tableRef.value?.tableApi?.getColumn(column.accessorKey)?.toggleVisibility(false)
+        tableRef.value?.tableApi?.getColumn(columnKey)?.toggleVisibility(false)
       }
     }
   })

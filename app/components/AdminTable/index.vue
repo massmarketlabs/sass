@@ -136,7 +136,18 @@ defineExpose({
       sticky
       size="sm"
       class="max-h-[calc(100vh-140px)]"
-    />
+    >
+      <template
+        v-for="(_, name) in $slots"
+        :key="name"
+        #[name]="slotData"
+      >
+        <slot
+          :name="name"
+          v-bind="slotData"
+        />
+      </template>
+    </UTable>
     <Pagination
       v-if="!hidePagination"
       :model-value="page"

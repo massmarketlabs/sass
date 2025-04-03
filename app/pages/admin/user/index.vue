@@ -74,14 +74,7 @@ const columns: AdminTableColumn<UserWithRole>[] = [
   },
   {
     accessorKey: 'status',
-    header: t('columns.status'),
-    cell: ({ cell: { row: { original } } }) => h(
-      UBadge,
-      {
-        color: original.banned ? 'error' : (original.emailVerified ? 'success' : 'warning'),
-        label: original.banned ? t('status.banned') : (original.emailVerified ? t('status.verified') : t('status.unverified'))
-      }
-    )
+    header: t('columns.status')
   },
   {
     accessorKey: 'createdAt',
@@ -89,8 +82,7 @@ const columns: AdminTableColumn<UserWithRole>[] = [
     cell: dateColumn
   },
   {
-    accessorKey: 'actions',
-    header: ' ',
+    id: 'actions',
     cell: ({ row }) => actionColumn(row, getRowItems)
   }
 ]
@@ -171,7 +163,20 @@ const fetchData: FetchDataFn<UserWithRole> = async ({ page, limit }) => {
       ref="table"
       :columns="columns"
       :fetch-data="fetchData"
-    />
+    >
+      <template #status-cell="{ row: { original } }">
+        <UBadge
+          :color="original.banned
+            ? 'error'
+            : (original.emailVerified ? 'success' : 'warning')"
+          :label="original.banned
+            ? t('status.banned')
+            : (original.emailVerified
+              ? t('status.verified')
+              : t('status.unverified'))"
+        />
+      </template>
+    </AdminTable>
     <CreateUserModal
       v-model:open="isUserModalOpen"
       :t="t"
