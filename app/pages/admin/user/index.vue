@@ -12,82 +12,7 @@ const selectedUserId = ref('')
 
 const { refresh } = useAdminTable()
 
-const columns: AdminTableColumn<UserWithRole>[] = [
-  {
-    accessorKey: 'id',
-    header: 'ID',
-    cell: IDColumn
-  },
-  {
-    accessorKey: 'avatar',
-    header: t('columns.avatar'),
-    cell: avatarColumn
-  },
-  {
-    accessorKey: 'name',
-    header: t('columns.name')
-  },
-  {
-    accessorKey: 'email',
-    header: t('columns.email')
-  },
-  {
-    accessorKey: 'role',
-    header: t('columns.role'),
-    cell: ({ row }) => {
-      const roles = ['user', 'admin'] as const
-      const items = roles.map(role => ({
-        label: t(`roles.${role}`),
-        type: 'checkbox' as const,
-        checked: row.original.role === role,
-        onUpdateChecked: async () => {
-          const result = await client.admin.setRole({
-            userId: row.original.id,
-            role
-          })
-          if (result.data?.user) {
-            refresh()
-          } else {
-            console.error(result.error)
-          }
-        }
-      }))
-      return h(
-        UDropdownMenu as any,
-        {
-          items,
-          arrow: true
-        },
-        () => h(
-          UButton,
-          {
-            color: row.original.role === 'admin' ? 'primary' : 'neutral',
-            variant: 'outline',
-            size: 'xs',
-            icon: 'i-lucide-chevron-down',
-            trailing: true
-          },
-          () => t(`roles.${row.original.role}`)
-        )
-      )
-    }
-  },
-  {
-    accessorKey: 'status',
-    header: t('columns.status')
-  },
-  {
-    accessorKey: 'createdAt',
-    header: t('columns.createdAt'),
-    cell: dateColumn
-  },
-  {
-    id: 'actions',
-    cell: ({ row }) => actionColumn(row, getRowItems)
-  }
-]
-
-function getRowItems(row: Row<UserWithRole>) {
+const getRowItems = (row: Row<UserWithRole>) => {
   const user = row.original
   return [
     {
@@ -133,6 +58,66 @@ function getRowItems(row: Row<UserWithRole>) {
   ]
 }
 
+const getRoleDropdownItems = (original: UserWithRole) => {
+  const roles = ['user', 'admin'] as const
+  return roles.map((role) => {
+    return {
+      label: t(`roles.${role}`),
+      type: 'checkbox' as const,
+      checked: original.role === role,
+      onUpdateChecked: async () => {
+        const result = await client.admin.setRole({
+          userId: original.id,
+          role
+        })
+        if (result.data?.user) {
+          refresh()
+        } else {
+          console.error(result.error)
+        }
+      }
+    }
+  })
+}
+
+const columns: AdminTableColumn<UserWithRole>[] = [
+  {
+    accessorKey: 'id',
+    header: 'ID',
+    cell: IDColumn
+  },
+  {
+    accessorKey: 'avatar',
+    header: t('columns.avatar'),
+    cell: avatarColumn
+  },
+  {
+    accessorKey: 'name',
+    header: t('columns.name')
+  },
+  {
+    accessorKey: 'email',
+    header: t('columns.email')
+  },
+  {
+    accessorKey: 'role',
+    header: t('columns.role')
+  },
+  {
+    accessorKey: 'status',
+    header: t('columns.status')
+  },
+  {
+    accessorKey: 'createdAt',
+    header: t('columns.createdAt'),
+    cell: dateColumn
+  },
+  {
+    id: 'actions',
+    cell: ({ row }) => actionColumn(row, getRowItems)
+  }
+]
+
 const fetchData: FetchDataFn<UserWithRole> = async ({ page, limit }) => {
   const result = await client.admin.listUsers({
     query: {
@@ -164,6 +149,22 @@ const fetchData: FetchDataFn<UserWithRole> = async ({ page, limit }) => {
       :columns="columns"
       :fetch-data="fetchData"
     >
+      <template #role-cell="{ row: { original } }">
+        <UDropdownMenu
+          :items="getRoleDropdownItems(original)"
+          arrow
+        >
+          <UButton
+            :color="original.role === 'admin' ? 'primary' : 'neutral'"
+            variant="outline"
+            size="xs"
+            icon="i-lucide-chevron-down"
+            trailing
+          >
+            {{ t(`roles.${original.role}`) }}
+          </UButton>
+        </UDropdownMenu>
+      </template>
       <template #status-cell="{ row: { original } }">
         <UBadge
           :color="original.banned
