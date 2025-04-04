@@ -13,6 +13,14 @@ export default defineNuxtConfig({
   ],
   i18n: {
     vueI18n: '~/i18n/i18n.config.ts',
+    baseUrl: process.env.BETTER_AUTH_URL,
+    locales: ['en', 'zh', 'ja', 'fr'].map((lang) => {
+      return {
+        code: lang,
+        language: lang
+      }
+    }),
+    defaultLocale: 'en',
     bundle: {
       optimizeTranslationDirective: false
     }

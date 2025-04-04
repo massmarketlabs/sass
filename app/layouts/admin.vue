@@ -173,6 +173,7 @@ const clickSignOut = () => {
         <template #right>
           <slot name="navRight" />
           <ClientOnly>
+            <LocaleToggler />
             <ColorModeToggler />
           </ClientOnly>
         </template>
