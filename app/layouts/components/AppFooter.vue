@@ -19,6 +19,7 @@ const { t } = useI18n()
         </div>
 
         <div class="flex items-center space-x-4">
+          <LocaleToggler />
           <ClientOnly>
             <ColorModeToggler />
           </ClientOnly>
