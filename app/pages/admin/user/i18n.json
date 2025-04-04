@@ -22,6 +22,11 @@
         "password": "Password",
         "role": "Role"
       },
+      "validation": {
+        "nameMin": "Name must be at least {n} characters",
+        "emailInvalid": "Invalid email address",
+        "passwordMin": "Password must be at least {n} characters"
+      },
       "roles": {
         "user": "User",
         "admin": "Administrator"
@@ -66,6 +71,11 @@
         "email": "邮箱",
         "password": "密码",
         "role": "角色"
+      },
+      "validation": {
+        "nameMin": "名称至少需要 {n} 个字符",
+        "emailInvalid": "无效的邮箱地址",
+        "passwordMin": "密码至少需要 {n} 个字符"
       },
       "roles": {
         "user": "普通用户",
@@ -112,6 +122,11 @@
         "password": "パスワード",
         "role": "役割"
       },
+      "validation": {
+        "nameMin": "名前は少なくとも {n} 文字必要です",
+        "emailInvalid": "無効なメールアドレス",
+        "passwordMin": "パスワードは少なくとも {n} 文字必要です"
+      },
       "roles": {
         "user": "ユーザー",
         "admin": "管理者"
@@ -156,6 +171,11 @@
         "email": "Email",
         "password": "Mot de passe",
         "role": "Rôle"
+      },
+      "validation": {
+        "nameMin": "Le nom doit contenir au moins {n} caractères",
+        "emailInvalid": "Adresse e-mail invalide",
+        "passwordMin": "Le mot de passe doit contenir au moins {n} caractères"
       },
       "roles": {
         "user": "Utilisateur",
