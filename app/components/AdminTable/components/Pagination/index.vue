@@ -25,22 +25,24 @@ watch(
 </script>
 
 <template>
-  <div class="w-full flex items-center justify-end">
+  <div class="w-full flex items-center justify-between">
     <span class="mr-4 text-sm"><span class="text-sm">{{ t('pagination.total') }}:</span> {{ total }}</span>
-    <span class="ml-4 mr-1 text-sm hidden sm:block">{{ t('pagination.rowsPerPage') }}</span>
-    <USelect
-      v-model="limit"
-      :items="sizes"
-      size="sm"
-      @change="emit('change')"
-    />
-    <span class="ml-4 mr-4 text-sm">{{ t('pagination.pageOf', { page, totalPage }) }}</span>
-    <UPagination
-      v-model:page="page"
-      :items-per-page="limit"
-      :total="total"
-      show-edges
-      size="sm"
-    />
+    <div class="flex items-center">
+      <span class="ml-4 mr-1 text-sm hidden sm:block">{{ t('pagination.rowsPerPage') }}</span>
+      <USelect
+        v-model="limit"
+        :items="sizes"
+        size="sm"
+        @change="emit('change')"
+      />
+      <span class="ml-4 mr-4 text-sm">{{ t('pagination.pageOf', { page, totalPage }) }}</span>
+      <UPagination
+        v-model:page="page"
+        :items-per-page="limit"
+        :total="total"
+        show-edges
+        size="sm"
+      />
+    </div>
   </div>
 </template>
