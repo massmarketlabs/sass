@@ -31,13 +31,11 @@ const columnItems = computed(() => columnOptions.value.map(column => ({
     v-if="columnOptions.length"
     arrow
     :items="columnItems"
-    size="sm"
   >
     <UButton
       color="neutral"
       variant="outline"
       icon="i-lucide-settings-2"
-      size="sm"
     />
   </UDropdownMenu>
 </template>

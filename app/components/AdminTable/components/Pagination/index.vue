@@ -32,7 +32,6 @@ watch(
       <USelect
         v-model="limit"
         :items="sizes"
-        size="sm"
         @change="emit('change')"
       />
       <span class="ml-4 mr-4 text-sm">{{ t('pagination.pageOf', { page, totalPage }) }}</span>
@@ -41,7 +40,6 @@ watch(
         :items-per-page="limit"
         :total="total"
         show-edges
-        size="sm"
       />
     </div>
   </div>

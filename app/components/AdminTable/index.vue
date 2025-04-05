@@ -106,15 +106,14 @@ defineExpose({
   <div>
     <FlexThreeColumn>
       <template #left>
-        <slot name="topLeft" />
+        <slot name="top-Left" />
       </template>
       <template #right>
-        <slot name="topRight" />
+        <slot name="top-right" />
         <UButton
           :color="refreshSuccess ? 'success' : 'neutral'"
           variant="outline"
           :icon="loading ? 'i-lucide-loader-2' : (refreshSuccess ? 'i-lucide-check' : 'i-lucide-refresh-cw')"
-          size="sm"
           :loading="loading"
           @click="handleRefresh"
         />
@@ -134,7 +133,6 @@ defineExpose({
       :columns="columns"
       :data="data"
       sticky
-      size="sm"
       class="max-h-[calc(100vh-140px)]"
     >
       <template

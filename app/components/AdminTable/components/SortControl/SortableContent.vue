@@ -74,19 +74,16 @@ const resetSorting = () => {
           v-model="sort.field"
           :items="[...findSelectedColumn(sort.field), ...availableColumns]"
           class="flex-1 mr-2"
-          size="sm"
         />
         <USelect
           v-model="sort.order"
           :items="[{ label: t('sortControl.asc'), value: 'asc' }, { label: t('sortControl.desc'), value: 'desc' }]"
           class="w-24 mr-2"
-          size="sm"
         />
         <UButton
           icon="lucide-trash"
           color="neutral"
           variant="outline"
-          size="sm"
           class="mr-2"
           @click="removeSort(index)"
         />
@@ -94,7 +91,6 @@ const resetSorting = () => {
           icon="lucide-grip-vertical"
           color="neutral"
           variant="outline"
-          size="sm"
           class="drag-handle"
         />
       </div>
@@ -103,7 +99,6 @@ const resetSorting = () => {
       <UButton
         color="neutral"
         variant="solid"
-        size="sm"
         @click="addSort"
       >
         {{ t('sortControl.addSort') }}
@@ -112,7 +107,6 @@ const resetSorting = () => {
         v-if="sortOptions.length > 0"
         color="neutral"
         variant="outline"
-        size="sm"
         @click="resetSorting"
       >
         {{ t('sortControl.resetSorting') }}

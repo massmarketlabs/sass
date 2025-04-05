@@ -28,6 +28,12 @@ export interface StringDict<T> {
   [key: string]: T
 }
 
+export interface FilterItem {
+  label: string
+  id: string
+  count?: number
+}
+
 export interface SortOption {
   field: string
   order: string

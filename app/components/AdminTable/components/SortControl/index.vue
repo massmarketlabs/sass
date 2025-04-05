@@ -21,14 +21,13 @@ const { t } = useI18n()
       color="neutral"
       variant="outline"
       icon="lucide-arrow-down-up"
-      size="sm"
     >
       {{ sortOptions.length ? t('sortControl.sort') : '' }}
       <UBadge
         v-if="sortOptions.length"
         color="neutral"
         variant="outline"
-        size="xs"
+        size="sm"
       >
         {{ sortOptions.length }}
       </UBadge>

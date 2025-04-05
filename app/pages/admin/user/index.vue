@@ -130,6 +130,12 @@ const fetchData: FetchDataFn<UserWithRole> = async ({ page, limit }) => {
     total: result.data?.total || 0
   }
 }
+
+const roleFilter = ref([])
+const roleOptions = ref<FilterItem[]>([
+  { label: t('user.roles.user'), id: 'user', count: 0 },
+  { label: t('user.roles.admin'), id: 'admin', count: 0 }
+])
 </script>
 
 <template>
@@ -149,6 +155,13 @@ const fetchData: FetchDataFn<UserWithRole> = async ({ page, limit }) => {
       :columns="columns"
       :fetch-data="fetchData"
     >
+      <template #top-Left>
+        <ColumnFilter
+          v-model:filter="roleFilter"
+          :name="t('user.columns.role')"
+          :items="roleOptions"
+        />
+      </template>
       <template #role-cell="{ row: { original } }">
         <UDropdownMenu
           :items="getRoleDropdownItems(original)"
