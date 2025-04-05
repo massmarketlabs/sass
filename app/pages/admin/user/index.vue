@@ -136,6 +136,13 @@ const roleOptions = ref<FilterItem[]>([
   { label: t('user.roles.user'), id: 'user', count: 0 },
   { label: t('user.roles.admin'), id: 'admin', count: 0 }
 ])
+
+const statusFilter = ref([])
+const statusOptions = ref<FilterItem[]>([
+  { label: t('user.status.banned'), id: 'banned', count: 0 },
+  { label: t('user.status.verified'), id: 'verified', count: 0 },
+  { label: t('user.status.unverified'), id: 'unverified', count: 0 }
+])
 </script>
 
 <template>
@@ -156,10 +163,15 @@ const roleOptions = ref<FilterItem[]>([
       :fetch-data="fetchData"
     >
       <template #top-Left>
-        <ColumnFilter
+        <CheckboxFilter
           v-model:filter="roleFilter"
           :name="t('user.columns.role')"
           :items="roleOptions"
+        />
+        <CheckboxFilter
+          v-model:filter="statusFilter"
+          :name="t('global.page.status')"
+          :items="statusOptions"
         />
       </template>
       <template #role-cell="{ row: { original } }">
