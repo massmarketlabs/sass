@@ -165,11 +165,13 @@ const statusOptions = ref<FilterItem[]>([
       <template #top-Left>
         <CheckboxFilter
           v-model:filter="roleFilter"
+          filter-name="role"
           :name="t('user.columns.role')"
           :items="roleOptions"
         />
         <CheckboxFilter
           v-model:filter="statusFilter"
+          filter-name="status"
           :name="t('global.page.status')"
           :items="statusOptions"
         />

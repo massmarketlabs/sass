@@ -1,12 +1,25 @@
 <script setup lang="ts">
-const { items, name } = defineProps<{
+import { useRoute, useRouter } from 'vue-router'
+
+const { items, name, filterName } = defineProps<{
   items: FilterItem[]
   name: string
+  filterName: string
 }>()
 const filter = defineModel<string[]>('filter', { default: [] })
+
+const route = useRoute()
+const router = useRouter()
+
+// Initialize filter from route query
+if (route.query[filterName]) {
+  filter.value = JSON.parse(route.query[filterName] as string)
+}
+
 const selectedItems = computed(() => {
   return items.filter(item => filter.value.includes(item.id))
 })
+
 const onUpdateChecked = (checked: string | boolean, item: FilterItem) => {
   if (checked) {
     filter.value.push(item.id)
@@ -14,6 +27,21 @@ const onUpdateChecked = (checked: string | boolean, item: FilterItem) => {
     filter.value.splice(filter.value.indexOf(item.id), 1)
   }
 }
+
+// Watch for changes in filter and update the route query
+watch(
+  () => filter.value,
+  (newFilter) => {
+    const query = { ...route.query }
+    if (newFilter.length) {
+      query[filterName] = JSON.stringify(newFilter)
+    } else {
+      delete query[filterName]
+    }
+    router.replace({ query })
+  },
+  { deep: true }
+)
 </script>
 
 <template>
