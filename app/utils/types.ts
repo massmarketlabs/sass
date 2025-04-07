@@ -1,3 +1,4 @@
+import type { CalendarDate } from '@internationalized/date'
 import type { TableColumn } from '@nuxt/ui'
 import type { CellContext, RowData } from '@tanstack/vue-table'
 
@@ -38,6 +39,8 @@ export interface SortOption {
   field: string
   order: string
 }
+
+export interface DateRange { start: CalendarDate | undefined, end: CalendarDate | undefined }
 
 export interface FetchDataParams {
   page: number

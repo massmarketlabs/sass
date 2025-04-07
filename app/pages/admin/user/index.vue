@@ -143,6 +143,11 @@ const statusOptions = ref<FilterItem[]>([
   { label: t('user.status.verified'), id: 'verified', count: 0 },
   { label: t('user.status.unverified'), id: 'unverified', count: 0 }
 ])
+
+const createdAtRange = ref({
+  start: undefined,
+  end: undefined
+})
 </script>
 
 <template>
@@ -174,6 +179,11 @@ const statusOptions = ref<FilterItem[]>([
           filter-name="status"
           :name="t('global.page.status')"
           :items="statusOptions"
+        />
+        <DateRangeFilter
+          v-model:date-range="createdAtRange"
+          filter-name="createdAt"
+          :name="t('global.page.createdAt')"
         />
       </template>
       <template #role-cell="{ row: { original } }">
