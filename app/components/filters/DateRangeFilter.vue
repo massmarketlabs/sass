@@ -69,7 +69,7 @@ watch(
       />
       <UIcon
         v-if="!(dateRange.start && dateRange.end)"
-        name="i-lucide-filter"
+        name="i-lucide-calendar"
         class="w-4 h-4 mr-1"
       />
       {{ name }}
