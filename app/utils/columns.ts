@@ -27,9 +27,7 @@ export const yesNoColumn = <T>(cell: ColumnCell<T>, t: TranFunction) => {
 
 export const avatarColumn = <T>(cell: ColumnCell<T>) => {
   const value = cell.getValue() as string
-  if (value) {
-    return h(UAvatar, { src: value })
-  }
+  return h(UAvatar, { src: value })
 }
 
 export const isEnabledColumn = <T>(cell: ColumnCell<T>, t: TranFunction) => {

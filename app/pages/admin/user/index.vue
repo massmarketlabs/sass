@@ -103,11 +103,10 @@ const getRoleDropdownItems = (original: UserWithRole) => {
 const columns: AdminTableColumn<UserWithRole>[] = [
   {
     accessorKey: 'id',
-    header: 'ID',
-    cell: IDColumn
+    header: 'ID'
   },
   {
-    accessorKey: 'avatar',
+    accessorKey: 'image',
     header: t('user.columns.avatar'),
     cell: avatarColumn
   },

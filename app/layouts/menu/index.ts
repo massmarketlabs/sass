@@ -21,22 +21,6 @@ export const getMenus = (t: (name: string) => string): NavigationMenuItem[][] =>
             to: '/admin/maintenance/dbPool'
           }
         ]
-      },
-      {
-        label: 'Composables',
-        icon: 'i-lucide-database',
-        defaultOpen: false,
-        children: [
-          {
-            label: 'Table',
-            icon: 'i-lucide-file-text',
-            to: '/admin/table'
-          },
-          {
-            label: 'Another Table2',
-            icon: 'i-lucide-file-text'
-          }
-        ]
       }
     ],
     [
