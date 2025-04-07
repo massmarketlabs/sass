@@ -5,11 +5,14 @@ import ColumnControl from './components/ColumnControl.vue'
 import Pagination from './components/Pagination/index.vue'
 import SortControl from './components/SortControl/index.vue'
 import useColumnControl from './composables/useColumnControl'
+import useSelectControl from './composables/useSelectControl'
 
-const { fetchData, columns, hidePagination = false } = defineProps<{
+const { fetchData, columns, hidePagination = false, canSelect = false, rowId } = defineProps<{
   fetchData: FetchDataFn<T>
   columns: AdminTableColumn<T>[]
   hidePagination?: boolean
+  canSelect?: boolean
+  rowId?: string
 }>()
 
 const route = useRoute()
@@ -20,11 +23,13 @@ const limit = ref<number>(Number(route.query.limit) || 20)
 const loading = ref(false)
 const total = ref(0)
 const data = ref<any[]>([])
+const rowSelection = defineModel<Record<string, boolean>>('rowSelection', { default: {} })
 
 const sortOptions = ref<SortOption[]>([])
 
 const tableRef = useTemplateRef<UTableInstance>('table')
 const { selectedColumns } = useColumnControl(columns, tableRef)
+const { selectColumnId, getRowId, selectedRowCount, rowCount } = useSelectControl(tableRef, rowId)
 
 const fetchTableData = async () => {
   loading.value = true
@@ -129,12 +134,29 @@ defineExpose({
     </FlexThreeColumn>
     <UTable
       ref="table"
+      v-model:row-selection="rowSelection"
+      :get-row-id="getRowId"
       :loading="loading"
-      :columns="columns"
+      :columns="canSelect ? [{ id: selectColumnId }, ...columns] : columns"
       :data="data"
       sticky
       class="max-h-[calc(100vh-140px)]"
     >
+      <template #[`${selectColumnId}-header`]="{ table }">
+        <UCheckbox
+          :model-value="table.getIsSomePageRowsSelected()
+            ? 'indeterminate'
+            : table.getIsAllPageRowsSelected()"
+          @update:model-value="(value: boolean | 'indeterminate') =>
+            table.toggleAllPageRowsSelected(!!value)"
+        />
+      </template>
+      <template #[`${selectColumnId}-cell`]="{ row }">
+        <UCheckbox
+          :model-value="row.getIsSelected()"
+          @update:model-value="(value: boolean | 'indeterminate') => row.toggleSelected(!!value)"
+        />
+      </template>
       <template
         v-for="(_, name) in $slots"
         :key="name"
@@ -147,10 +169,13 @@ defineExpose({
       </template>
     </UTable>
     <Pagination
-      v-if="!hidePagination"
       :model-value="page"
       :limit="limit"
       :total="total"
+      :hide-pagination="hidePagination"
+      :can-select="canSelect"
+      :selected-row-count="selectedRowCount"
+      :row-count="rowCount"
       @update:model-value="updatePage"
       @update:limit="updateLimit"
     />

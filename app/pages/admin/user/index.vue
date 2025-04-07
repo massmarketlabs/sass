@@ -163,7 +163,6 @@ const createdAtRange = ref({
       </UButton>
     </template>
     <AdminTable
-      ref="table"
       :columns="columns"
       :fetch-data="fetchData"
     >
