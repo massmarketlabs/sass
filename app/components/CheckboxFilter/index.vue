@@ -1,3 +1,5 @@
+<i18n src="./i18n.json"></i18n>
+
 <script setup lang="ts">
 import { useRoute, useRouter } from 'vue-router'
 
@@ -6,6 +8,9 @@ const { items, name, filterName } = defineProps<{
   name: string
   filterName: string
 }>()
+
+const { t } = useI18n()
+
 const filter = defineModel<string[]>('filter', { default: [] })
 
 const route = useRoute()
@@ -67,7 +72,7 @@ watch(
         class="w-4 h-4 mr-1"
       />
       {{ name }}
-      <template v-if="selectedItems.length">
+      <template v-if="selectedItems.length && selectedItems.length <= 2">
         <UBadge
           v-for="item in selectedItems"
           :key="item.id"
@@ -77,6 +82,16 @@ watch(
           class="ml-1"
         >
           {{ item.label }}
+        </UBadge>
+      </template>
+      <template v-if="selectedItems.length && selectedItems.length > 2">
+        <UBadge
+          color="neutral"
+          variant="outline"
+          size="sm"
+          class="ml-1"
+        >
+          {{ t('checkboxFilter.nSelected', { n: selectedItems.length }) }}
         </UBadge>
       </template>
     </UButton>
