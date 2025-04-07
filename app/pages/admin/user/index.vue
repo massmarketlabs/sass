@@ -10,6 +10,26 @@ const isUserModalOpen = ref(false)
 const isBanModalOpen = ref(false)
 const selectedUserId = ref('')
 
+const search = ref('')
+
+const roleFilter = ref([])
+const roleOptions = ref<FilterItem[]>([
+  { label: t('user.roles.user'), id: 'user', count: 0 },
+  { label: t('user.roles.admin'), id: 'admin', count: 0 }
+])
+
+const statusFilter = ref([])
+const statusOptions = ref<FilterItem[]>([
+  { label: t('user.status.banned'), id: 'banned', count: 0 },
+  { label: t('user.status.verified'), id: 'verified', count: 0 },
+  { label: t('user.status.unverified'), id: 'unverified', count: 0 }
+])
+
+const createdAtRange = ref({
+  start: undefined,
+  end: undefined
+})
+
 const { refresh } = useAdminTable()
 
 const getActionItems = (row: Row<UserWithRole>) => {
@@ -130,24 +150,6 @@ const fetchData: FetchDataFn<UserWithRole> = async ({ page, limit }) => {
     total: result.data?.total || 0
   }
 }
-
-const roleFilter = ref([])
-const roleOptions = ref<FilterItem[]>([
-  { label: t('user.roles.user'), id: 'user', count: 0 },
-  { label: t('user.roles.admin'), id: 'admin', count: 0 }
-])
-
-const statusFilter = ref([])
-const statusOptions = ref<FilterItem[]>([
-  { label: t('user.status.banned'), id: 'banned', count: 0 },
-  { label: t('user.status.verified'), id: 'verified', count: 0 },
-  { label: t('user.status.unverified'), id: 'unverified', count: 0 }
-])
-
-const createdAtRange = ref({
-  start: undefined,
-  end: undefined
-})
 </script>
 
 <template>
@@ -163,10 +165,15 @@ const createdAtRange = ref({
       </UButton>
     </template>
     <AdminTable
+      ref="table"
       :columns="columns"
       :fetch-data="fetchData"
     >
       <template #top-Left>
+        <UInput
+          v-model="search"
+          :placeholder="`${t('global.page.name')}...`"
+        />
         <CheckboxFilter
           v-model:filter="roleFilter"
           filter-name="role"
