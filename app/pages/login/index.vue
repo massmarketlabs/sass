@@ -50,7 +50,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 </script>
 
 <template>
-  <UContainer class="flex min-h-[calc(100vh-4rem)] items-center justify-center p-4">
+  <UContainer class="flex items-center justify-center p-4">
     <UCard class="w-full max-w-md">
       <template #header>
         <div class="text-center p-4">
@@ -59,7 +59,6 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
           </h2>
         </div>
       </template>
-
       <div class="space-y-4">
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <UButton

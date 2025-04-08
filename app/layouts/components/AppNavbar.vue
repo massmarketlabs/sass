@@ -12,8 +12,8 @@ const { loggedIn, signOut, user } = useAuth()
 
 <template>
   <!-- Navigation -->
-  <nav class="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-900">
-    <UContainer class="flex h-16 items-center justify-between">
+  <nav class="fixed h-16 top-0 left-0 right-0 z-50 bg-white dark:bg-gray-900">
+    <UContainer class="flex h-full items-center justify-between">
       <NuxtLink
         to="/"
         class="flex items-center gap-2"
