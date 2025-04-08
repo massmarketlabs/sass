@@ -18,6 +18,7 @@
       "resetSorting": "重置排序",
       "asc": "升序",
       "desc": "降序",
+      "sortBy": "排序方式",
       "noSorting": "未应用排序",
       "addSortingHint": "添加排序以组织您的行。"
     }
@@ -29,6 +30,7 @@
       "resetSorting": "並べ替えをリセット",
       "asc": "昇順",
       "desc": "降順",
+      "sortBy": "並べ替え基準",
       "noSorting": "並べ替えが適用されていません",
       "addSortingHint": "行を整理するために並べ替えを追加してください。"
     }
@@ -40,6 +42,7 @@
       "resetSorting": "Réinitialiser le tri",
       "asc": "Ascendant",
       "desc": "Descendant",
+      "sortBy": "Trier par",
       "noSorting": "Aucun tri appliqué",
       "addSortingHint": "Ajoutez un tri pour organiser vos lignes."
     }
