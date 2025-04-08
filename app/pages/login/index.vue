@@ -50,7 +50,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 </script>
 
 <template>
-  <UContainer class="flex items-center justify-center p-4">
+  <UContainer class="flex items-center justify-center p-4 min-w-100 sm:min-w-160">
     <UCard class="w-full max-w-md">
       <template #header>
         <div class="text-center p-4">
@@ -60,30 +60,24 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
         </div>
       </template>
       <div class="space-y-4">
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
           <UButton
-            color="primary"
+            color="neutral"
             variant="outline"
             icon="i-simple-icons-google"
+            class="justify-center"
             @click="auth.signIn.social({ provider: 'google', callbackURL: '/user' })"
           >
             Google
           </UButton>
           <UButton
-            color="primary"
+            color="neutral"
             variant="outline"
             icon="i-simple-icons-github"
+            class="justify-center"
             @click="auth.signIn.social({ provider: 'github', callbackURL: '/user' })"
           >
             Github
-          </UButton>
-          <UButton
-            color="primary"
-            variant="outline"
-            icon="i-simple-icons-apple"
-            @click="auth.signIn.social({ provider: 'apple', callbackURL: '/user' })"
-          >
-            Apple
           </UButton>
         </div>
 
@@ -103,6 +97,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
             <UInput
               v-model="state.email"
               type="email"
+              class="w-full"
               :placeholder="t('login.emailPlaceholder')"
             />
           </UFormField>
@@ -115,6 +110,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
             <UInput
               v-model="state.password"
               type="password"
+              class="w-full"
               :placeholder="t('login.passwordPlaceholder')"
             />
           </UFormField>
@@ -128,7 +124,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
             </UFormField>
             <UButton
               variant="link"
-              color="primary"
+              color="neutral"
               to="/forgot-password"
             >
               {{ t('login.forgotPassword') }}
@@ -148,7 +144,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
             {{ t('login.noAccount') }}
             <UButton
               variant="link"
-              color="primary"
+              color="neutral"
               to="/register"
             >
               {{ t('login.createAccount') }}
