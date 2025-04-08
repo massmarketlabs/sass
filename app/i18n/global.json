@@ -3,6 +3,9 @@
     "global": {
       "appName": "NuxSaaS",
       "appSlogan": "A fullstack SaaS starter kit built with Nuxt",
+      "auth": {
+        "signOut": "Sign Out"
+      },
       "page": {
         "actions": "Actions",
         "create": "Create",

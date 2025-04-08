@@ -1,8 +1,11 @@
+<i18n src="./i18n.json"></i18n>
+
 <script setup lang="ts">
 definePageMeta({
   auth: false
 })
 
+const { t } = useI18n()
 const auth = useAuth()
 const toast = useToast()
 
@@ -38,7 +41,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
   else {
     await navigateTo('/user')
     toast.add({
-      title: 'Login Success',
+      title: t('login.loginSuccess'),
       color: 'success'
     })
   }
@@ -52,7 +55,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       <template #header>
         <div class="text-center p-4">
           <h2 class="text-xl font-semibold">
-            Welcome to NuxSaaS
+            {{ t('login.welcome', { name: t('global.appName') }) }}
           </h2>
         </div>
       </template>
@@ -85,7 +88,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
           </UButton>
         </div>
 
-        <USeparator label="Or" />
+        <USeparator :label="t('login.or')" />
 
         <UForm
           :schema="schema"
@@ -94,26 +97,26 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
           @submit="onSubmit"
         >
           <UFormField
-            label="Email"
+            :label="t('login.email')"
             name="email"
             required
           >
             <UInput
               v-model="state.email"
               type="email"
-              placeholder="Email Address"
+              :placeholder="t('login.emailPlaceholder')"
             />
           </UFormField>
 
           <UFormField
-            label="Password"
+            :label="t('login.password')"
             name="password"
             required
           >
             <UInput
               v-model="state.password"
               type="password"
-              placeholder="Password"
+              :placeholder="t('login.passwordPlaceholder')"
             />
           </UFormField>
 
@@ -121,7 +124,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
             <UFormField name="rememberMe">
               <UCheckbox
                 v-model="state.rememberMe"
-                label="Remember me"
+                :label="t('login.rememberMe')"
               />
             </UFormField>
             <UButton
@@ -129,7 +132,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
               color="primary"
               to="/forgot-password"
             >
-              Forgot your password?
+              {{ t('login.forgotPassword') }}
             </UButton>
           </div>
 
@@ -139,20 +142,20 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
             block
             :loading="loading"
           >
-            Sign In
+            {{ t('login.signIn') }}
           </UButton>
-        </UForm>
 
-        <div class="text-center text-sm">
-          Don't have an account?
-          <UButton
-            variant="link"
-            color="primary"
-            to="/register"
-          >
-            Create today!
-          </UButton>
-        </div>
+          <div class="text-center text-sm">
+            {{ t('login.noAccount') }}
+            <UButton
+              variant="link"
+              color="primary"
+              to="/register"
+            >
+              {{ t('login.createAccount') }}
+            </UButton>
+          </div>
+        </uform>
       </div>
     </UCard>
   </UContainer>

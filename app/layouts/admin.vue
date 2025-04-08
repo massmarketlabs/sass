@@ -4,6 +4,8 @@
 import SearchPalette from './components/SearchPalette.vue'
 import { getMenus } from './menu'
 
+const { user, signOut } = useAuth()
+
 const router = useRouter()
 const route = useRoute()
 const { t } = useI18n()
@@ -37,7 +39,7 @@ menus.forEach((group) => {
 })
 
 const clickSignOut = () => {
-
+  signOut()
 }
 </script>
 
@@ -83,16 +85,6 @@ const clickSignOut = () => {
           >
             <template #content>
               <UButton
-                icon="i-lucide-rocket"
-                size="sm"
-                color="neutral"
-                variant="link"
-                class="w-full p-[10px]"
-              >
-                Button
-              </UButton>
-              <USeparator class="w-full" />
-              <UButton
                 icon="i-lucide-log-out"
                 size="sm"
                 color="neutral"
@@ -100,7 +92,7 @@ const clickSignOut = () => {
                 class="w-full p-[10px]"
                 @click="clickSignOut"
               >
-                Sign Out
+                {{ t('global.auth.signOut') }}
               </UButton>
             </template>
             <div
@@ -109,14 +101,14 @@ const clickSignOut = () => {
             >
               <div class="flex items-center">
                 <UAvatar
-                  src="https://avatars.githubusercontent.com/u/64819679?s=48&v=4"
+                  :src="user?.image || undefined"
                   size="xs"
                 />
                 <span
                   v-if="!isCollapsed"
                   class="text-xs ml-2"
                 >
-                  Name
+                  {{ user?.name }}
                 </span>
               </div>
               <UIcon

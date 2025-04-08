@@ -1,0 +1,66 @@
+{
+  "en": {
+    "login": {
+      "welcome": "Welcome to {name}",
+      "email": "Email",
+      "password": "Password",
+      "emailPlaceholder": "Email Address",
+      "passwordPlaceholder": "Password",
+      "rememberMe": "Remember me",
+      "forgotPassword": "Forgot your password?",
+      "signIn": "Sign In",
+      "noAccount": "Don't have an account?",
+      "createAccount": "Create today!",
+      "or": "Or",
+      "loginSuccess": "Login Success"
+    }
+  },
+  "zh": {
+    "login": {
+      "welcome": "欢迎使用 {name}",
+      "email": "邮箱",
+      "password": "密码",
+      "emailPlaceholder": "邮箱地址",
+      "passwordPlaceholder": "密码",
+      "rememberMe": "记住我",
+      "forgotPassword": "忘记密码？",
+      "signIn": "登录",
+      "noAccount": "还没有账号？",
+      "createAccount": "立即注册！",
+      "or": "或者",
+      "loginSuccess": "登录成功"
+    }
+  },
+  "ja": {
+    "login": {
+      "welcome": "{name}へようこそ",
+      "email": "メールアドレス",
+      "password": "パスワード",
+      "emailPlaceholder": "メールアドレス",
+      "passwordPlaceholder": "パスワード",
+      "rememberMe": "ログイン状態を保持",
+      "forgotPassword": "パスワードをお忘れですか？",
+      "signIn": "ログイン",
+      "noAccount": "アカウントをお持ちでない方",
+      "createAccount": "新規登録！",
+      "or": "または",
+      "loginSuccess": "ログインに成功しました"
+    }
+  },
+  "fr": {
+    "login": {
+      "welcome": "Bienvenue sur {name}",
+      "email": "E-mail",
+      "password": "Mot de passe",
+      "emailPlaceholder": "Adresse e-mail",
+      "passwordPlaceholder": "Mot de passe",
+      "rememberMe": "Se souvenir de moi",
+      "forgotPassword": "Mot de passe oublié ?",
+      "signIn": "Se connecter",
+      "noAccount": "Vous n'avez pas de compte ?",
+      "createAccount": "Créez-en un !",
+      "or": "Ou",
+      "loginSuccess": "Connexion réussie"
+    }
+  }
+}
