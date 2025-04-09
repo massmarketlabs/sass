@@ -41,7 +41,8 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
   loading.value = true
   const { error } = await auth.signIn.email({
     email: event.data.email,
-    password: event.data.password
+    password: event.data.password,
+    rememberMe: event.data.rememberMe
   })
   if (error) {
     toast.add({
