@@ -18,7 +18,7 @@ const config = useRuntimeConfig()
 
 const redirectTo = computed(() => {
   const redirect = route.query.redirect as string
-  return redirect || config.public.auth.authenticatedRedirect
+  return redirect || config.public.auth.unauthenticatedRedirect
 })
 
 const schema = z.object({
