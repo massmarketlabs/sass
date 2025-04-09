@@ -7,7 +7,7 @@
       "totalRows": "Total row(s): {total}"
     }
   },
-  "zh": {
+  "zh-CN": {
     "pagination": {
       "rowsPerPage": "每页行数",
       "pageOf": "第 {page} 页，共 {totalPage} 页",

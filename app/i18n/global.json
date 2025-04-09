@@ -18,7 +18,7 @@
       }
     }
   },
-  "zh": {
+  "zh-CN": {
     "global": {
       "appName": "NuxSaaS",
       "appSlogan": "基于 Nuxt 构建的全栈 SaaS 起始套件",

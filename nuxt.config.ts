@@ -19,12 +19,12 @@ export default defineNuxtConfig({
   i18n: {
     vueI18n: '~/i18n/i18n.config.ts',
     baseUrl: process.env.BETTER_AUTH_URL,
-    locales: ['en', 'zh', 'ja', 'fr'].map((lang) => {
-      return {
-        code: lang,
-        language: lang
-      }
-    }),
+    locales: [
+      { code: 'en', iso: 'en-US', name: 'English' },
+      { code: 'zh-CN', iso: 'zh-CN', name: '简体中文' },
+      { code: 'ja', iso: 'ja-JP', name: '日本語' },
+      { code: 'fr', iso: 'fr-FR', name: 'Français' }
+    ],
     defaultLocale: 'en',
     bundle: {
       optimizeTranslationDirective: false

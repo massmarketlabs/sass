@@ -2,23 +2,23 @@ import global from './global.json'
 import zodEn from './zod/en.json'
 import zodFr from './zod/fr.json'
 import zodJa from './zod/ja.json'
-import zodZh from './zod/zh.json'
+import zodZhCN from './zod/zh-CN.json'
 
 // Merge zod translations with global messages
 const messages = {
-  en: {
+  'en': {
     ...zodEn,
     ...global.en
   },
-  zh: {
-    ...zodZh,
-    ...global.zh
+  'zh-CN': {
+    ...zodZhCN,
+    ...global['zh-CN']
   },
-  ja: {
+  'ja': {
     ...zodJa,
     ...global.ja
   },
-  fr: {
+  'fr': {
     ...zodFr,
     ...global.fr
   }

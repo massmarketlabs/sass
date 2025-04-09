@@ -3,7 +3,7 @@ const { locale, setLocale, locales } = useI18n()
 
 const localeItems = computed(() => {
   return locales.value.map(item => ({
-    label: getLocaleName(item.code),
+    label: item.name,
     type: 'checkbox' as const,
     checked: locale.value === item.code,
     onUpdateChecked: async (checked: boolean) => {
@@ -13,16 +13,6 @@ const localeItems = computed(() => {
     }
   }))
 })
-
-function getLocaleName(code: string) {
-  const names = {
-    en: 'English',
-    zh: '中文',
-    ja: '日本語',
-    fr: 'Français'
-  }
-  return names[code as keyof typeof names] || code
-}
 </script>
 
 <template>

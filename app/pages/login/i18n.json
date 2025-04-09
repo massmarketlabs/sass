@@ -19,7 +19,7 @@
       }
     }
   },
-  "zh": {
+  "zh-CN": {
     "login": {
       "welcome": "欢迎使用 {name}",
       "email": "邮箱",

@@ -8,7 +8,7 @@
       "waitingConnections": "Waiting Connections"
     }
   },
-  "zh": {
+  "zh-CN": {
     "dbPool": {
       "title": "数据库连接池状态",
       "totalConnections": "总连接数",

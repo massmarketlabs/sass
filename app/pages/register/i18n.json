@@ -31,7 +31,7 @@
       "success": "Registration Success"
     }
   },
-  "zh": {
+  "zh-CN": {
     "register": {
       "title": "创建账号",
       "or": "或者",

@@ -11,7 +11,7 @@
       "addSortingHint": "Add sorting to organize your rows."
     }
   },
-  "zh": {
+  "zh-CN": {
     "sortControl": {
       "sort": "排序",
       "addSort": "添加排序",

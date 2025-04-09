@@ -15,7 +15,7 @@
       }
     }
   },
-  "zh": {
+  "zh-CN": {
     "dashboard": {
       "stats": {
         "activeUsers": "活跃用户",
