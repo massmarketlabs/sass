@@ -5,7 +5,14 @@ import AppNavbar from './components/AppNavbar.vue'
 
 <template>
   <div class="min-h-screen flex flex-col items-center relative">
-    <AppNavbar />
+    <AppNavbar>
+      <template #center>
+        <slot name="nav-center" />
+      </template>
+      <template #right>
+        <slot name="nav-right" />
+      </template>
+    </AppNavbar>
     <div class="flex flex-1 pt-16">
       <slot />
     </div>
