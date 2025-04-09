@@ -13,11 +13,10 @@ useHead({
 const auth = useAuth()
 const toast = useToast()
 const route = useRoute()
-const config = useRuntimeConfig()
 
 const redirectTo = computed(() => {
   const redirect = route.query.redirect as string
-  return redirect || config.public.auth.unauthenticatedRedirect
+  return redirect || '/'
 })
 
 const schema = z.object({
