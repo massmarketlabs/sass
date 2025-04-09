@@ -10,8 +10,8 @@ const auth = useAuth()
 const toast = useToast()
 
 const schema = z.object({
-  email: z.string().email('Invalid email address'),
-  password: z.string().min(8, 'Password must be at least 8 characters'),
+  email: z.string().email(t('login.errors.invalidEmail')),
+  password: z.string().min(8, t('login.errors.passwordLength', { min: 8 })),
   rememberMe: z.boolean().optional()
 })
 type Schema = zodOutput<typeof schema>
