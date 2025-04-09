@@ -1,6 +1,6 @@
 {
   "en": {
-    "login": {
+    "signIn": {
       "welcome": "Welcome to {name}",
       "email": "Email",
       "password": "Password",
@@ -12,7 +12,7 @@
       "noAccount": "Don't have an account?",
       "createAccount": "Create today!",
       "or": "Or",
-      "loginSuccess": "Login Success",
+      "signInSuccess": "Sign in Success",
       "errors": {
         "invalidEmail": "Invalid email address",
         "passwordLength": "Password must be at least {min} characters"
@@ -20,7 +20,7 @@
     }
   },
   "zh-CN": {
-    "login": {
+    "signIn": {
       "welcome": "欢迎使用 {name}",
       "email": "邮箱",
       "password": "密码",
@@ -32,7 +32,7 @@
       "noAccount": "还没有账号？",
       "createAccount": "立即注册！",
       "or": "或者",
-      "loginSuccess": "登录成功",
+      "signInSuccess": "登录成功",
       "errors": {
         "invalidEmail": "无效的邮箱地址",
         "passwordLength": "密码长度至少为{min}个字符"
@@ -40,7 +40,7 @@
     }
   },
   "ja": {
-    "login": {
+    "signIn": {
       "welcome": "{name}へようこそ",
       "email": "メールアドレス",
       "password": "パスワード",
@@ -52,7 +52,7 @@
       "noAccount": "アカウントをお持ちでない方",
       "createAccount": "新規登録！",
       "or": "または",
-      "loginSuccess": "ログインに成功しました",
+      "signInSuccess": "ログインに成功しました",
       "errors": {
         "invalidEmail": "無効なメールアドレス",
         "passwordLength": "パスワードは{min}文字以上である必要があります"
@@ -60,7 +60,7 @@
     }
   },
   "fr": {
-    "login": {
+    "signIn": {
       "welcome": "Bienvenue sur {name}",
       "email": "E-mail",
       "password": "Mot de passe",
@@ -72,7 +72,7 @@
       "noAccount": "Vous n'avez pas de compte ?",
       "createAccount": "Créez-en un !",
       "or": "Ou",
-      "loginSuccess": "Connexion réussie",
+      "signInSuccess": "Connexion réussie",
       "errors": {
         "invalidEmail": "Adresse e-mail invalide",
         "passwordLength": "Le mot de passe doit contenir au moins {min} caractères"
