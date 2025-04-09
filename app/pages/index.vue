@@ -94,7 +94,7 @@ const features = [
         </template>
         <template v-else>
           <UButton
-            to="/login"
+            to="/signin"
             variant="ghost"
           >
             Sign in

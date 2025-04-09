@@ -74,7 +74,7 @@ export default defineNuxtConfig({
     public: {
       auth: {
         redirectUserTo: '/dashboard',
-        redirectGuestTo: '/login'
+        redirectGuestTo: '/signin'
       }
     }
   }

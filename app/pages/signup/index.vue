@@ -6,16 +6,21 @@ definePageMeta({
 })
 
 const { t } = useI18n()
+
+useHead({
+  title: t('signUp.pageTitle')
+})
+
 const auth = useAuth()
 const toast = useToast()
 
 const schema = z.object({
-  name: z.string().min(5, t('register.form.name.error', { min: 5 })),
-  email: z.string().email(t('register.form.email.error')),
-  password: z.string().min(8, t('register.form.password.error', { min: 8 })),
+  name: z.string().min(5, t('signUp.form.name.error', { min: 5 })),
+  email: z.string().email(t('signUp.form.email.error')),
+  password: z.string().min(8, t('signUp.form.password.error', { min: 8 })),
   confirmPassword: z.string()
 }).refine(data => data.password === data.confirmPassword, {
-  message: t('register.form.confirmPassword.error'),
+  message: t('signUp.form.confirmPassword.error'),
   path: ['confirmPassword']
 })
 
@@ -48,7 +53,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
   else {
     await navigateTo('/user')
     toast.add({
-      title: t('register.success'),
+      title: t('signUp.success'),
       color: 'success'
     })
   }
@@ -62,7 +67,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       <template #header>
         <div class="text-center p-4">
           <h2 class="text-xl font-semibold">
-            {{ t('register.title') }}
+            {{ t('signUp.title') }}
           </h2>
         </div>
       </template>
@@ -89,7 +94,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
           </UButton>
         </div>
 
-        <USeparator :label="t('register.or')" />
+        <USeparator :label="t('signUp.or')" />
 
         <UForm
           :schema="schema"
@@ -98,52 +103,52 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
           @submit="onSubmit"
         >
           <UFormField
-            :label="t('register.form.name.label')"
+            :label="t('signUp.form.name.label')"
             name="name"
             required
           >
             <UInput
               v-model="state.name"
-              :placeholder="t('register.form.name.placeholder')"
+              :placeholder="t('signUp.form.name.placeholder')"
               class="w-full"
             />
           </UFormField>
 
           <UFormField
-            :label="t('register.form.email.label')"
+            :label="t('signUp.form.email.label')"
             name="email"
             required
           >
             <UInput
               v-model="state.email"
               type="email"
-              :placeholder="t('register.form.email.placeholder')"
+              :placeholder="t('signUp.form.email.placeholder')"
               class="w-full"
             />
           </UFormField>
 
           <UFormField
-            :label="t('register.form.password.label')"
+            :label="t('signUp.form.password.label')"
             name="password"
             required
           >
             <UInput
               v-model="state.password"
               type="password"
-              :placeholder="t('register.form.password.placeholder')"
+              :placeholder="t('signUp.form.password.placeholder')"
               class="w-full"
             />
           </UFormField>
 
           <UFormField
-            :label="t('register.form.confirmPassword.label')"
+            :label="t('signUp.form.confirmPassword.label')"
             name="confirmPassword"
             required
           >
             <UInput
               v-model="state.confirmPassword"
               type="password"
-              :placeholder="t('register.form.confirmPassword.placeholder')"
+              :placeholder="t('signUp.form.confirmPassword.placeholder')"
               class="w-full"
             />
           </UFormField>
@@ -154,18 +159,18 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
             block
             :loading="loading"
           >
-            {{ t('register.submit') }}
+            {{ t('signUp.submit') }}
           </UButton>
         </UForm>
 
         <div class="text-center text-sm">
-          {{ t('register.haveAccount') }}
+          {{ t('signUp.haveAccount') }}
           <UButton
             variant="link"
             color="primary"
-            to="/login"
+            to="/signin"
           >
-            {{ t('register.signIn') }}
+            {{ t('signUp.signIn') }}
           </UButton>
         </div>
       </div>

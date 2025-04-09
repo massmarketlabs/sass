@@ -149,8 +149,8 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
             {{ t('signIn.noAccount') }}
             <UButton
               variant="link"
-              color="neutral"
-              to="/register"
+              color="primary"
+              to="/signup"
             >
               {{ t('signIn.createAccount') }}
             </UButton>
