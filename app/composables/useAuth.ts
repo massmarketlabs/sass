@@ -8,7 +8,6 @@ import { adminClient } from 'better-auth/client/plugins'
 import { defu } from 'defu'
 
 interface RuntimeAuthConfig {
-  authenticatedRedirect: RouteLocationRaw | string
   unauthenticatedRedirect: RouteLocationRaw | string
 }
 
@@ -27,7 +26,6 @@ export function useAuth() {
   })
 
   const options = defu(useRuntimeConfig().public.auth as Partial<RuntimeAuthConfig>, {
-    authenticatedRedirect: '/',
     unauthenticatedRedirect: '/signin'
   })
   const session = useState<InferSessionFromClient<ClientOptions> | null>('auth:session', () => null)

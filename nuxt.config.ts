@@ -73,7 +73,6 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       auth: {
-        authenticatedRedirect: '/',
         unauthenticatedRedirect: '/signin'
       }
     }
