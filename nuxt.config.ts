@@ -73,8 +73,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       auth: {
-        redirectUserTo: '/dashboard',
-        redirectGuestTo: '/signin'
+        authenticatedRedirect: '/',
+        unauthenticatedRedirect: '/signin'
       }
     }
   }

@@ -8,11 +8,11 @@ type MiddlewareOptions = false | {
   /**
    * Redirect authenticated user to this route
    */
-  redirectUserTo?: string
+  authenticatedRedirect?: string
   /**
    * Redirect guest to this route
    */
-  redirectGuestTo?: string
+  unauthenticatedRedirect?: string
 }
 
 declare module '#app' {
@@ -33,15 +33,15 @@ export default defineNuxtRouteMiddleware(async (to) => {
     return
   }
   const { loggedIn, options, fetchSession } = useAuth()
-  const { only, redirectUserTo, redirectGuestTo } = defu(to.meta?.auth, options)
+  const { only, authenticatedRedirect, unauthenticatedRedirect } = defu(to.meta?.auth, options)
 
   // If guest mode, redirect if authenticated
   if (only === 'guest' && loggedIn.value) {
     // Avoid infinite redirect
-    if (to.path === redirectUserTo) {
+    if (to.path === authenticatedRedirect) {
       return
     }
-    return navigateTo(redirectUserTo)
+    return navigateTo(`${unauthenticatedRedirect}?redirect=${to.fullPath}`)
   }
 
   // If client-side, fetch session between each navigation
@@ -51,9 +51,9 @@ export default defineNuxtRouteMiddleware(async (to) => {
   // If not authenticated, redirect to home
   if (!loggedIn.value) {
     // Avoid infinite redirect
-    if (to.path === redirectGuestTo) {
+    if (to.path === unauthenticatedRedirect) {
       return
     }
-    return navigateTo(redirectGuestTo)
+    return navigateTo(`${unauthenticatedRedirect}?redirect=${to.fullPath}`)
   }
 })

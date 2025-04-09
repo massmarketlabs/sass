@@ -1,6 +1,7 @@
 <script setup lang="ts">
 definePageMeta({
-  auth: false
+  auth: false,
+  layout: false
 })
 
 const { t } = useI18n()
@@ -8,8 +9,7 @@ const { loggedIn, signOut, user } = useAuth()
 
 const navigation = [
   { name: 'Features', href: '/#features' },
-  { name: 'Documentation', href: '/docs' },
-  { name: 'About', href: '/about' }
+  { name: 'Documentation', href: '/docs' }
 ]
 
 const features = [
@@ -95,15 +95,9 @@ const features = [
         <template v-else>
           <UButton
             to="/signin"
-            variant="ghost"
+            variant="outline"
           >
             Sign in
-          </UButton>
-          <UButton
-            to="/login"
-            color="primary"
-          >
-            Get started
           </UButton>
         </template>
       </div>
@@ -143,7 +137,10 @@ const features = [
       </section>
 
       <!-- Features Section -->
-      <section class="py-24">
+      <section
+        id="features"
+        class="py-24"
+      >
         <UContainer>
           <div class="text-center mb-16">
             <h2 class="text-3xl font-bold">

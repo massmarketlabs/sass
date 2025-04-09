@@ -13,6 +13,13 @@ useHead({
 
 const auth = useAuth()
 const toast = useToast()
+const route = useRoute()
+const config = useRuntimeConfig()
+
+const redirectTo = computed(() => {
+  const redirect = route.query.redirect as string
+  return redirect || config.public.auth.authenticatedRedirect
+})
 
 const schema = z.object({
   name: z.string().min(5, t('signUp.form.name.error', { min: 5 })),
@@ -51,7 +58,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     })
   }
   else {
-    await navigateTo('/user')
+    await navigateTo(redirectTo.value)
     toast.add({
       title: t('signUp.success'),
       color: 'success'
@@ -79,7 +86,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
             variant="outline"
             icon="i-simple-icons-google"
             class="justify-center"
-            @click="auth.signIn.social({ provider: 'google', callbackURL: '/user' })"
+            @click="auth.signIn.social({ provider: 'google', callbackURL: redirectTo })"
           >
             Google
           </UButton>
@@ -88,7 +95,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
             variant="outline"
             icon="i-simple-icons-github"
             class="justify-center"
-            @click="auth.signIn.social({ provider: 'github', callbackURL: '/user' })"
+            @click="auth.signIn.social({ provider: 'github', callbackURL: redirectTo })"
           >
             Github
           </UButton>

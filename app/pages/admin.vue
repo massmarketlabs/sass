@@ -4,7 +4,7 @@ definePageMeta({
 })
 const { user } = useAuth()
 if (!user.value) {
-  await navigateTo('/login')
+  await navigateTo('/signin')
 } else {
   if (user.value.role !== 'admin') {
     await navigateTo('/403')
