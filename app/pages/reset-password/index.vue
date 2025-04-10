@@ -13,6 +13,8 @@ useHead({
 const auth = useAuth()
 const toast = useToast()
 const route = useRoute()
+const localePath = useLocalePath()
+const runtimeConfig = useRuntimeConfig()
 
 const state = reactive({
   password: undefined as string | undefined,
@@ -50,6 +52,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       title: t('resetPassword.success'),
       color: 'success'
     })
+    navigateTo(localePath(runtimeConfig.public.auth.unauthenticatedRedirect))
   }
   loading.value = false
 }
