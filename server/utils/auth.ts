@@ -3,7 +3,7 @@ import { drizzleAdapter } from 'better-auth/adapters/drizzle'
 import { admin, anonymous } from 'better-auth/plugins'
 import * as schema from '../database/schema'
 import { db } from './db'
-import { processEnv, redisInstance } from './drivers'
+import { processEnv, redisInstance, resendInstance } from './drivers'
 
 export const auth = betterAuth({
   baseURL: processEnv.BETTER_AUTH_URL,
@@ -30,7 +30,18 @@ export const auth = betterAuth({
     }
   },
   emailAndPassword: {
-    enabled: true
+    enabled: true,
+    sendResetPassword: async ({ user, url }) => {
+      const response = await resendInstance.emails.send({
+        from: `${processEnv.APP_NAME} <${processEnv.APP_FROM_EMAIL}>`,
+        to: [user.email],
+        subject: 'Reset your password',
+        html: `Click the link to reset your password: ${url}`
+      })
+      if (response.error) {
+        console.log(response.error)
+      }
+    }
   },
   socialProviders: {
     github: {
