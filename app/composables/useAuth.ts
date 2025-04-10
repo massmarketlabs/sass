@@ -64,6 +64,7 @@ export function useAuth() {
     signIn: client.signIn,
     signUp: client.signUp,
     forgetPassword: client.forgetPassword,
+    resetPassword: client.resetPassword,
     async signOut({ redirectTo }: { redirectTo?: RouteLocationRaw } = {}) {
       const res = await client.signOut()
       session.value = null
