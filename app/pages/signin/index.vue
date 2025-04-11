@@ -33,6 +33,9 @@ const state = reactive<Partial<Schema>>({
 })
 
 const loading = ref(false)
+const isEmailVerifyModalOpen = ref(false)
+const resendLoading = ref(false)
+let unverifiedEmail = ''
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   if (loading.value)
@@ -44,6 +47,12 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     rememberMe: event.data.rememberMe
   })
   if (error) {
+    if (error.code === 'EMAIL_NOT_VERIFIED') {
+      unverifiedEmail = event.data.email
+      isEmailVerifyModalOpen.value = true
+      loading.value = false
+      return
+    }
     toast.add({
       title: error.message,
       color: 'error'
@@ -57,6 +66,30 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     })
   }
   loading.value = false
+}
+
+async function handleResendEmail() {
+  if (resendLoading.value)
+    return
+  resendLoading.value = true
+  const { error } = await auth.sendVerificationEmail({
+    email: unverifiedEmail,
+    callbackURL: redirectTo.value
+  })
+  if (error) {
+    toast.add({
+      title: error.message,
+      color: 'error'
+    })
+  } else {
+    toast.add({
+      title: t('signIn.sendEmailSuccess'),
+      color: 'success'
+    })
+  }
+
+  isEmailVerifyModalOpen.value = false
+  resendLoading.value = false
 }
 </script>
 
@@ -161,8 +194,45 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
               {{ t('signIn.createAccount') }}
             </UButton>
           </div>
-        </uform>
+        </UForm>
       </div>
     </UCard>
+
+    <UModal v-model:open="isEmailVerifyModalOpen">
+      <template #content>
+        <UCard>
+          <template #header>
+            <div class="flex items">
+              <h3 class="text-lg font-medium">
+                {{ t('signIn.emailNotVerified') }}
+              </h3>
+            </div>
+          </template>
+
+          <p class="text-sm">
+            {{ t('signIn.emailNotVerifiedDesc') }}
+          </p>
+
+          <template #footer>
+            <div class="flex justify-end gap-3">
+              <UButton
+                color="neutral"
+                variant="outline"
+                @click="isEmailVerifyModalOpen = false"
+              >
+                {{ t('global.page.cancel') }}
+              </UButton>
+              <UButton
+                color="primary"
+                :loading="resendLoading"
+                @click="handleResendEmail"
+              >
+                {{ t('signIn.sendEmail') }}
+              </UButton>
+            </div>
+          </template>
+        </UCard>
+      </template>
+    </UModal>
   </UContainer>
 </template>
