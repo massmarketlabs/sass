@@ -76,5 +76,19 @@ export default defineNuxtConfig({
         unauthenticatedRedirect: '/signin'
       }
     }
+  },
+  app: {
+    head: {
+      link: [
+        { rel: 'icon', type: 'image/png', href: '/favicons/favicon-96x96.png', sizes: '96x96' },
+        { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' },
+        { rel: 'shortcut icon', href: '/favicon.ico' },
+        { rel: 'apple-touch-icon', sizes: '180x180', href: '/favicons/apple-touch-icon.png' },
+        { rel: 'manifest', href: '/favicons/site.webmanifest' }
+      ],
+      meta: [
+        { name: 'apple-mobile-web-app-title', content: 'NuxSaaS' }
+      ]
+    }
   }
 })

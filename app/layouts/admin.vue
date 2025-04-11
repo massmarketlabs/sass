@@ -54,14 +54,17 @@ const clickSignOut = () => {
           v-if="!isCollapsed"
           class="flex items-center ps-2.5"
         >
-          <Logo />
+          <Logo class="h-8 w-8" />
           <span
             class="self-center ml-2 text-xl font-semibold whitespace-nowrap dark:text-white"
           >
             {{ t('global.appName') }}
           </span>
         </a>
-        <Logo v-if="isCollapsed" />
+        <Logo
+          v-if="isCollapsed"
+          class="h-8 w-8"
+        />
         <div
           class="flex mb-2 mt-3"
           :class="{ 'pl-2 pr-2': !isCollapsed }"

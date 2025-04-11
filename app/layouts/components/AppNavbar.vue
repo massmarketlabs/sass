@@ -10,10 +10,7 @@ const { t } = useI18n()
         to="/"
         class="flex items-center gap-2"
       >
-        <UIcon
-          name="i-lucide-zap"
-          class="h-6 w-6 text-primary-500"
-        />
+        <Logo class="w-8 h-8" />
         <span class="font-bold text-xl">{{ t('global.appName') }}</span>
       </NuxtLink>
 

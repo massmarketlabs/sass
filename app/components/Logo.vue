@@ -1,6 +1,6 @@
 <template>
-  <UAvatar
-    src="/logo.png"
+  <img
+    src="/logo.svg"
     alt="Logo"
-  />
+  >
 </template>
