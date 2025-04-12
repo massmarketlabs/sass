@@ -14,6 +14,7 @@ useHead({
 const auth = useAuth()
 const toast = useToast()
 const route = useRoute()
+const localePath = useLocalePath()
 
 const redirectTo = computed(() => {
   const redirect = route.query.redirect as string
@@ -174,7 +175,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
           <UButton
             variant="link"
             color="primary"
-            to="/signin"
+            :to="localePath('/signin')"
           >
             {{ t('signUp.signIn') }}
           </UButton>

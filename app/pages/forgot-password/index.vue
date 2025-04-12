@@ -12,6 +12,7 @@ useHead({
 
 const auth = useAuth()
 const toast = useToast()
+const localePath = useLocalePath()
 
 const schema = z.object({
   email: z.string().email(t('forgotPassword.errors.invalidEmail'))
@@ -24,8 +25,6 @@ const state = reactive<Partial<Schema>>({
 })
 
 const loading = ref(false)
-
-const localePath = useLocalePath()
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   if (loading.value)
@@ -101,7 +100,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
           <UButton
             variant="link"
             color="primary"
-            to="/signin"
+            :to="localePath('/signin')"
           >
             {{ t('forgotPassword.backToSignIn') }}
           </UButton>

@@ -4,6 +4,7 @@
 const { user, session, client } = useAuth()
 const toast = useToast()
 const { t } = useI18n()
+const localePath = useLocalePath()
 const { data: accounts } = await useAsyncData('/accounts', () => client.listAccounts())
 
 function hasProvider(provider: string) {
@@ -44,7 +45,7 @@ onMounted(() => {
             </div>
           </div>
           <UButton
-            to="/"
+            :to="localePath('/')"
             variant="outline"
             color="neutral"
             icon="i-heroicons-arrow-left"

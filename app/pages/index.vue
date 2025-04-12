@@ -6,6 +6,7 @@ definePageMeta({
 
 const { t } = useI18n()
 const { loggedIn, signOut, user } = useAuth()
+const localePath = useLocalePath()
 
 const navigation = [
   { name: 'Features', href: '/#features' },
@@ -53,7 +54,7 @@ const features = [
         <NuxtLink
           v-for="item in navigation"
           :key="item.name"
-          :to="item.href"
+          :to="localePath(item.href)"
           class="text-sm font-medium text-gray-700 hover:text-primary-500 dark:text-gray-300 dark:hover:text-primary-400"
         >
           {{ item.name }}
@@ -68,7 +69,7 @@ const features = [
               {
                 label: 'Profile',
                 icon: 'i-lucide-user',
-                to: '/profile'
+                to: localePath('/profile')
               },
               {
                 label: 'Sign out',
@@ -94,7 +95,7 @@ const features = [
         </template>
         <template v-else>
           <UButton
-            to="/signin"
+            :to="localePath('/signin')"
             variant="outline"
           >
             Sign in
@@ -115,7 +116,7 @@ const features = [
             </p>
             <div class="flex gap-4 justify-center">
               <UButton
-                to="/login"
+                :to="localePath('/signin')"
                 color="primary"
                 size="lg"
               >

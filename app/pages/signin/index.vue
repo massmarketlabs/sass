@@ -13,6 +13,7 @@ useHead({
 const auth = useAuth()
 const toast = useToast()
 const route = useRoute()
+const localePath = useLocalePath()
 
 const redirectTo = computed(() => {
   const redirect = route.query.redirect as string
@@ -169,7 +170,7 @@ async function handleResendEmail() {
             <UButton
               variant="link"
               color="neutral"
-              to="/forgot-password"
+              :to="localePath('/forgot-password')"
             >
               {{ t('signIn.forgotPassword') }}
             </UButton>
@@ -189,7 +190,7 @@ async function handleResendEmail() {
             <UButton
               variant="link"
               color="primary"
-              to="/signup"
+              :to="localePath('/signup')"
             >
               {{ t('signIn.createAccount') }}
             </UButton>

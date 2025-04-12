@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const localePath = useLocalePath()
 </script>
 
 <template>
@@ -16,7 +17,7 @@
       </p>
       <div class="mt-6">
         <UButton
-          to="/"
+          :to="localePath('/')"
           icon="lucide:home"
           variant="soft"
         >

@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 const { t } = useI18n()
+const localePath = useLocalePath()
 </script>
 
 <template>
@@ -7,7 +8,7 @@ const { t } = useI18n()
   <nav class="fixed h-16 top-0 left-0 right-0 z-50 bg-white dark:bg-gray-900">
     <UContainer class="flex h-full items-center justify-between">
       <NuxtLink
-        to="/"
+        :to="localePath('/')"
         class="flex items-center gap-2"
       >
         <Logo class="w-8 h-8" />

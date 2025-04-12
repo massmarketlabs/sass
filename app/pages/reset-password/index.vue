@@ -119,7 +119,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
           <UButton
             variant="link"
             color="primary"
-            to="/signin"
+            :to="localePath('/signin')"
           >
             {{ t('resetPassword.backToSignIn') }}
           </UButton>
