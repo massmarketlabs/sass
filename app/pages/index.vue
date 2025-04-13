@@ -104,9 +104,14 @@ const features = [
       </div>
     </template>
     <div class="pt-16">
+      <div class="absolute inset-0 bg-gradient-to-b from-emerald-50 to-white dark:from-gray-900 dark:to-gray-800" />
+      <div class="absolute inset-0">
+        <div class="absolute inset-0 bg-gradient-to-r from-emerald-500/10 to-teal-500/10 blur-3xl opacity-50" />
+        <div class="absolute top-0 left-0 w-[500px] h-[500px] bg-teal-500/20 rounded-full blur-3xl -ml-32 -mt-32 opacity-30" />
+      </div>
       <!-- Hero Section -->
-      <section class="bg-gray-50 dark:bg-gray-900">
-        <UContainer class="py-24">
+      <section class="relative overflow-hidden">
+        <UContainer class="relative py-24">
           <div class="text-center">
             <h1 class="text-4xl font-bold tracking-tight sm:text-6xl mb-6">
               {{ t('global.appName') }}
@@ -140,9 +145,13 @@ const features = [
       <!-- Features Section -->
       <section
         id="features"
-        class="py-24"
+        class="relative py-24"
       >
-        <UContainer>
+        <!-- Background gradient for features -->
+        <div class="absolute inset-0">
+          <div class="absolute inset-0 bg-gradient-to-b from-white via-emerald-50 to-white dark:from-gray-800 dark:via-gray-900 dark:to-gray-800" />
+        </div>
+        <UContainer class="relative">
           <div class="text-center mb-16">
             <h2 class="text-3xl font-bold">
               Everything you need to build your SaaS
@@ -156,10 +165,10 @@ const features = [
             <UCard
               v-for="feature in features"
               :key="feature.title"
-              class="text-center"
+              class="text-center backdrop-blur-sm bg-white/50 dark:bg-gray-800/50 border-0 shadow-lg"
             >
               <div class="flex flex-col items-center p-6">
-                <div class="p-3 bg-primary-50 dark:bg-primary-900 rounded-full mb-4">
+                <div class="p-3 bg-primary-50 dark:bg-primary-900/50 rounded-full mb-4">
                   <UIcon
                     :name="feature.icon"
                     class="text-primary-500 w-6 h-6"
