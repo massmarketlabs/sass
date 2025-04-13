@@ -38,5 +38,6 @@
     "less",
     "scss"
   ],
-  "workbench.editor.labelFormat": "short"
+  "workbench.editor.labelFormat": "short",
+  "workbench.editorAssociations": { "*.svg": "default" }
 }

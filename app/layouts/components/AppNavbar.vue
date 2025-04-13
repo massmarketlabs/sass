@@ -11,8 +11,10 @@ const localePath = useLocalePath()
         :to="localePath('/')"
         class="flex items-center gap-2"
       >
-        <Logo class="w-8 h-8" />
-        <span class="font-bold text-xl">{{ t('global.appName') }}</span>
+        <span class="font-bold text-xl flex items-center">
+          <Logo class="w-6 h-6 mr-1" />
+          {{ t('global.appName') }}
+        </span>
       </NuxtLink>
 
       <slot name="center" />

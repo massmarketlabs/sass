@@ -54,7 +54,7 @@ const clickSignOut = () => {
           v-if="!isCollapsed"
           class="flex items-center ps-2.5"
         >
-          <Logo class="h-8 w-8" />
+          <Logo class="h-6 w-6" />
           <span
             class="self-center ml-2 text-xl font-semibold whitespace-nowrap dark:text-white"
           >
@@ -63,7 +63,7 @@ const clickSignOut = () => {
         </a>
         <Logo
           v-if="isCollapsed"
-          class="h-8 w-8"
+          class="h-6 w-6 ml-1"
         />
         <div
           class="flex mb-2 mt-3"
