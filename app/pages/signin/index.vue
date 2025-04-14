@@ -17,7 +17,7 @@ const localePath = useLocalePath()
 
 const redirectTo = computed(() => {
   const redirect = route.query.redirect as string
-  return redirect || '/'
+  return localePath(redirect || '/')
 })
 
 const schema = z.object({
