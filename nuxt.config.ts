@@ -10,7 +10,8 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     'nuxt-zod-i18n', // before @nuxtjs/i18n module
     '@nuxtjs/i18n',
-    'nuxt-echarts'
+    'nuxt-echarts',
+    '@nuxt/test-utils/module'
   ],
   components: [
     { path: '~/components/filters', pathPrefix: false },
