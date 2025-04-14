@@ -1,5 +1,8 @@
+<i18n src="./i18n.json"></i18n>
+
 <script setup lang="ts">
 const localePath = useLocalePath()
+const { t } = useI18n()
 </script>
 
 <template>
@@ -10,10 +13,10 @@ const localePath = useLocalePath()
         class="mx-auto h-16 w-16 text-red-500 dark:text-red-400"
       />
       <h1 class="mt-4 text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
-        Access Denied
+        {{ t('403.title') }}
       </h1>
       <p class="mt-2 text-base text-gray-500 dark:text-gray-400">
-        Sorry, you don't have permission to access this page.
+        {{ t('403.message') }}
       </p>
       <div class="mt-6">
         <UButton
@@ -21,7 +24,7 @@ const localePath = useLocalePath()
           icon="lucide:home"
           variant="soft"
         >
-          Back to home
+          {{ t('403.back') }}
         </UButton>
       </div>
     </div>

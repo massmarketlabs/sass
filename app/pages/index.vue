@@ -10,7 +10,7 @@ const localePath = useLocalePath()
 
 const navigation = [
   { name: 'Features', href: '/#features' },
-  { name: 'Documentation', href: '/docs' }
+  { name: 'Documentation', href: 'https://docs.nuxsaas.com' }
 ]
 
 const features = [
