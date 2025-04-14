@@ -39,5 +39,8 @@
     "scss"
   ],
   "workbench.editor.labelFormat": "short",
-  "workbench.editorAssociations": { "*.svg": "default" }
+  "workbench.editorAssociations": {
+    "*.svg": "default"
+  },
+  "vitest.nodeExecutable": "~/.nvm/versions/node/v22.14.0/bin/node"
 }
