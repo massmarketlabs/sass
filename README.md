@@ -14,6 +14,10 @@ npm install
 # Development Server
 npm run dev
 
+# Run test
+npm run test
+npm run test -- -t="should submit valid signup form"
+
 # Build the application for production
 npm run build
 
