@@ -29,7 +29,7 @@
       "submit": "Create Account",
       "haveAccount": "Already have an account?",
       "signIn": "Sign in here",
-      "success": "Registration Success"
+      "sendEmailSuccess": "Verification email has been sent, Please verify your email address to continue."
     }
   },
   "zh-CN": {
@@ -61,8 +61,7 @@
       },
       "submit": "创建账号",
       "haveAccount": "已有账号？",
-      "signIn": "点此登录",
-      "success": "注册成功"
+      "sendEmailSuccess": "验证邮件已发送，请验证您的邮箱地址以继续。"
     }
   },
   "ja": {
@@ -95,7 +94,7 @@
       "submit": "アカウント作成",
       "haveAccount": "既にアカウントをお持ちですか？",
       "signIn": "ログインする",
-      "success": "登録が完了しました"
+      "sendEmailSuccess": "確認メールを送信しました。メールアドレスを確認して続行してください。"
     }
   },
   "fr": {
@@ -128,7 +127,7 @@
       "submit": "Créer un compte",
       "haveAccount": "Vous avez déjà un compte ?",
       "signIn": "Connectez-vous ici",
-      "success": "Inscription réussie"
+      "sendEmailSuccess": "L'email de vérification a été envoyé. Veuillez vérifier votre adresse email pour continuer."
     }
   }
 }

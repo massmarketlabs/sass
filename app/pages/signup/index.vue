@@ -58,11 +58,14 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     })
   }
   else {
-    await navigateTo(redirectTo.value)
     toast.add({
-      title: t('signUp.success'),
+      title: t('signUp.sendEmailSuccess'),
       color: 'success'
     })
+    state.name = undefined
+    state.email = undefined
+    state.password = undefined
+    state.confirmPassword = undefined
   }
   loading.value = false
 }

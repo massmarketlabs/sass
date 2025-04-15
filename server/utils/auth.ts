@@ -45,6 +45,8 @@ export const auth = betterAuth({
     }
   },
   emailVerification: {
+    sendOnSignUp: true,
+    autoSignInAfterVerification: true,
     sendVerificationEmail: async ({ user, url }) => {
       const response = await resendInstance.emails.send({
         from: `${processEnv.APP_NAME} <${processEnv.APP_FROM_EMAIL}>`,
