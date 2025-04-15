@@ -73,9 +73,9 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     <UCard class="w-full max-w-md">
       <template #header>
         <div class="text-center p-4">
-          <h2 class="text-xl font-semibold">
+          <h1 class="text-xl font-semibold">
             {{ t('signUp.title') }}
-          </h2>
+          </h1>
         </div>
       </template>
 
