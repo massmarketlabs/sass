@@ -11,6 +11,10 @@ export default defineVitestConfig({
         }
       }
     },
+    coverage: {
+      reporter: ['html'],
+      reportsDirectory: '../tests/coverage'
+    },
     setupFiles: './tests/setup.ts'
   }
 })
