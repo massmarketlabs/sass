@@ -127,6 +127,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
           <UFormField
             :label="t('signUp.form.email.label')"
             name="email"
+            autocomplete="email"
             required
           >
             <UInput

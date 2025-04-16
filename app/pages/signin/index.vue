@@ -144,6 +144,7 @@ async function handleResendEmail() {
               type="email"
               class="w-full"
               :placeholder="t('signIn.emailPlaceholder')"
+              autocomplete="email"
             />
           </UFormField>
 
