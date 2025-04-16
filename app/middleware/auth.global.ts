@@ -24,7 +24,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
   if (to.meta?.auth === false) {
     return
   }
-  const { loggedIn, options, fetchSession } = useAuth()
+  const { loggedIn, user, options, fetchSession } = useAuth()
   const { unauthenticatedRedirect } = defu(to.meta?.auth, options)
 
   // If client-side, fetch session between each navigation
@@ -38,5 +38,14 @@ export default defineNuxtRouteMiddleware(async (to) => {
       return
     }
     return navigateTo(`${unauthenticatedRedirect}?redirect=${to.fullPath}`)
+  }
+  const routeParts = (to.name as string).split('___')
+  const routeName = routeParts[0]
+  const localePath = useLocalePath()
+  if (routeName?.startsWith('admin') && user.value?.role != 'admin') {
+    return navigateTo(localePath('/403'))
+  }
+  if (routeName == 'admin') {
+    return navigateTo(localePath('/admin/dashboard'))
   }
 })
