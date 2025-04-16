@@ -3,6 +3,7 @@ import type {
   InferSessionFromClient
 } from 'better-auth/client'
 import type { RouteLocationRaw } from 'vue-router'
+import { stripeClient } from '@better-auth/stripe/client'
 import { createAuthClient } from 'better-auth/client'
 import { adminClient } from 'better-auth/client/plugins'
 import { defu } from 'defu'
@@ -21,7 +22,10 @@ export function useAuth() {
       headers
     },
     plugins: [
-      adminClient()
+      adminClient(),
+      stripeClient({
+        subscription: true
+      })
     ]
   })
 
