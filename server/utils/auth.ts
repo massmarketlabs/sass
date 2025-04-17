@@ -81,20 +81,34 @@ export const auth = betterAuth({
         enabled: true,
         plans: [
           {
-            name: 'basic', // the name of the plan, it'll be automatically lower cased when stored in the database
-            priceId: 'price_1234567890', // the price id from stripe
-            annualDiscountPriceId: 'price_1234567890', // (optional) the price id for annual billing with a discount
+            name: 'pro-month',
+            priceId: processEnv.STRIPE_PRICE_ID_PRO_MONTH,
             limits: {
-              projects: 5,
-              storage: 10
+              projects: 1,
+              storage: 100
+            },
+            freeTrial: {
+              days: 14,
+              onTrialStart: async (subscription) => {
+                // Called when a trial starts
+                console.log(`pro onTrialStart: ${subscription.referenceId}`)
+              },
+              onTrialEnd: async ({ subscription }) => {
+                // Called when a trial ends
+                console.log(`pro onTrialEnd: ${subscription.referenceId}`)
+              },
+              onTrialExpired: async (subscription) => {
+                // Called when a trial expires without conversion
+                console.log(`pro onTrialExpired: ${subscription.referenceId}`)
+              }
             }
           },
           {
-            name: 'pro',
-            priceId: 'price_0987654321',
+            name: 'pro-year',
+            priceId: processEnv.STRIPE_PRICE_ID_PRO_YEAR,
             limits: {
-              projects: 20,
-              storage: 50
+              projects: 1,
+              storage: 100
             },
             freeTrial: {
               days: 14,
