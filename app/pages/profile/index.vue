@@ -48,7 +48,7 @@ onMounted(() => {
             :to="localePath('/')"
             variant="outline"
             color="neutral"
-            icon="i-heroicons-arrow-left"
+            icon="i-lucide-arrow-left"
           >
             {{ t('profile.back') }}
           </UButton>
