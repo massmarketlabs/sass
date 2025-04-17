@@ -11,6 +11,15 @@ nvm use
 # Use npm or whatever you like to install the dependencies
 npm install
 
+# Generate auth-related schema based on Better Auth config
+npm run auth:schema
+
+# Generate database schema based on Drizzle ORM config
+npm run db:generate
+
+# Apply database migrations to PostgreSQL
+npm run db:migrate
+
 # Development Server
 npm run dev
 
