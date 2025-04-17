@@ -1,7 +1,7 @@
 import { stripe } from '@better-auth/stripe'
 import { betterAuth } from 'better-auth'
 import { drizzleAdapter } from 'better-auth/adapters/drizzle'
-import { admin, anonymous } from 'better-auth/plugins'
+import { admin } from 'better-auth/plugins'
 import * as schema from '../database/schema'
 import { db } from './db'
 import { processEnv, redisInstance, resendInstance, stripeClient } from './drivers'
@@ -72,7 +72,6 @@ export const auth = betterAuth({
     }
   },
   plugins: [
-    anonymous(),
     admin(),
     stripe({
       stripeClient,
