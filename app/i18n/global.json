@@ -3,8 +3,14 @@
     "global": {
       "appName": "NuxSaaS",
       "appSlogan": "A fullstack SaaS starter kit built with Nuxt",
+      "nav": {
+        "features": "Features",
+        "pricing": "Pricing"
+      },
       "auth": {
-        "signOut": "Sign Out"
+        "signIn": "Sign In",
+        "signOut": "Sign Out",
+        "profile": "Profile"
       },
       "page": {
         "actions": "Actions",
@@ -22,6 +28,15 @@
     "global": {
       "appName": "NuxSaaS",
       "appSlogan": "基于 Nuxt 构建的全栈 SaaS 起始套件",
+      "nav": {
+        "features": "功能特性",
+        "pricing": "定价方案"
+      },
+      "auth": {
+        "signIn": "登录",
+        "signOut": "退出",
+        "profile": "个人资料"
+      },
       "page": {
         "actions": "操作",
         "create": "创建",
@@ -38,6 +53,15 @@
     "global": {
       "appName": "NuxSaaS",
       "appSlogan": "Nuxt で構築されたフルスタック SaaS スターターキット",
+      "nav": {
+        "features": "機能",
+        "pricing": "料金"
+      },
+      "auth": {
+        "signIn": "ログイン",
+        "signOut": "ログアウト",
+        "profile": "プロフィール"
+      },
       "page": {
         "actions": "アクション",
         "create": "作成",
@@ -54,6 +78,15 @@
     "global": {
       "appName": "NuxSaaS",
       "appSlogan": "Kit de démarrage SaaS full-stack créé avec Nuxt",
+      "nav": {
+        "features": "Fonctionnalités",
+        "pricing": "Tarification"
+      },
+      "auth": {
+        "signIn": "Connexion",
+        "signOut": "Déconnexion",
+        "profile": "Profil"
+      },
       "page": {
         "actions": "Actions",
         "create": "Créer",

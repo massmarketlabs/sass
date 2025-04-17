@@ -9,8 +9,8 @@ const { loggedIn, signOut, user } = useAuth()
 const localePath = useLocalePath()
 
 const navigation = [
-  { name: 'Features', href: '/#features' },
-  { name: 'Documentation', href: 'https://docs.nuxsaas.com' }
+  { name: t('global.nav.features'), href: localePath('/#features') },
+  { name: t('global.nav.pricing'), href: localePath('/pricing') }
 ]
 
 const features = [
@@ -67,12 +67,12 @@ const features = [
           <UDropdownMenu
             :items="[
               {
-                label: 'Profile',
+                label: t('global.auth.profile'),
                 icon: 'i-lucide-user',
                 to: localePath('/profile')
               },
               {
-                label: 'Sign out',
+                label: t('global.auth.signOut'),
                 icon: 'i-lucide-log-out',
                 onSelect: () => signOut()
               }
@@ -98,7 +98,7 @@ const features = [
             :to="localePath('/signin')"
             variant="outline"
           >
-            Sign in
+            {{ t('global.auth.signIn') }}
           </UButton>
         </template>
       </div>
