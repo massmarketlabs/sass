@@ -10,8 +10,7 @@ export const auth = betterAuth({
   baseURL: processEnv.BETTER_AUTH_URL,
   database: drizzleAdapter(db, {
     provider: 'pg',
-    schema,
-    usePlural: true
+    schema
   }),
   secondaryStorage: {
     get: async (key) => {
