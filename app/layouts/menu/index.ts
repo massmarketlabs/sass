@@ -16,9 +16,9 @@ export const getMenus = (t: TranFunction, appRepo: string): NavigationMenuItem[]
         icon: 'i-lucide-wrench',
         children: [
           {
-            label: t('menu.dbPoolStatus'),
+            label: t('menu.dbStats'),
             icon: 'i-lucide-database',
-            to: '/admin/maintenance/dbPool'
+            to: '/admin/maintenance/db-stats'
           }
         ]
       }

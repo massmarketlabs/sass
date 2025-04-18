@@ -1,5 +1,5 @@
-import { getPoolStats } from '~~/server/utils/dbStats'
+import { getDBStats } from '~~/server/utils/dbStats'
 
 export default defineEventHandler(async () => {
-  return getPoolStats()
+  return getDBStats()
 })

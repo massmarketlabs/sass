@@ -5,7 +5,7 @@
       "dashboard": "Dashboard",
       "users": "Users",
       "maintenance": "Maintenance",
-      "dbPoolStatus": "DB Pool Status"
+      "dbStats": "Database Status"
     }
   },
   "zh-CN": {
@@ -14,7 +14,7 @@
       "dashboard": "仪表板",
       "users": "用户",
       "maintenance": "系统维护",
-      "dbPoolStatus": "数据库连接池状态"
+      "dbStats": "数据库状态"
     }
   },
   "ja": {
@@ -23,7 +23,7 @@
       "dashboard": "ダッシュボード",
       "users": "ユーザー",
       "maintenance": "メンテナンス",
-      "dbPoolStatus": "DBプール状態"
+      "dbStats": "データベース状態"
     }
   },
   "fr": {
@@ -32,7 +32,7 @@
       "dashboard": "Tableau de bord",
       "users": "Utilisateurs",
       "maintenance": "Maintenance",
-      "dbPoolStatus": "État du pool DB"
+      "dbStats": "État de la base de données"
     }
   }
 }
