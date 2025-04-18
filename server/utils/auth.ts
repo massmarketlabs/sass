@@ -83,10 +83,6 @@ export const auth = betterAuth({
           {
             name: 'pro-monthly',
             priceId: processEnv.STRIPE_PRICE_ID_PRO_MONTH,
-            limits: {
-              projects: 1,
-              storage: 100
-            },
             freeTrial: {
               days: 14,
               onTrialStart: async (subscription) => {
@@ -106,10 +102,6 @@ export const auth = betterAuth({
           {
             name: 'pro-yearly',
             priceId: processEnv.STRIPE_PRICE_ID_PRO_YEAR,
-            limits: {
-              projects: 1,
-              storage: 100
-            },
             freeTrial: {
               days: 14,
               onTrialStart: async (subscription) => {
