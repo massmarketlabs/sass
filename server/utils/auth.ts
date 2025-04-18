@@ -81,7 +81,7 @@ export const auth = betterAuth({
         enabled: true,
         plans: [
           {
-            name: 'pro-month',
+            name: 'pro-monthly',
             priceId: processEnv.STRIPE_PRICE_ID_PRO_MONTH,
             limits: {
               projects: 1,
@@ -104,7 +104,7 @@ export const auth = betterAuth({
             }
           },
           {
-            name: 'pro-year',
+            name: 'pro-yearly',
             priceId: processEnv.STRIPE_PRICE_ID_PRO_YEAR,
             limits: {
               projects: 1,

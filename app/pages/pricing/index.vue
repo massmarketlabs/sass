@@ -6,7 +6,7 @@ definePageMeta({
   layout: false
 })
 const { t } = useI18n()
-const { loggedIn, signOut, user } = useAuth()
+const { loggedIn, signOut, user, subscription } = useAuth()
 const localePath = useLocalePath()
 const runtimeConfig = useRuntimeConfig()
 const navigation = [
@@ -41,7 +41,19 @@ const plans = [
     ],
     cta: t('pricing.cta.pro'),
     color: 'primary' as const,
-    popular: true
+    popular: true,
+    click: async () => {
+      if (!loggedIn.value) {
+        navigateTo(localePath('/signin?redirect=/pricing'))
+        return
+      }
+      const result = await subscription.upgrade({
+        plan: `pro-${billingPeriod.value}`,
+        successUrl: localePath('/'),
+        cancelUrl: localePath('/pricing')
+      })
+      console.log(result)
+    }
   },
   {
     name: t('pricing.enterprise.name'),
@@ -199,6 +211,7 @@ const plans = [
                 :to="plan.to"
                 variant="solid"
                 class="w-full justify-center"
+                @click="plan.click"
               >
                 {{ plan.cta }}
               </UButton>
