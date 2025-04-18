@@ -1,4 +1,4 @@
-export const getMenus = (t: (name: string) => string): NavigationMenuItem[][] => {
+export const getMenus = (t: TranFunction, appRepo: string): NavigationMenuItem[][] => {
   return [
     [
       {
@@ -28,7 +28,7 @@ export const getMenus = (t: (name: string) => string): NavigationMenuItem[][] =>
         label: 'GitHub',
         icon: 'i-lucide-github',
         badge: '1k',
-        to: 'https://github.com/NuxSaaS/NuxSaaS',
+        to: appRepo,
         target: '_blank'
       },
       {

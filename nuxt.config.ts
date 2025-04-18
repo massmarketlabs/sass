@@ -73,6 +73,8 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
+      appRepo: process.env.APP_REPO,
+      appContactEmail: process.env.APP_CONTACT_EMAIL,
       auth: {
         unauthenticatedRedirect: '/signin'
       }

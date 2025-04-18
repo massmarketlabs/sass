@@ -19,7 +19,7 @@
         "name": "Pro",
         "description": "For growing businesses",
         "price": "${price}",
-        "period": "per user/month",
+        "period": "per month",
         "feature1": "All features",
         "feature2": "Priority support"
       },
@@ -61,8 +61,8 @@
       "pro": {
         "name": "专业版",
         "description": "适合成长中的企业",
-        "price": "￥{price}",
-        "period": "每用户/月",
+        "price": "${price}",
+        "period": "每月",
         "feature1": "所有功能",
         "feature2": "优先支持"
       },
@@ -104,8 +104,8 @@
       "pro": {
         "name": "プロプラン",
         "description": "成長中の企業向け",
-        "price": "¥{price}",
-        "period": "ユーザー/月",
+        "price": "${price}",
+        "period": "月額",
         "feature1": "全機能",
         "feature2": "優先サポート"
       },
@@ -148,7 +148,7 @@
         "name": "Pro",
         "description": "Pour les entreprises en croissance",
         "price": "${price}",
-        "period": "par utilisateur/mois",
+        "period": "par mois",
         "feature1": "Toutes les fonctionnalités",
         "feature2": "Support prioritaire"
       },

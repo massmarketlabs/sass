@@ -8,7 +8,7 @@ definePageMeta({
 const { t } = useI18n()
 const { loggedIn, signOut, user } = useAuth()
 const localePath = useLocalePath()
-
+const runtimeConfig = useRuntimeConfig()
 const navigation = [
   { name: t('global.nav.features'), href: localePath('/#features') },
   { name: t('global.nav.pricing'), href: localePath('/pricing') }
@@ -26,7 +26,8 @@ const plans = [
       t('pricing.free.feature2')
     ],
     cta: t('pricing.cta.free'),
-    color: 'neutral' as const
+    color: 'neutral' as const,
+    to: runtimeConfig.public.appRepo
   },
   {
     name: t('pricing.pro.name'),
@@ -53,7 +54,8 @@ const plans = [
       t('pricing.enterprise.feature3')
     ],
     cta: t('pricing.cta.enterprise'),
-    color: 'neutral' as const
+    color: 'neutral' as const,
+    to: `mailto:${runtimeConfig.public.appContactEmail}`
   }
 ]
 </script>
@@ -194,6 +196,7 @@ const plans = [
             <template #footer>
               <UButton
                 :color="plan.color"
+                :to="plan.to"
                 variant="solid"
                 class="w-full justify-center"
               >

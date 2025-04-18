@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 const { t } = useI18n()
+const runtimeConfig = useRuntimeConfig()
 </script>
 
 <template>
@@ -27,7 +28,7 @@ const { t } = useI18n()
             icon="i-simple-icons-github"
             variant="ghost"
             color="neutral"
-            href="https://github.com/NuxSaaS/NuxSaaS"
+            :href="runtimeConfig.public.appRepo"
             target="_blank"
             rel="noopener noreferrer"
           />

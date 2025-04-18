@@ -7,6 +7,7 @@ definePageMeta({
 const { t } = useI18n()
 const { loggedIn, signOut, user } = useAuth()
 const localePath = useLocalePath()
+const runtimeConfig = useRuntimeConfig()
 
 const navigation = [
   { name: t('global.nav.features'), href: localePath('/#features') },
@@ -128,7 +129,7 @@ const features = [
                 Get Started
               </UButton>
               <UButton
-                to="https://github.com/NuxSaaS/NuxSaaS"
+                :to="runtimeConfig.public.appRepo"
                 target="_blank"
                 color="neutral"
                 variant="outline"
