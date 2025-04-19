@@ -137,16 +137,22 @@ const columns: AdminTableColumn<UserWithRole>[] = [
   }
 ]
 
-const fetchData: FetchDataFn<UserWithRole> = async ({ page, limit }) => {
-  const result = await client.admin.listUsers({
+const fetchData: FetchDataFn<UserWithRole> = async ({ page, limit, sort }) => {
+  const result = await $fetch('/api/admin/list/user', {
     query: {
+      page,
       limit,
-      offset: (page - 1) * limit
+      sort: sort.map((item) => {
+        return `${item.field}:${item.order}`
+      }).join(','),
+      role: roleFilter.value.length ? roleFilter.value.join(',') : undefined,
+      status: statusFilter.value.length ? statusFilter.value.join(',') : undefined,
+      createdAt: createdAtRange.value.start && createdAtRange.value.end ? `${createdAtRange.value.start}|${createdAtRange.value.end}` : undefined
     }
   })
   return {
-    data: result.data?.users || [],
-    total: result.data?.total || 0
+    data: result.data as unknown as UserWithRole[],
+    total: result.total
   }
 }
 </script>
