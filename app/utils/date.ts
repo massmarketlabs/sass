@@ -54,7 +54,10 @@ export const formatToDay = (value: CalendarDate | Date | string) => {
   return format(date, DATE_FORMAT)
 }
 
-export const formatToDatetime = (value: CalendarDate | Date | string) => {
+export const formatToDatetime = (value: CalendarDate | Date | string | undefined) => {
+  if (!value) {
+    return ''
+  }
   const date = formatToDate(value)
   return format(date, DATETIME_FORMAT)
 }

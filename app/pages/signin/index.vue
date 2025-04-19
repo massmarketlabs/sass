@@ -48,7 +48,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     rememberMe: event.data.rememberMe
   })
   if (error) {
-    if (error.code === 'EMAIL_NOT_VERIFIED') {
+    if (error.code === auth.errorCodes.EMAIL_NOT_VERIFIED) {
       unverifiedEmail = event.data.email
       isEmailVerifyModalOpen.value = true
       loading.value = false

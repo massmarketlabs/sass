@@ -1,5 +1,6 @@
 <script setup lang="ts" generic="T">
 import type { UTableInstance } from './types'
+import { useDebounceFn } from '@vueuse/core'
 import { FetchError } from 'ofetch'
 import { useRoute, useRouter } from 'vue-router'
 import ColumnControl from './components/ColumnControl.vue'
@@ -33,7 +34,7 @@ const tableRef = useTemplateRef<UTableInstance>('table')
 const { selectedColumns } = useColumnControl(columns, tableRef)
 const { selectColumnId, getRowId, selectedRowCount, rowCount } = useSelectControl(tableRef, rowId)
 
-const fetchTableData = async () => {
+const fetchTableData = useDebounceFn(async () => {
   loading.value = true
   try {
     const result = await fetchData({
@@ -56,7 +57,7 @@ const fetchTableData = async () => {
   } finally {
     loading.value = false
   }
-}
+})
 
 // Watch sortOptions and sync to URL
 watch(
