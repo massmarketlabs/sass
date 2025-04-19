@@ -1,5 +1,6 @@
 <script setup lang="ts" generic="T">
 import type { UTableInstance } from './types'
+import { FetchError } from 'ofetch'
 import { useRoute, useRouter } from 'vue-router'
 import ColumnControl from './components/ColumnControl.vue'
 import Pagination from './components/Pagination/index.vue'
@@ -17,6 +18,7 @@ const { fetchData, columns, hidePagination = false, canSelect = false, rowId } =
 
 const route = useRoute()
 const router = useRouter()
+const toast = useToast()
 
 const page = ref<number>(Number(route.query.page) || 1)
 const limit = ref<number>(Number(route.query.limit) || 20)
@@ -41,6 +43,16 @@ const fetchTableData = async () => {
     })
     data.value = result.data || []
     total.value = result.total || 0
+  } catch (error: unknown) {
+    if (error instanceof FetchError) {
+      toast.add({
+        description: error.data?.message || error.message,
+        color: 'error',
+        icon: 'i-lucide-alert-circle'
+      })
+    }
+    console.error('Error fetching data:', error)
+    loading.value = false
   } finally {
     loading.value = false
   }
