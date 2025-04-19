@@ -18,13 +18,6 @@ const roleOptions = ref<FilterItem[]>([
   { label: t('user.roles.admin'), id: 'admin', count: 0 }
 ])
 
-const statusFilter = ref([])
-const statusOptions = ref<FilterItem[]>([
-  { label: t('user.status.banned'), id: 'banned', count: 0 },
-  { label: t('user.status.verified'), id: 'verified', count: 0 },
-  { label: t('user.status.unverified'), id: 'unverified', count: 0 }
-])
-
 const createdAtRange = ref({
   start: undefined,
   end: undefined
@@ -138,16 +131,38 @@ const columns: AdminTableColumn<UserWithRole>[] = [
 ]
 
 const fetchData: FetchDataFn<UserWithRole> = async ({ page, limit, sort }) => {
+  const filter = []
+  if (search.value) {
+    filter.push({
+      col: 'name',
+      op: 'like',
+      v: search.value
+    })
+  }
+  if (roleFilter.value.length) {
+    filter.push({
+      col: 'role',
+      op: 'in',
+      v: roleFilter.value
+    })
+  }
+  const { start, end } = createdAtRange.value
+  if (start && end) {
+    filter.push({
+      col: 'createdAt',
+      op: 'between',
+      v: [start, end]
+    })
+  }
+
   const result = await $fetch('/api/admin/list/user', {
     query: {
       page,
       limit,
-      sort: sort.map((item) => {
-        return `${item.field}:${item.order}`
-      }).join(','),
-      role: roleFilter.value.length ? roleFilter.value.join(',') : undefined,
-      status: statusFilter.value.length ? statusFilter.value.join(',') : undefined,
-      createdAt: createdAtRange.value.start && createdAtRange.value.end ? `${createdAtRange.value.start}|${createdAtRange.value.end}` : undefined
+      sort: JSON.stringify(sort.map((item) => {
+        return [item.field, item.order]
+      })),
+      filter: JSON.stringify(filter)
     }
   })
   return {
@@ -184,12 +199,6 @@ const fetchData: FetchDataFn<UserWithRole> = async ({ page, limit, sort }) => {
           filter-name="role"
           :name="t('user.columns.role')"
           :items="roleOptions"
-        />
-        <CheckboxFilter
-          v-model:filter="statusFilter"
-          filter-name="status"
-          :name="t('global.page.status')"
-          :items="statusOptions"
         />
         <DateRangeFilter
           v-model:date-range="createdAtRange"

@@ -1,11 +1,27 @@
+import type { SQL } from 'drizzle-orm'
 import type { PgColumn, PgSelect } from 'drizzle-orm/pg-core'
-import { and, asc, desc, getTableColumns, gte, inArray, lte, sql } from 'drizzle-orm'
+import { and, asc, desc, getTableColumns, gte, inArray, like, lte, sql } from 'drizzle-orm'
+import { z } from 'zod'
 import * as schema from '~~/server/database/schema'
 
 type TableNames = keyof typeof schema
 
 function isValidTable(table: string): table is TableNames {
   return table in schema
+}
+
+function withFilters<T extends PgSelect>(
+  qb: T,
+  filters: SQL[]
+) {
+  return qb.where(and(...filters))
+}
+
+function withSorts<T extends PgSelect>(
+  qb: T,
+  sorts: SQL[]
+) {
+  return qb.orderBy(...sorts)
 }
 
 function withPagination<T extends PgSelect>(
@@ -15,33 +31,60 @@ function withPagination<T extends PgSelect>(
 ) {
   return qb.limit(pageSize).offset((page - 1) * pageSize)
 }
-function withInArray<T extends PgSelect>(
-  qb: T,
-  column: PgColumn,
-  values: string[]
-) {
-  return qb.where(inArray(column, values))
-}
 
-function withInDates<T extends PgSelect>(
-  qb: T,
-  column: PgColumn,
-  startDate: Date,
-  endDate: Date
-) {
-  return qb.where(and(
-    gte(column, startDate),
-    lte(column, endDate)
-  ))
-}
+const filterSchema = z.array(
+  z.union([
+    z.object({
+      col: z.string(),
+      op: z.literal('between'),
+      v: z.tuple([z.string(), z.string()])
+    }),
+    z.object({
+      col: z.string(),
+      op: z.literal('in'),
+      v: z.array(z.string()).min(1)
+    }),
+    z.object({
+      col: z.string(),
+      op: z.literal('like'),
+      v: z.string()
+    })
+  ])
+)
 
-function withOrder<T extends PgSelect>(
-  qb: T,
-  orderFunc: typeof asc | typeof desc,
-  column: PgColumn
-) {
-  return qb.orderBy(orderFunc(column))
-}
+const sortSchema = z.array(
+  z.tuple([
+    z.string(),
+    z.enum(['asc', 'desc'])
+  ])
+)
+
+const querySchema = z.object({
+  page: z.coerce.number().int().positive().default(1),
+  limit: z.coerce.number().int().positive().max(100).default(20),
+  filter: z.string()
+    .transform((str) => {
+      try {
+        const parsed = JSON.parse(str)
+        return filterSchema.parse(parsed)
+      }
+      catch {
+        return []
+      }
+    })
+    .optional(),
+  sort: z.string()
+    .transform((str) => {
+      try {
+        const parsed = JSON.parse(str)
+        return sortSchema.parse(parsed)
+      }
+      catch {
+        return []
+      }
+    })
+    .optional()
+})
 
 export default eventHandler(async (event) => {
   const tableName = getRouterParam(event, 'tableName')
@@ -58,65 +101,79 @@ export default eventHandler(async (event) => {
     throw createError({
       statusCode: 400,
       statusMessage: 'Bad Request',
-      data: 'INVLIAD_TABLE_NAME',
+      data: 'INVALID_TABLE_NAME',
       message: 'Invalid Table Name'
     })
   }
+
   const table = schema[tableName]
   const columns = getTableColumns(table)
-  const query = getQuery(event)
 
-  const page = Number(query.page) || 1
-  const limit = Number(query.limit) || 20
-
+  const query = await getValidatedQuery(event, querySchema.parse)
+  console.log(query)
   const db = await useDB(event)
 
   const listQuery = db.select().from(table).$dynamic()
   const totalQuery = db.select({ count: sql<number>`cast(count(*) as int)` }).from(table).$dynamic()
 
-  for (const [key, value] of Object.entries(query)) {
-    if (['page', 'limit', 'sort'].includes(key))
-      continue
-
-    if (key in columns) {
-      const columnKey = key as keyof typeof columns
-      if (`${columns[columnKey].columnType}` == 'PgTimestamp' && typeof value === 'string') {
-        const [start, end] = value.split('|')
-        if (start && end) {
-          withInDates(listQuery, table[columnKey], new Date(start), new Date(end))
+  if (query) {
+    // Handle filters
+    if (query.filter) {
+      const filters: SQL[] = []
+      for (const filter of query.filter) {
+        if (filter.col in columns) {
+          const columnKey = filter.col as keyof typeof columns
+          const column = table[columnKey] as PgColumn
+          if (filter.op === 'between') {
+            filters.push(
+              and(
+                gte(column, new Date(filter.v[0])),
+                lte(column, new Date(filter.v[1]))
+              )!
+            )
+          } else if (filter.op === 'in') {
+            filters.push(
+              inArray(column, filter.v)
+            )
+          } else if (filter.op == 'like') {
+            filters.push(
+              like(column, filter.v)
+            )
+          }
         }
-      } else if (typeof value === 'string') {
-        const values = value.split(',')
-        withInArray(listQuery, table[columnKey], values)
-        withInArray(totalQuery, table[columnKey], values)
+      }
+      if (filters.length) {
+        withFilters(listQuery, filters)
+        withFilters(totalQuery, filters)
       }
     }
-  }
-
-  // Handle sorting
-  if (query.sort && typeof query.sort === 'string') {
-    const sortParams = query.sort.split(',')
-    for (const param of sortParams) {
-      const [field, direction] = param.split(':')
-      if (field in columns) {
-        const columnKey = field as keyof typeof columns
-        const orderFunc = direction === 'desc'
-          ? desc
-          : asc
-        withOrder(listQuery, orderFunc, table[columnKey])
-        withOrder(totalQuery, orderFunc, table[columnKey])
+    // Handle sorting
+    if (query.sort?.length) {
+      const sorts: SQL[] = []
+      for (const [field, direction] of query.sort) {
+        if (field in columns) {
+          const columnKey = field as keyof typeof columns
+          const column = table[columnKey] as PgColumn
+          const orderFunc = direction === 'desc' ? desc : asc
+          sorts.push(orderFunc(column))
+        }
       }
+      withSorts(listQuery, sorts)
+      withSorts(totalQuery, sorts)
     }
   }
 
   // Handle pagination
+  const page = query?.page || 1
+  const limit = query?.limit || 20
   withPagination(listQuery, page, limit)
+  console.log(listQuery.toSQL())
   const count = await totalQuery.groupBy(table.id)
   const result = await listQuery
 
   return {
     data: result,
-    total: count[0].count,
+    total: count[0]?.count || 0,
     page,
     limit
   }
