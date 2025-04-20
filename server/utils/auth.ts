@@ -2,6 +2,7 @@ import { stripe } from '@better-auth/stripe'
 import { betterAuth } from 'better-auth'
 import { drizzleAdapter } from 'better-auth/adapters/drizzle'
 import { admin, openAPI } from 'better-auth/plugins'
+import { v7 as uuidv7 } from 'uuid'
 import * as schema from '../database/schema'
 import { db } from './db'
 import { processEnv, redisInstance, resendInstance, stripeClient } from './drivers'
@@ -12,6 +13,13 @@ export const auth = betterAuth({
     provider: 'pg',
     schema
   }),
+  advanced: {
+    database: {
+      generateId: () => {
+        return uuidv7()
+      }
+    }
+  },
   secondaryStorage: {
     get: async (key) => {
       const value = await redisInstance.get(key)

@@ -1,7 +1,9 @@
-import { boolean, integer, pgTable, text, timestamp } from 'drizzle-orm/pg-core'
+// generated using npm run auth:schema, and change text('id') to uuid('id')
+
+import { boolean, integer, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core'
 
 export const user = pgTable('user', {
-  id: text('id').primaryKey(),
+  id: uuid('id').primaryKey(),
   name: text('name').notNull(),
   email: text('email').notNull().unique(),
   emailVerified: boolean('email_verified').notNull(),
@@ -16,10 +18,10 @@ export const user = pgTable('user', {
 })
 
 export const account = pgTable('account', {
-  id: text('id').primaryKey(),
+  id: uuid('id').primaryKey(),
   accountId: text('account_id').notNull(),
   providerId: text('provider_id').notNull(),
-  userId: text('user_id').notNull().references(() => user.id, { onDelete: 'cascade' }),
+  userId: uuid('user_id').notNull().references(() => user.id, { onDelete: 'cascade' }),
   accessToken: text('access_token'),
   refreshToken: text('refresh_token'),
   idToken: text('id_token'),
@@ -32,7 +34,7 @@ export const account = pgTable('account', {
 })
 
 export const verification = pgTable('verification', {
-  id: text('id').primaryKey(),
+  id: uuid('id').primaryKey(),
   identifier: text('identifier').notNull(),
   value: text('value').notNull(),
   expiresAt: timestamp('expires_at').notNull(),
@@ -41,7 +43,7 @@ export const verification = pgTable('verification', {
 })
 
 export const subscription = pgTable('subscription', {
-  id: text('id').primaryKey(),
+  id: uuid('id').primaryKey(),
   plan: text('plan').notNull(),
   referenceId: text('reference_id').notNull(),
   stripeCustomerId: text('stripe_customer_id'),
