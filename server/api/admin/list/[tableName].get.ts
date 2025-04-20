@@ -66,7 +66,17 @@ const querySchema = z.object({
     .transform((str) => {
       try {
         const parsed = JSON.parse(str)
-        return filterSchema.parse(parsed)
+        if (!Array.isArray(parsed))
+          return []
+
+        return parsed.reduce<z.infer<typeof filterSchema>>((validFilters, item) => {
+          const result = filterSchema.element.safeParse(item)
+          if (result.success) {
+            validFilters.push(result.data)
+          }
+
+          return validFilters
+        }, [])
       }
       catch {
         return []
@@ -77,7 +87,16 @@ const querySchema = z.object({
     .transform((str) => {
       try {
         const parsed = JSON.parse(str)
-        return sortSchema.parse(parsed)
+        if (!Array.isArray(parsed))
+          return []
+
+        return parsed.reduce<z.infer<typeof sortSchema>>((validSorts, item) => {
+          const result = sortSchema.element.safeParse(item)
+          if (result.success) {
+            validSorts.push(result.data)
+          }
+          return validSorts
+        }, [])
       }
       catch {
         return []
