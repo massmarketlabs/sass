@@ -39,7 +39,7 @@ export default eventHandler(async (event) => {
   const columnKey = columnName as keyof typeof columns
   const column = table[columnKey] as PgColumn
   const countQuery = db.select({ column, count: sql<number>`cast(count(*) as int)` }).from(table).groupBy(column).$dynamic()
-  console.log(countQuery)
+  console.log(countQuery.toSQL())
   const result = await countQuery
   return result
 })

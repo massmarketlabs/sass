@@ -9,17 +9,18 @@ const { user, signOut } = useAuth()
 const router = useRouter()
 const route = useRoute()
 const { t } = useI18n()
+const localePath = useLocalePath()
 const isCollapsed = ref(false)
 const rumtimeConfig = useRuntimeConfig()
 
 defineShortcuts({
-  'g-1': () => router.push('/admin/dashboard'),
-  'g-2': () => router.push('/admin/table')
+  'g-1': () => router.push(localePath('/admin/dashboard')),
+  'g-2': () => router.push(localePath('/admin/user'))
 })
 const pathNameItemMap: StringDict<NavigationMenuItem> = {}
 const pathNameParentMap: StringDict<NavigationMenuItem | undefined> = {}
 
-const menus = getMenus(t, rumtimeConfig.public.appRepo)
+const menus = getMenus(t, localePath, rumtimeConfig.public.appRepo)
 const menuIterator = (menus: NavigationMenuItem[], parent?: NavigationMenuItem) => {
   for (const menu of menus) {
     const to = `${menu.to}`
