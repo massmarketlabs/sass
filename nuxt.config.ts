@@ -10,7 +10,7 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     'nuxt-zod-i18n', // before @nuxtjs/i18n module
     '@nuxtjs/i18n',
-    'nuxt-echarts',
+    'nuxt-charts',
     '@nuxt/test-utils/module'
   ],
   i18n: {
@@ -41,10 +41,6 @@ export default defineNuxtConfig({
         globInclude: ['**\/*.{vue,jsx,tsx,md,mdc,mdx}', 'app/**/*.ts']
       }
     }
-  },
-  echarts: {
-    charts: ['LineChart', 'PieChart'],
-    components: ['GridComponent', 'TooltipComponent', 'TitleComponent', 'LegendComponent']
   },
   future: {
     compatibilityVersion: 4
