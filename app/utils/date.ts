@@ -43,9 +43,6 @@ export const formatToDate = (value: CalendarDate | Date | string) => {
     // 2024-12-27T06:11:35.707123+00:00
     date = parseISO(value)
   }
-  if (!date) {
-    return ''
-  }
   return date
 }
 
