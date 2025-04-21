@@ -13,10 +13,6 @@ export default defineNuxtConfig({
     'nuxt-echarts',
     '@nuxt/test-utils/module'
   ],
-  components: [
-    { path: '~/components/filters', pathPrefix: false },
-    '~/components'
-  ],
   i18n: {
     vueI18n: '~/i18n/i18n.config.ts',
     baseUrl: process.env.BETTER_AUTH_URL,

@@ -20,7 +20,8 @@
         "cancel": "Cancel",
         "name": "Name",
         "status": "Status",
-        "createdAt": "Created At"
+        "createdAt": "Created At",
+        "all": "All"
       }
     }
   },
@@ -45,7 +46,8 @@
         "cancel": "取消",
         "name": "名称",
         "status": "状态",
-        "createdAt": "创建时间"
+        "createdAt": "创建时间",
+        "all": "全部"
       }
     }
   },
@@ -70,7 +72,8 @@
         "cancel": "キャンセル",
         "name": "名前",
         "status": "状態",
-        "createdAt": "作成日時"
+        "createdAt": "作成日時",
+        "all": "すべて"
       }
     }
   },
@@ -95,7 +98,8 @@
         "cancel": "Annuler",
         "name": "Nom",
         "status": "Statut",
-        "createdAt": "Créé le"
+        "createdAt": "Créé le",
+        "all": "Tout"
       }
     }
   }

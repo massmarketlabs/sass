@@ -1,6 +1,6 @@
 import type { SQL } from 'drizzle-orm'
 import type { PgColumn, PgSelect } from 'drizzle-orm/pg-core'
-import { and, asc, desc, getTableColumns, gte, ilike, inArray, lte, sql } from 'drizzle-orm'
+import { and, asc, desc, eq, getTableColumns, gte, ilike, inArray, lte, sql } from 'drizzle-orm'
 import { z } from 'zod'
 import * as schema from '~~/server/database/schema'
 
@@ -47,6 +47,11 @@ const filterSchema = z.array(
     z.object({
       col: z.string(),
       op: z.literal('like'),
+      v: z.string()
+    }),
+    z.object({
+      col: z.string(),
+      op: z.literal('eq'),
       v: z.string()
     })
   ])
@@ -157,6 +162,10 @@ export default eventHandler(async (event) => {
           } else if (filter.op == 'like') {
             filters.push(
               ilike(column, `%${filter.v}%`)
+            )
+          } else if (filter.op == 'eq') {
+            filters.push(
+              eq(column, filter.v)
             )
           }
         }

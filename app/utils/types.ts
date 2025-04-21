@@ -54,6 +54,14 @@ export type AdminTableFilter =
   | {
     name: string
     field: string
+    value: string
+    clearValue?: string
+    type: 'tabs'
+    items: FilterItem[]
+  }
+  | {
+    name: string
+    field: string
     value: DateRange
     type: 'daterange'
   }
@@ -74,6 +82,10 @@ export type FilterCondition = {
 } | {
   col: string
   op: 'like'
+  v: string
+} | {
+  col: string
+  op: 'eq'
   v: string
 }
 

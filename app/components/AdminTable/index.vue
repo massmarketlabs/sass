@@ -6,6 +6,7 @@ import { useRoute, useRouter } from 'vue-router'
 import ColumnControl from './components/ColumnControl.vue'
 import FilterCheckbox from './components/filters/Checkbox/index.vue'
 import FilterDateRange from './components/filters/DateRange.vue'
+import FilterTabs from './components/filters/Tabs.vue'
 import Pagination from './components/Pagination/index.vue'
 import SortControl from './components/SortControl/index.vue'
 import useColumnControl from './composables/useColumnControl'
@@ -49,6 +50,10 @@ const fetchTableData = useDebounceFn(async () => {
       } else if (item.type === 'checkbox') {
         if (item.value.length) {
           filter.push({ col: item.field, op: 'in', v: item.value })
+        }
+      } else if (item.type === 'tabs') {
+        if (item.value && item.clearValue != item.value) {
+          filter.push({ col: item.field, op: 'eq', v: item.value })
         }
       } else if (item.type === 'daterange') {
         const { start, end } = item.value
@@ -162,6 +167,14 @@ defineExpose({
           />
           <FilterCheckbox
             v-else-if="filter.type === 'checkbox'"
+            v-model:filter="filter.value"
+            :filter-name="filter.field"
+            :name="filter.name"
+            :items="filter.items"
+            @update:filter="fetchTableData"
+          />
+          <FilterTabs
+            v-else-if="filter.type === 'tabs'"
             v-model:filter="filter.value"
             :filter-name="filter.field"
             :name="filter.name"

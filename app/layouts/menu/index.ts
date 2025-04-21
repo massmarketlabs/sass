@@ -12,6 +12,11 @@ export const getMenus = (t: TranFunction, appRepo: string): NavigationMenuItem[]
         to: '/admin/user'
       },
       {
+        label: t('menu.subscriptions'),
+        icon: 'i-lucide-credit-card',
+        to: '/admin/subscription'
+      },
+      {
         label: t('menu.maintenance'),
         icon: 'i-lucide-wrench',
         children: [
