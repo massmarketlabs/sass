@@ -4,14 +4,17 @@ import { useDebounceFn } from '@vueuse/core'
 import { FetchError } from 'ofetch'
 import { useRoute, useRouter } from 'vue-router'
 import ColumnControl from './components/ColumnControl.vue'
+import FilterCheckbox from './components/filters/Checkbox/index.vue'
+import FilterDateRange from './components/filters/DateRange.vue'
 import Pagination from './components/Pagination/index.vue'
 import SortControl from './components/SortControl/index.vue'
 import useColumnControl from './composables/useColumnControl'
 import useSelectControl from './composables/useSelectControl'
 
-const { fetchData, columns, hidePagination = false, canSelect = false, rowId } = defineProps<{
+const { fetchData, columns, filters = [], hidePagination = false, canSelect = false, rowId } = defineProps<{
   fetchData: FetchDataFn<T>
   columns: AdminTableColumn<T>[]
+  filters?: AdminTableFilter[]
   hidePagination?: boolean
   canSelect?: boolean
   rowId?: string
@@ -37,10 +40,32 @@ const { selectColumnId, getRowId, selectedRowCount, rowCount } = useSelectContro
 const fetchTableData = useDebounceFn(async () => {
   loading.value = true
   try {
+    const filter: FilterCondition[] = []
+    for (const item of filters) {
+      if (item.type === 'input') {
+        if (item.value) {
+          filter.push({ col: item.field, op: 'like', v: item.value })
+        }
+      } else if (item.type === 'checkbox') {
+        if (item.value.length) {
+          filter.push({ col: item.field, op: 'in', v: item.value })
+        }
+      } else if (item.type === 'daterange') {
+        const { start, end } = item.value
+        if (start && end) {
+          filter.push({
+            col: item.field,
+            op: 'between',
+            v: [formatToDate(start).toISOString(), endOfDate(formatToDate(end)).toISOString()]
+          })
+        }
+      }
+    }
     const result = await fetchData({
       page: page.value,
       limit: limit.value,
-      sort: sortOptions.value
+      sort: sortOptions.value,
+      filter
     })
     data.value = result.data || []
     total.value = result.total || 0
@@ -124,7 +149,34 @@ defineExpose({
   <div>
     <FlexThreeColumn>
       <template #left>
-        <slot name="top-Left" />
+        <slot name="top-left-before" />
+        <template
+          v-for="(filter, index) in filters"
+          :key="index"
+        >
+          <UInput
+            v-if="filter.type === 'input'"
+            v-model="filter.value"
+            :placeholder="`${filter.name}...`"
+            @update:model-value="fetchTableData"
+          />
+          <FilterCheckbox
+            v-else-if="filter.type === 'checkbox'"
+            v-model:filter="filter.value"
+            :filter-name="filter.field"
+            :name="filter.name"
+            :items="filter.items"
+            @update:filter="fetchTableData"
+          />
+          <FilterDateRange
+            v-else-if="filter.type === 'daterange'"
+            v-model:date-range="filter.value"
+            :filter-name="filter.field"
+            :name="filter.name"
+            @update:date-range="fetchTableData"
+          />
+        </template>
+        <slot name="top-left-after" />
       </template>
       <template #right>
         <slot name="top-right" />

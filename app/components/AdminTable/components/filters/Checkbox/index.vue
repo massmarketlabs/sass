@@ -9,6 +9,9 @@ const { items, name, filterName } = defineProps<{
   filterName: string
 }>()
 
+const emit = defineEmits<{
+  (e: 'update:filter', value: string[]): void
+}>()
 const { t } = useI18n()
 
 const filter = defineModel<string[]>('filter', { default: [] })
@@ -44,6 +47,7 @@ watch(
       delete query[filterName]
     }
     router.replace({ query })
+    emit('update:filter', newFilter)
   },
   { deep: true }
 )

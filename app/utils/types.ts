@@ -35,17 +35,53 @@ export interface FilterItem {
   count?: number
 }
 
+export interface DateRange { start: CalendarDate | undefined, end: CalendarDate | undefined }
+
+export type AdminTableFilter =
+  | {
+    name: string
+    field: string
+    value: string | undefined
+    type: 'input'
+  }
+  | {
+    name: string
+    field: string
+    value: string[]
+    type: 'checkbox'
+    items: FilterItem[]
+  }
+  | {
+    name: string
+    field: string
+    value: DateRange
+    type: 'daterange'
+  }
+
 export interface SortOption {
   field: string
   order: string
 }
 
-export interface DateRange { start: CalendarDate | undefined, end: CalendarDate | undefined }
+export type FilterCondition = {
+  col: string
+  op: 'between'
+  v: [string, string]
+} | {
+  col: string
+  op: 'in'
+  v: string[]
+} | {
+  col: string
+  op: 'like'
+  v: string
+}
 
 export interface FetchDataParams {
   page: number
   limit: number
   sort: SortOption[]
+  filter: FilterCondition[]
 }
 
 export interface PaginationResult<T> {

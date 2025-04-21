@@ -1,6 +1,6 @@
 import type { SQL } from 'drizzle-orm'
 import type { PgColumn, PgSelect } from 'drizzle-orm/pg-core'
-import { and, asc, desc, getTableColumns, gte, inArray, like, lte, sql } from 'drizzle-orm'
+import { and, asc, desc, getTableColumns, gte, ilike, inArray, lte, sql } from 'drizzle-orm'
 import { z } from 'zod'
 import * as schema from '~~/server/database/schema'
 
@@ -156,7 +156,7 @@ export default eventHandler(async (event) => {
             )
           } else if (filter.op == 'like') {
             filters.push(
-              like(column, filter.v)
+              ilike(column, `%${filter.v}%`)
             )
           }
         }

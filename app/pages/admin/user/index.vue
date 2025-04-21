@@ -10,18 +10,30 @@ const isUserModalOpen = ref(false)
 const isBanModalOpen = ref(false)
 const selectedUserId = ref('')
 
-const search = ref('')
-
-const roleFilter = ref([])
-const roleOptions = ref<FilterItem[]>([
-  { label: t('user.roles.user'), id: 'user', count: 0 },
-  { label: t('user.roles.admin'), id: 'admin', count: 0 }
+const filters = ref<AdminTableFilter[]>([
+  {
+    name: t('global.page.name'),
+    field: 'name',
+    type: 'input',
+    value: undefined
+  },
+  {
+    name: t('user.columns.role'),
+    field: 'role',
+    type: 'checkbox',
+    items: [
+      { label: t('user.roles.user'), id: 'user', count: 0 },
+      { label: t('user.roles.admin'), id: 'admin', count: 0 }
+    ],
+    value: []
+  },
+  {
+    name: t('global.page.createdAt'),
+    field: 'createdAt',
+    type: 'daterange',
+    value: { start: undefined, end: undefined }
+  }
 ])
-
-const createdAtRange = ref({
-  start: undefined,
-  end: undefined
-})
 
 const { refresh } = useAdminTable()
 
@@ -130,31 +142,7 @@ const columns: AdminTableColumn<UserWithRole>[] = [
   }
 ]
 
-const fetchData: FetchDataFn<UserWithRole> = async ({ page, limit, sort }) => {
-  const filter = []
-  if (search.value) {
-    filter.push({
-      col: 'name',
-      op: 'like',
-      v: search.value
-    })
-  }
-  if (roleFilter.value.length) {
-    filter.push({
-      col: 'role',
-      op: 'in',
-      v: roleFilter.value
-    })
-  }
-  const { start, end } = createdAtRange.value
-  if (start && end) {
-    filter.push({
-      col: 'createdAt',
-      op: 'between',
-      v: [formatToDate(start).toISOString(), endOfDate(formatToDate(end)).toISOString()]
-    })
-  }
-
+const fetchData: FetchDataFn<UserWithRole> = async ({ page, limit, sort, filter }) => {
   const result = await $fetch('/api/admin/list/user', {
     query: {
       page,
@@ -187,25 +175,9 @@ const fetchData: FetchDataFn<UserWithRole> = async ({ page, limit, sort }) => {
     <AdminTable
       ref="table"
       :columns="columns"
+      :filters="filters"
       :fetch-data="fetchData"
     >
-      <template #top-Left>
-        <UInput
-          v-model="search"
-          :placeholder="`${t('global.page.name')}...`"
-        />
-        <CheckboxFilter
-          v-model:filter="roleFilter"
-          filter-name="role"
-          :name="t('user.columns.role')"
-          :items="roleOptions"
-        />
-        <DateRangeFilter
-          v-model:date-range="createdAtRange"
-          filter-name="createdAt"
-          :name="t('global.page.createdAt')"
-        />
-      </template>
       <template #role-cell="{ row: { original } }">
         <UDropdownMenu
           :items="getRoleDropdownItems(original)"
