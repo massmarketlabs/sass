@@ -187,7 +187,6 @@ export default eventHandler(async (event) => {
         }
       }
       withSorts(listQuery, sorts)
-      withSorts(totalQuery, sorts)
     }
   }
 
@@ -196,7 +195,7 @@ export default eventHandler(async (event) => {
   const limit = query?.limit || 20
   withPagination(listQuery, page, limit)
   console.log(listQuery.toSQL())
-  const count = await totalQuery.groupBy(table.id)
+  const count = await totalQuery
   const result = await listQuery
 
   return {
