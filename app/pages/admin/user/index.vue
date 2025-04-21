@@ -200,7 +200,6 @@ const fetchData: FetchDataFn<UserWithRole> = async ({ page, limit, sort }) => {
           :name="t('user.columns.role')"
           :items="roleOptions"
         />
-        {{ createdAtRange }}
         <DateRangeFilter
           v-model:date-range="createdAtRange"
           filter-name="createdAt"
