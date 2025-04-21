@@ -48,6 +48,15 @@ const activeSubscription = computed(() => {
         </span>
       </UButton>
     </UDropdownMenu>
+    <UButton
+      v-if="user?.role == 'admin'"
+      variant="outline"
+      color="neutral"
+      class="flex items-center gap-2"
+      :to="localePath('/admin')"
+    >
+      {{ t('global.nav.admin') }}
+    </UButton>
   </template>
   <template v-else>
     <UButton

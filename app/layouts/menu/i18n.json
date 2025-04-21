@@ -6,7 +6,8 @@
       "users": "Users",
       "subscriptions": "Subscriptions",
       "maintenance": "Maintenance",
-      "dbStats": "Database Status"
+      "dbStats": "Database Status",
+      "home": "Home"
     }
   },
   "zh-CN": {
@@ -16,7 +17,8 @@
       "users": "用户",
       "subscriptions": "订阅管理",
       "maintenance": "系统维护",
-      "dbStats": "数据库状态"
+      "dbStats": "数据库状态",
+      "home": "首页"
     }
   },
   "ja": {
@@ -26,7 +28,8 @@
       "users": "ユーザー",
       "subscriptions": "サブスクリプション",
       "maintenance": "メンテナンス",
-      "dbStats": "データベース状態"
+      "dbStats": "データベース状態",
+      "home": "ホーム"
     }
   },
   "fr": {
@@ -36,7 +39,8 @@
       "users": "Utilisateurs",
       "subscriptions": "Abonnements",
       "maintenance": "Maintenance",
-      "dbStats": "État de la base de données"
+      "dbStats": "État de la base de données",
+      "home": "Accueil"
     }
   }
 }

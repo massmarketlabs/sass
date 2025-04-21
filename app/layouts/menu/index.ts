@@ -32,6 +32,11 @@ export const getMenus = (t: TranFunction, localePath: LocalePathFunction, appRep
     ],
     [
       {
+        label: t('menu.home'),
+        icon: 'i-lucide-home',
+        to: localePath('/')
+      },
+      {
         label: 'GitHub',
         icon: 'i-lucide-github',
         badge: '1k',
