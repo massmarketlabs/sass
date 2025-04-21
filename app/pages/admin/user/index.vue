@@ -142,8 +142,16 @@ const columns: AdminTableColumn<UserWithRole>[] = [
   }
 ]
 
+const { data: roleCount } = await useFetch<ColumnCount[]>('/api/admin/count/user/role')
+roleCount.value?.forEach((item) => {
+  const role = (filters[1] as FilterCheckbox).items?.find(role => role.id === item.column)
+  if (role) {
+    role.count = item.count
+  }
+})
+
 const fetchData: FetchDataFn<UserWithRole> = async ({ page, limit, sort, filter }) => {
-  const result = await $fetch('/api/admin/list/user', {
+  const result = await $fetch<PageData<UserWithRole>>('/api/admin/list/user', {
     query: {
       page,
       limit,
@@ -154,7 +162,7 @@ const fetchData: FetchDataFn<UserWithRole> = async ({ page, limit, sort, filter 
     }
   })
   return {
-    data: result.data as unknown as UserWithRole[],
+    data: result.data,
     total: result.total
   }
 }

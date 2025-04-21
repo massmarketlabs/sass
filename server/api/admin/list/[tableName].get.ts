@@ -3,12 +3,7 @@ import type { PgColumn, PgSelect } from 'drizzle-orm/pg-core'
 import { and, asc, desc, eq, getTableColumns, gte, ilike, inArray, lte, sql } from 'drizzle-orm'
 import { z } from 'zod'
 import * as schema from '~~/server/database/schema'
-
-type TableNames = keyof typeof schema
-
-function isValidTable(table: string): table is TableNames {
-  return table in schema
-}
+import { isValidTable } from '~~/server/utils/db'
 
 function withFilters<T extends PgSelect>(
   qb: T,

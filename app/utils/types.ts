@@ -35,36 +35,44 @@ export interface FilterItem {
   count?: number
 }
 
+export interface FilterInput {
+  name: string
+  field: string
+  value: string | undefined
+  type: 'input'
+}
+
+export interface FilterCheckbox {
+  name: string
+  field: string
+  value: string[]
+  type: 'checkbox'
+  items: FilterItem[]
+}
+
+export interface FilterTabs {
+  name: string
+  field: string
+  value: string
+  clearValue?: string
+  type: 'tabs'
+  items: FilterItem[]
+}
+
+export interface FilterDateRange {
+  name: string
+  field: string
+  value: DateRange
+  type: 'daterange'
+}
+
 export interface DateRange { start: CalendarDate | undefined, end: CalendarDate | undefined }
 
 export type AdminTableFilter =
-  | {
-    name: string
-    field: string
-    value: string | undefined
-    type: 'input'
-  }
-  | {
-    name: string
-    field: string
-    value: string[]
-    type: 'checkbox'
-    items: FilterItem[]
-  }
-  | {
-    name: string
-    field: string
-    value: string
-    clearValue?: string
-    type: 'tabs'
-    items: FilterItem[]
-  }
-  | {
-    name: string
-    field: string
-    value: DateRange
-    type: 'daterange'
-  }
+  | FilterInput
+  | FilterCheckbox
+  | FilterTabs
+  | FilterDateRange
 
 export interface SortOption {
   field: string
@@ -96,9 +104,14 @@ export interface FetchDataParams {
   filter: FilterCondition[]
 }
 
-export interface PaginationResult<T> {
+export interface PageData<T> {
   data: T[]
   total: number
 }
 
-export type FetchDataFn<T> = (params: FetchDataParams) => Promise<PaginationResult<T>>
+export type FetchDataFn<T> = (params: FetchDataParams) => Promise<PageData<T>>
+
+export interface ColumnCount {
+  column: string
+  count: number
+}

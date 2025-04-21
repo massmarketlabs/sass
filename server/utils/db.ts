@@ -15,10 +15,16 @@ export const useDB = async (event?: H3Event<EventHandlerRequest>): Promise<NodeP
     return event.context.db
   }
   // Otherwise, create a new connection to the database
-  const client = await pgPool.connect()
-  const db = drizzle({ client, schema })
+  // const client = await pgPool.connect()
+  const db = drizzle({ client: pgPool, schema })
   if (event) {
     event.context.db = db
   }
   return db
+}
+
+export type TableNames = keyof typeof schema
+
+export function isValidTable(table: string): table is TableNames {
+  return table in schema
 }

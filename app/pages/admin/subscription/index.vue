@@ -94,7 +94,7 @@ const columns: AdminTableColumn<Subscription>[] = [
 ]
 
 const fetchData: FetchDataFn<Subscription> = async ({ page, limit, sort, filter }) => {
-  const result = await $fetch('/api/admin/list/subscription', {
+  const result = await $fetch<PageData<Subscription>>('/api/admin/list/subscription', {
     query: {
       page,
       limit,
@@ -105,7 +105,7 @@ const fetchData: FetchDataFn<Subscription> = async ({ page, limit, sort, filter 
     }
   })
   return {
-    data: result.data as unknown as Subscription[],
+    data: result.data,
     total: result.total
   }
 }
