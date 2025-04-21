@@ -10,7 +10,7 @@ const isUserModalOpen = ref(false)
 const isBanModalOpen = ref(false)
 const selectedUserId = ref('')
 
-const filters = ref<AdminTableFilter[]>([
+const filters: AdminTableFilter[] = reactive([
   {
     name: t('global.page.name'),
     field: 'name',
