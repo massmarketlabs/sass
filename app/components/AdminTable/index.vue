@@ -152,7 +152,7 @@ defineExpose({
 
 <template>
   <div>
-    <FlexThreeColumn>
+    <FlexThreeColumn class="max-w-full overflow-x-scroll">
       <template #left>
         <slot name="top-left-before" />
         <template
