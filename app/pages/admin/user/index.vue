@@ -151,7 +151,7 @@ const fetchData: FetchDataFn<UserWithRole> = async ({ page, limit, sort }) => {
     filter.push({
       col: 'createdAt',
       op: 'between',
-      v: [formatToDate(start).toISOString(), formatToDate(end).toISOString()]
+      v: [formatToDate(start).toISOString(), endOfDate(formatToDate(end)).toISOString()]
     })
   }
 
