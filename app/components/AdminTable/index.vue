@@ -52,7 +52,7 @@ const fetchTableData = useDebounceFn(async () => {
           filter.push({ col: item.field, op: 'in', v: item.value })
         }
       } else if (item.type === 'tabs') {
-        if (item.value && item.clearValue != item.value) {
+        if (item.value) {
           filter.push({ col: item.field, op: 'eq', v: item.value })
         }
       } else if (item.type === 'daterange') {

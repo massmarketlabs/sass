@@ -54,7 +54,6 @@ export interface FilterTabs {
   name: string
   field: string
   value: string
-  clearValue?: string
   type: 'tabs'
   items: FilterItem[]
 }

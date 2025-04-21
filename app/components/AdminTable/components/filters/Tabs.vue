@@ -64,5 +64,16 @@ watch(
       trigger: 'data-[state=active]:text-(--ui-bg) data-[state=active]:bg-(--ui-primary) pl-4 pr-4',
       indicator: 'hidden'
     }"
-  />
+  >
+    <template #trailing="{ item }">
+      <UBadge
+        v-if="item.count != undefined && item.count > 0"
+        color="neutral"
+        variant="outline"
+        size="sm"
+      >
+        {{ item.count }}
+      </UBadge>
+    </template>
+  </UTabs>
 </template>
