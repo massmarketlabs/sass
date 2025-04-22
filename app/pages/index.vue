@@ -1,3 +1,5 @@
+<i18n src="./index.json"></i18n>
+
 <script setup lang="ts">
 definePageMeta({
   auth: false,
@@ -13,91 +15,91 @@ const navigation = [
   { name: t('global.nav.pricing'), href: localePath('/pricing') }
 ]
 
-// Group features by category
+// Convert features keys to i18n keys
 const features = {
   foundation: [
     {
       icon: 'i-lucide-layout-template',
-      title: 'Modern Tech Stack',
-      description: 'Built with Nuxt, ready for Nuxt v4, TypeScript and Vue 3 Composition API'
+      title: t('home.features.items.modernTechStack.title'),
+      description: t('home.features.items.modernTechStack.description')
     },
     {
       icon: 'i-lucide-shield-check',
-      title: 'Secure Auth',
-      description: 'A robust authentication system powered by Better Auth, providing OAuth2 social logins (Google, GitHub, etc.), sign-in/up, and email-based password reset capabilities.'
+      title: t('home.features.items.secureAuth.title'),
+      description: t('home.features.items.secureAuth.description')
     },
     {
       icon: 'i-lucide-database',
-      title: 'Enterprise Database',
-      description: 'PostgreSQL with Drizzle ORM for type-safe operations'
+      title: t('home.features.items.enterpriseDatabase.title'),
+      description: t('home.features.items.enterpriseDatabase.description')
     }
   ],
   integration: [
     {
       icon: 'i-lucide-mail',
-      title: 'Email Integration',
-      description: 'Built-in Resend integration for transactional emails'
+      title: t('home.features.items.emailIntegration.title'),
+      description: t('home.features.items.emailIntegration.description')
     },
     {
       icon: 'i-lucide-credit-card',
-      title: 'Payment Ready',
-      description: 'Stripe integration for subscription management'
+      title: t('home.features.items.paymentReady.title'),
+      description: t('home.features.items.paymentReady.description')
     },
     {
       icon: 'i-lucide-box',
-      title: 'No Vendor Lock-in',
-      description: 'Modular architecture with swappable components'
+      title: t('home.features.items.noVendorLockIn.title'),
+      description: t('home.features.items.noVendorLockIn.description')
     }
   ],
   admin: [
     {
       icon: 'i-lucide-grid',
-      title: 'Dashboard',
-      description: 'A powerful admin dashboard with beautiful charts'
+      title: t('home.features.items.dashboard.title'),
+      description: t('home.features.items.dashboard.description')
     },
     {
       icon: 'i-lucide-users',
-      title: 'Advanced tables',
-      description: 'Notion/Airtable like advanced filtering, sorting, and pagination, and built-in generic list api out of the box'
+      title: t('home.features.items.advancedTables.title'),
+      description: t('home.features.items.advancedTables.description')
     },
     {
       icon: 'i-lucide-file-text',
-      title: 'User/Subscription Management',
-      description: 'Ready to use User/Subscription management page'
+      title: t('home.features.items.userSubscriptionManagement.title'),
+      description: t('home.features.items.userSubscriptionManagement.description')
     }
   ],
   experience: [
     {
       icon: 'i-lucide-palette',
-      title: 'Modern UI Design',
-      description: 'Beautiful components with Nuxt UI and TailwindCSS'
+      title: t('home.features.items.modernUIDesign.title'),
+      description: t('home.features.items.modernUIDesign.description')
     },
     {
       icon: 'i-lucide-languages',
-      title: 'I18n Ready',
-      description: 'Built-in support for multiple languages'
+      title: t('home.features.items.i18nReady.title'),
+      description: t('home.features.items.i18nReady.description')
     },
     {
       icon: 'i-lucide-smartphone',
-      title: 'Responsive Layout',
-      description: 'Optimized for all devices and screen sizes'
+      title: t('home.features.items.responsiveLayout.title'),
+      description: t('home.features.items.responsiveLayout.description')
     }
   ],
   developer: [
     {
       icon: 'i-lucide-code',
-      title: 'Developer Friendly',
-      description: 'ESLint + TypeScript for better development'
+      title: t('home.features.items.developerFriendly.title'),
+      description: t('home.features.items.developerFriendly.description')
     },
     {
       icon: 'i-lucide-timer',
-      title: 'Quick Setup',
-      description: 'Start developing in minutes'
+      title: t('home.features.items.quickSetup.title'),
+      description: t('home.features.items.quickSetup.description')
     },
     {
       icon: 'i-lucide-settings',
-      title: 'Customizable',
-      description: 'Easily extend and customize components'
+      title: t('home.features.items.customizable.title'),
+      description: t('home.features.items.customizable.description')
     }
   ]
 }
@@ -144,7 +146,7 @@ const features = {
                 color="primary"
                 size="lg"
               >
-                Get Started
+                {{ t('home.getStarted') }}
               </UButton>
               <UButton
                 :to="runtimeConfig.public.appRepo"
@@ -154,7 +156,7 @@ const features = {
                 size="lg"
                 icon="i-simple-icons-github"
               >
-                View on GitHub
+                {{ t('home.viewOnGithub') }}
               </UButton>
             </div>
           </div>
@@ -169,10 +171,10 @@ const features = {
         <UContainer>
           <div class="text-center mb-16">
             <h2 class="text-3xl font-bold mb-4">
-              Solid Foundation for Your SaaS Success
+              {{ t('home.features.title') }}
             </h2>
             <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              Offers a complete and scalable solution packed with the essential features you need to build, launch, and grow your SaaS product.
+              {{ t('home.features.subtitle') }}
             </p>
           </div>
 
@@ -184,7 +186,7 @@ const features = {
               class="space-y-8"
             >
               <h3 class="text-xl font-semibold capitalize text-center">
-                {{ key }}
+                {{ t(`home.features.categories.${key}`) }}
               </h3>
               <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <UCard
