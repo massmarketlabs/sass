@@ -13,38 +13,77 @@ const navigation = [
   { name: t('global.nav.pricing'), href: localePath('/pricing') }
 ]
 
-const features = [
-  {
-    icon: 'i-lucide-layout-template',
-    title: 'Modern Stack',
-    description: 'Built with Nuxt 3, TypeScript and Vue 3 Composition API'
-  },
-  {
-    icon: 'i-lucide-shield-check',
-    title: 'Authentication Ready',
-    description: 'Integrated with Better Auth for secure authentication'
-  },
-  {
-    icon: 'i-lucide-database',
-    title: 'Database Integration',
-    description: 'PostgreSQL with Drizzle ORM for type-safe database operations'
-  },
-  {
-    icon: 'i-lucide-palette',
-    title: 'Beautiful UI',
-    description: 'Styled with Nuxt UI and TailwindCSS for modern design'
-  },
-  {
-    icon: 'i-lucide-moon',
-    title: 'Dark Mode',
-    description: 'Built-in dark mode support for better user experience'
-  },
-  {
-    icon: 'i-lucide-smartphone',
-    title: 'Responsive Design',
-    description: 'Fully responsive layout for all devices'
-  }
-]
+// Group features by category
+const features = {
+  foundation: [
+    {
+      icon: 'i-lucide-layout-template',
+      title: 'Modern Tech Stack',
+      description: 'Built with Nuxt, ready for Nuxt v4, TypeScript and Vue 3 Composition API'
+    },
+    {
+      icon: 'i-lucide-shield-check',
+      title: 'Secure Auth',
+      description: 'A robust authentication system powered by Better Auth, providing OAuth2 social logins (Google, GitHub, etc.), sign-in/up, and email-based password reset capabilities.'
+    },
+    {
+      icon: 'i-lucide-database',
+      title: 'Enterprise Database',
+      description: 'PostgreSQL with Drizzle ORM for type-safe operations'
+    }
+  ],
+  integration: [
+    {
+      icon: 'i-lucide-mail',
+      title: 'Email Integration',
+      description: 'Built-in Resend integration for transactional emails'
+    },
+    {
+      icon: 'i-lucide-credit-card',
+      title: 'Payment Ready',
+      description: 'Stripe integration for subscription management'
+    },
+    {
+      icon: 'i-lucide-box',
+      title: 'No Vendor Lock-in',
+      description: 'Modular architecture with swappable components'
+    }
+  ],
+  experience: [
+    {
+      icon: 'i-lucide-palette',
+      title: 'Modern UI Design',
+      description: 'Beautiful components with Nuxt UI and TailwindCSS'
+    },
+    {
+      icon: 'i-lucide-languages',
+      title: 'I18n Ready',
+      description: 'Built-in support for multiple languages'
+    },
+    {
+      icon: 'i-lucide-smartphone',
+      title: 'Responsive Layout',
+      description: 'Optimized for all devices and screen sizes'
+    }
+  ],
+  developer: [
+    {
+      icon: 'i-lucide-code',
+      title: 'Developer Friendly',
+      description: 'ESLint + TypeScript for better development'
+    },
+    {
+      icon: 'i-lucide-timer',
+      title: 'Quick Setup',
+      description: 'Start developing in minutes'
+    },
+    {
+      icon: 'i-lucide-settings',
+      title: 'Customizable',
+      description: 'Easily extend and customize components'
+    }
+  ]
+}
 </script>
 
 <template>
@@ -108,43 +147,55 @@ const features = [
       <!-- Features Section -->
       <section
         id="features"
-        class="relative py-24"
+        class="relative py-24 bg-gray-50/50 dark:bg-gray-900/50"
       >
-        <!-- Background gradient for features -->
-        <div class="absolute inset-0">
-          <div class="absolute inset-0 bg-gradient-to-b from-white via-emerald-50 to-white dark:from-gray-800 dark:via-gray-900 dark:to-gray-800" />
-        </div>
-        <UContainer class="relative">
+        <UContainer>
           <div class="text-center mb-16">
-            <h2 class="text-3xl font-bold">
+            <h2 class="text-3xl font-bold mb-4">
               Everything you need to build your SaaS
             </h2>
-            <p class="mt-4 text-lg text-gray-600 dark:text-gray-400">
-              Start your next project with our feature-rich template
+            <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+              A complete solution with all the features you need to build, launch and scale your SaaS product
             </p>
           </div>
 
-          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <UCard
-              v-for="feature in features"
-              :key="feature.title"
-              class="text-center backdrop-blur-sm bg-white/50 dark:bg-gray-800/50 border-0 shadow-lg"
+          <!-- Feature Groups -->
+          <div class="space-y-24">
+            <div
+              v-for="(group, key) in features"
+              :key="key"
+              class="space-y-8"
             >
-              <div class="flex flex-col items-center p-6">
-                <div class="p-3 bg-primary-50 dark:bg-primary-900/50 rounded-full mb-4">
-                  <UIcon
-                    :name="feature.icon"
-                    class="text-primary-500 w-6 h-6"
-                  />
-                </div>
-                <h3 class="text-lg font-semibold mb-2">
-                  {{ feature.title }}
-                </h3>
-                <p class="text-gray-600 dark:text-gray-400">
-                  {{ feature.description }}
-                </p>
+              <h3 class="text-xl font-semibold capitalize text-center">
+                {{ key }}
+              </h3>
+              <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <UCard
+                  v-for="feature in group"
+                  :key="feature.title"
+                  class="bg-white/80 dark:bg-gray-800/80 backdrop-blur border-0 shadow hover:shadow-lg transition-shadow duration-200"
+                >
+                  <div class="flex gap-4 items-start p-2">
+                    <div class="shrink-0">
+                      <div class="p-3 bg-primary-50 dark:bg-primary-900/50 rounded-lg">
+                        <UIcon
+                          :name="feature.icon"
+                          class="text-primary-500 w-5 h-5"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <h4 class="font-medium mb-2">
+                        {{ feature.title }}
+                      </h4>
+                      <p class="text-sm text-gray-600 dark:text-gray-400">
+                        {{ feature.description }}
+                      </p>
+                    </div>
+                  </div>
+                </UCard>
               </div>
-            </UCard>
+            </div>
           </div>
         </UContainer>
       </section>
