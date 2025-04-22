@@ -49,6 +49,23 @@ const features = {
       description: 'Modular architecture with swappable components'
     }
   ],
+  admin: [
+    {
+      icon: 'i-lucide-grid',
+      title: 'Dashboard',
+      description: 'A powerful admin dashboard with beautiful charts'
+    },
+    {
+      icon: 'i-lucide-users',
+      title: 'Advanced tables',
+      description: 'Notion/Airtable like advanced filtering, sorting, and pagination, and built-in generic list api out of the box'
+    },
+    {
+      icon: 'i-lucide-file-text',
+      title: 'User/Subscription Management',
+      description: 'Ready to use User/Subscription management page'
+    }
+  ],
   experience: [
     {
       icon: 'i-lucide-palette',
@@ -152,10 +169,10 @@ const features = {
         <UContainer>
           <div class="text-center mb-16">
             <h2 class="text-3xl font-bold mb-4">
-              Everything you need to build your SaaS
+              Solid Foundation for Your SaaS Success
             </h2>
             <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              A complete solution with all the features you need to build, launch and scale your SaaS product
+              Offers a complete and scalable solution packed with the essential features you need to build, launch, and grow your SaaS product.
             </p>
           </div>
 
