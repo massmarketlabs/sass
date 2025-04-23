@@ -5,10 +5,10 @@ import { admin, openAPI } from 'better-auth/plugins'
 import { v7 as uuidv7 } from 'uuid'
 import * as schema from '../database/schema'
 import { db } from './db'
-import { processEnv, redisInstance, resendInstance, stripeClient } from './drivers'
+import { redisInstance, resendInstance, stripeClient } from './drivers'
 
 export const auth = betterAuth({
-  baseURL: processEnv.BETTER_AUTH_URL,
+  baseURL: process.env.BETTER_AUTH_URL,
   database: drizzleAdapter(db, {
     provider: 'pg',
     schema
@@ -42,7 +42,7 @@ export const auth = betterAuth({
     requireEmailVerification: true,
     sendResetPassword: async ({ user, url }) => {
       const response = await resendInstance.emails.send({
-        from: `${processEnv.APP_NAME} <${processEnv.APP_FROM_EMAIL}>`,
+        from: `${process.env.APP_NAME} <${process.env.APP_FROM_EMAIL}>`,
         to: user.email,
         subject: 'Reset your password',
         text: `Click the link to reset your password: ${url}`
@@ -57,7 +57,7 @@ export const auth = betterAuth({
     autoSignInAfterVerification: true,
     sendVerificationEmail: async ({ user, url }) => {
       const response = await resendInstance.emails.send({
-        from: `${processEnv.APP_NAME} <${processEnv.APP_FROM_EMAIL}>`,
+        from: `${process.env.APP_NAME} <${process.env.APP_FROM_EMAIL}>`,
         to: user.email,
         subject: 'Verify your email address',
         text: `Click the link to verify your email: ${url}`
@@ -69,8 +69,8 @@ export const auth = betterAuth({
   },
   socialProviders: {
     github: {
-      clientId: processEnv.GITHUB_CLIENT_ID!,
-      clientSecret: processEnv.GITHUB_CLIENT_SECRET!
+      clientId: process.env.GITHUB_CLIENT_ID!,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET!
     }
   },
   account: {
@@ -79,18 +79,18 @@ export const auth = betterAuth({
     }
   },
   plugins: [
-    ...(processEnv.APP_ENV === 'development' ? [openAPI()] : []),
+    ...(process.env.APP_ENV === 'development' ? [openAPI()] : []),
     admin(),
     stripe({
       stripeClient,
-      stripeWebhookSecret: processEnv.STRIPE_WEBHOOK_SECRET!,
+      stripeWebhookSecret: process.env.STRIPE_WEBHOOK_SECRET!,
       createCustomerOnSignUp: true,
       subscription: {
         enabled: true,
         plans: [
           {
             name: 'pro-monthly',
-            priceId: processEnv.STRIPE_PRICE_ID_PRO_MONTH,
+            priceId: process.env.STRIPE_PRICE_ID_PRO_MONTH,
             freeTrial: {
               days: 14,
               onTrialStart: async (subscription) => {
@@ -109,7 +109,7 @@ export const auth = betterAuth({
           },
           {
             name: 'pro-yearly',
-            priceId: processEnv.STRIPE_PRICE_ID_PRO_YEAR,
+            priceId: process.env.STRIPE_PRICE_ID_PRO_YEAR,
             freeTrial: {
               days: 14,
               onTrialStart: async (subscription) => {
