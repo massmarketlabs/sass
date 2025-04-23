@@ -3,14 +3,16 @@ import pg from 'pg'
 import { Resend } from 'resend'
 import Stripe from 'stripe'
 
+const runtimeConfig = useRuntimeConfig()
+
 export const pgPool = new pg.Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: runtimeConfig.databaseUrl,
   max: 90,
   idleTimeoutMillis: 30000
 })
 
-export const redisInstance = new Redis(process.env.REDIS_URL as string)
+export const redisInstance = new Redis(runtimeConfig.redisUrl)
 
-export const resendInstance = new Resend(process.env.RESEND_API_KEY)
+export const resendInstance = new Resend(runtimeConfig.resendApiKey)
 
-export const stripeClient = new Stripe(process.env.STRIPE_SECRET_KEY!)
+export const stripeClient = new Stripe(runtimeConfig.stripeSecretKey!)

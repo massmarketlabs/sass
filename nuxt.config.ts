@@ -15,7 +15,7 @@ export default defineNuxtConfig({
   ],
   i18n: {
     vueI18n: '~/i18n/i18n.config.ts',
-    baseUrl: process.env.BETTER_AUTH_URL,
+    baseUrl: process.env.NUXT_APP_URL,
     locales: [
       { code: 'en', iso: 'en-US', name: 'English' },
       { code: 'zh-CN', iso: 'zh-CN', name: '简体中文' },
@@ -64,9 +64,26 @@ export default defineNuxtConfig({
     }
   },
   runtimeConfig: {
+    // Stripe
+    stripeSecretKey: process.env.NUXT_STRIPE_SECRET_KEY,
+    stripeWebhookSecret: process.env.NUXT_STRIPE_WEBHOOK_SECRET,
+    stripePriceIdProMonth: process.env.NUXT_STRIPE_PRICE_ID_PRO_MONTH,
+    stripePriceIdProYear: process.env.NUXT_STRIPE_PRICE_ID_PRO_YEAR,
+    // Resend
+    resendApiKey: process.env.NUXT_RESEND_API_KEY,
+    // Github
+    githubClientId: process.env.NUXT_GH_CLIENT_ID,
+    githubClientSecret: process.env.NUXT_GH_CLIENT_SECRET,
+    // DB
+    redisUrl: process.env.NUXT_REDIS_URL,
+    databaseUrl: process.env.NUXT_DATABASE_URL,
     public: {
-      appRepo: process.env.APP_REPO,
-      appContactEmail: process.env.APP_CONTACT_EMAIL,
+      baseURL: process.env.NUXT_APP_URL,
+      appName: process.env.NUXT_APP_NAME,
+      appEnv: process.env.NUXT_APP_ENV,
+      appRepo: process.env.NUXT_APP_REPO,
+      appNotifyEmail: process.env.NUXT_APP_NOTIFY_EMAIL,
+      appContactEmail: process.env.NUXT_APP_CONTACT_EMAIL,
       auth: {
         unauthenticatedRedirect: '/signin'
       }
