@@ -11,8 +11,17 @@ export default defineNuxtConfig({
     'nuxt-zod-i18n', // before @nuxtjs/i18n module
     '@nuxtjs/i18n',
     'nuxt-charts',
-    '@nuxt/test-utils/module'
+    '@nuxt/test-utils/module',
+    ...(process.env.NUXT_NITRO_PRESET === 'cloudflare-module' ? ['@nuxthub/core'] : [])
   ],
+  ...(process.env.NUXT_NITRO_PRESET === 'cloudflare-module'
+    ? {
+        hub: {
+          workers: true,
+          kv: true
+        }
+      }
+    : {}),
   i18n: {
     vueI18n: '~/i18n/i18n.config.ts',
     baseUrl: process.env.NUXT_APP_URL,
@@ -64,6 +73,8 @@ export default defineNuxtConfig({
     }
   },
   runtimeConfig: {
+    preset: process.env.NUXT_NITRO_PRESET,
+    betterAuthSecret: process.env.NUXT_BETTER_AUTH_SECRET,
     // Stripe
     stripeSecretKey: process.env.NUXT_STRIPE_SECRET_KEY,
     stripeWebhookSecret: process.env.NUXT_STRIPE_WEBHOOK_SECRET,
@@ -74,6 +85,9 @@ export default defineNuxtConfig({
     // Github
     githubClientId: process.env.NUXT_GH_CLIENT_ID,
     githubClientSecret: process.env.NUXT_GH_CLIENT_SECRET,
+    // Google
+    googleClientId: process.env.NUXT_GOOGLE_CLIENT_ID,
+    googleClientSecret: process.env.NUXT_GOOGLE_CLIENT_SECRET,
     // DB
     redisUrl: process.env.NUXT_REDIS_URL,
     databaseUrl: process.env.NUXT_DATABASE_URL,
@@ -101,6 +115,12 @@ export default defineNuxtConfig({
       meta: [
         { name: 'apple-mobile-web-app-title', content: 'NuxSaaS' }
       ]
+    }
+  },
+  nitro: {
+    preset: process.env.NUXT_NITRO_PRESET,
+    rollupConfig: {
+      external: process.env.NUXT_NITRO_PRESET != 'node-server' ? ['pg-native'] : undefined
     }
   }
 })

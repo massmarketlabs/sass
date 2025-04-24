@@ -11,7 +11,14 @@ export const pgPool = new pg.Pool({
   idleTimeoutMillis: 30000
 })
 
-export const redisInstance = new Redis(runtimeConfig.redisUrl)
+let hubKVInstance
+let redisInstance
+if (runtimeConfig.preset == 'cloudflare-module') {
+  hubKVInstance = hubKV()
+} else {
+  redisInstance = new Redis(runtimeConfig.redisUrl)
+}
+export const kvClient = redisInstance || hubKVInstance
 
 export const resendInstance = new Resend(runtimeConfig.resendApiKey)
 
