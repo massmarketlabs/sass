@@ -3,9 +3,10 @@ import type { EventHandlerRequest, H3Event } from 'h3'
 import { drizzle } from 'drizzle-orm/node-postgres'
 
 import * as schema from '../database/schema'
-import { pgPool } from './drivers'
+import { newPgPool, pgPool } from './drivers'
 
 // use db without pg pool
+export const newDB = () => drizzle({ client: newPgPool() })
 export const db = drizzle({ client: pgPool })
 
 // use db with pg pool

@@ -12,9 +12,9 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     'nuxt-charts',
     '@nuxt/test-utils/module',
-    ...(process.env.NUXT_NITRO_PRESET === 'cloudflare-module' ? ['@nuxthub/core'] : [])
+    ...(process.env.NUXT_NITRO_PRESET !== 'node-server' ? ['@nuxthub/core'] : [])
   ],
-  ...(process.env.NUXT_NITRO_PRESET === 'cloudflare-module'
+  ...(process.env.NUXT_NITRO_PRESET !== 'node-server'
     ? {
         hub: {
           workers: true,

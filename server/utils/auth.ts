@@ -2,22 +2,24 @@ import { stripe } from '@better-auth/stripe'
 import { betterAuth } from 'better-auth'
 import { drizzleAdapter } from 'better-auth/adapters/drizzle'
 import { admin, openAPI } from 'better-auth/plugins'
-import Redis from 'ioredis'
 import { v7 as uuidv7 } from 'uuid'
 import * as schema from '../database/schema'
-import { db } from './db'
-import { kvClient, resendInstance, stripeClient } from './drivers'
+import { db, newDB } from './db'
+import { redisClient, resendInstance, stripeClient } from './drivers'
 
 const runtimeConfig = useRuntimeConfig()
 console.log(`Base URL is ${runtimeConfig.public.baseURL}`)
 
-export const auth = betterAuth({
+export const newAuth = () => betterAuth({
   baseURL: runtimeConfig.public.baseURL,
   secret: runtimeConfig.betterAuthSecret,
-  database: drizzleAdapter(db, {
-    provider: 'pg',
-    schema
-  }),
+  database: drizzleAdapter(
+    runtimeConfig.preset == 'node-server' ? db : newDB(),
+    {
+      provider: 'pg',
+      schema
+    }
+  ),
   advanced: {
     database: {
       generateId: () => {
@@ -27,14 +29,11 @@ export const auth = betterAuth({
   },
   secondaryStorage: {
     get: async (key) => {
-      if (!kvClient) {
-        return null
-      }
-      if (kvClient instanceof Redis) {
-        const value = await kvClient.get(key)
+      if (redisClient) {
+        const value = await redisClient.get(key)
         return value
       } else {
-        const value = await kvClient.get(key)
+        const value = await hubKV().get(key)
         if (!value) {
           return null
         }
@@ -42,32 +41,26 @@ export const auth = betterAuth({
       }
     },
     set: async (key, value, ttl) => {
-      if (!kvClient) {
-        return null
-      }
       const stringValue = typeof value === 'string' ? value : JSON.stringify(value)
-      if (kvClient instanceof Redis) {
+      if (redisClient) {
         if (ttl) {
-          await kvClient.set(key, stringValue, 'EX', ttl)
+          await redisClient.set(key, stringValue, 'EX', ttl)
         } else {
-          await kvClient.set(key, stringValue)
+          await redisClient.set(key, stringValue)
         }
       } else {
         if (ttl) {
-          await kvClient.set(key, stringValue, { ttl })
+          await hubKV().set(key, stringValue, { ttl })
         } else {
-          await kvClient.set(key, stringValue)
+          await hubKV().set(key, stringValue)
         }
       }
     },
     delete: async (key) => {
-      if (!kvClient) {
-        return null
-      }
-      if (kvClient instanceof Redis) {
-        await kvClient.del(key)
+      if (redisClient) {
+        await redisClient.del(key)
       } else {
-        await kvClient.del(key)
+        await hubKV().del(key)
       }
     }
   },
@@ -185,3 +178,5 @@ export const auth = betterAuth({
     })
   ]
 })
+
+export const auth = newAuth()

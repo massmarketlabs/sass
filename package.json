@@ -15,7 +15,8 @@
     "lint:fix": "eslint --fix .",
     "auth:schema": "npx @better-auth/cli generate --config server/utils/auth.ts --output server/database/schema/auth.ts -y",
     "db:generate": "drizzle-kit generate --config ./server/database/drizzle.config.ts",
-    "db:migrate": "drizzle-kit migrate --config ./server/database/drizzle.config.ts"
+    "db:migrate": "drizzle-kit migrate --config ./server/database/drizzle.config.ts",
+    "deploy": "wrangler deploy"
   },
   "dependencies": {
     "@better-auth/stripe": "^1.2.7",
@@ -57,6 +58,7 @@
     "happy-dom": "^17.4.4",
     "playwright-core": "^1.51.1",
     "typescript": "^5.8.3",
-    "vitest": "^3.1.1"
+    "vitest": "^3.1.1",
+    "wrangler": "^4.13.0"
   }
 }
