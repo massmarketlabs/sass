@@ -1,6 +1,7 @@
 {
   "en": {
     "home": {
+      "slogan": "Nuxt.js Full-Stack SaaS Starter Kit - Free & Open Source",
       "getStarted": "Get Started",
       "viewOnGithub": "View on GitHub",
       "features": {
@@ -80,6 +81,7 @@
   },
   "zh-CN": {
     "home": {
+      "slogan": "Nuxt.js 全栈 SaaS 起步工具包 - 免费开源",
       "getStarted": "开始使用",
       "viewOnGithub": "在 GitHub 上查看",
       "features": {
@@ -159,6 +161,7 @@
   },
   "ja": {
     "home": {
+      "slogan": "Nuxt.js フルスタック SaaS スターターキット - 無料＆オープンソース",
       "getStarted": "始めましょう",
       "viewOnGithub": "GitHub で見る",
       "features": {
@@ -238,6 +241,7 @@
   },
   "fr": {
     "home": {
+      "slogan": "Kit de Démarrage SaaS Full-Stack Nuxt.js - Gratuit et Open Source",
       "getStarted": "Commencer",
       "viewOnGithub": "Voir sur GitHub",
       "features": {

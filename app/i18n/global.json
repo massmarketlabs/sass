@@ -2,7 +2,6 @@
   "en": {
     "global": {
       "appName": "NuxSaaS",
-      "appSlogan": "A fullstack SaaS starter kit built with Nuxt",
       "nav": {
         "admin": "Admin",
         "features": "Features",
@@ -29,7 +28,6 @@
   "zh-CN": {
     "global": {
       "appName": "NuxSaaS",
-      "appSlogan": "基于 Nuxt 构建的全栈 SaaS 起始套件",
       "nav": {
         "admin": "管理后台",
         "features": "功能特性",
@@ -56,7 +54,6 @@
   "ja": {
     "global": {
       "appName": "NuxSaaS",
-      "appSlogan": "Nuxt で構築されたフルスタック SaaS スターターキット",
       "nav": {
         "admin": "管理画面",
         "features": "機能",
@@ -83,7 +80,6 @@
   "fr": {
     "global": {
       "appName": "NuxSaaS",
-      "appSlogan": "Kit de démarrage SaaS full-stack créé avec Nuxt",
       "nav": {
         "admin": "Administration",
         "features": "Fonctionnalités",

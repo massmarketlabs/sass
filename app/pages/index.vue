@@ -138,7 +138,7 @@ const features = {
               {{ t('global.appName') }}
             </h1>
             <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">
-              {{ t('global.appSlogan') }}
+              {{ t('home.slogan') }}
             </p>
             <div class="flex gap-4 justify-center">
               <UButton
