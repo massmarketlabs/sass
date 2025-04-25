@@ -41,11 +41,19 @@ const state = reactive<Partial<Schema>>({
 })
 
 const loading = ref(false)
+const loadingAction = ref('')
+
+async function onSocialLogin(action: 'google' | 'github') {
+  loading.value = true
+  loadingAction.value = action
+  auth.signIn.social({ provider: action, callbackURL: redirectTo.value })
+}
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   if (loading.value)
     return
   loading.value = true
+  loadingAction.value = 'submit'
   const { error } = await auth.signUp.email({
     name: event.data.name,
     email: event.data.email,
@@ -89,7 +97,9 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
             variant="outline"
             icon="i-simple-icons-google"
             class="justify-center"
-            @click="auth.signIn.social({ provider: 'google', callbackURL: redirectTo })"
+            :loading="loading && loadingAction === 'google'"
+            :disabled="loading"
+            @click="onSocialLogin('google')"
           >
             Google
           </UButton>
@@ -98,7 +108,9 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
             variant="outline"
             icon="i-simple-icons-github"
             class="justify-center"
-            @click="auth.signIn.social({ provider: 'github', callbackURL: redirectTo })"
+            :loading="loading && loadingAction === 'github'"
+            :disabled="loading"
+            @click="onSocialLogin('github')"
           >
             Github
           </UButton>
@@ -168,7 +180,8 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
             type="submit"
             color="primary"
             block
-            :loading="loading"
+            :loading="loading && loadingAction === 'submit'"
+            :disabled="loading"
           >
             {{ t('signUp.submit') }}
           </UButton>
@@ -179,6 +192,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
           <UButton
             variant="link"
             color="primary"
+            :disabled="loading"
             :to="localePath('/signin')"
           >
             {{ t('signUp.signIn') }}
