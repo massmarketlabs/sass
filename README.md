@@ -1,18 +1,16 @@
 # NuxSaaS
 
-## Env
-```bash
-# use Node.js v22 LTS
-nvm use
-```
 
 ## Setup
 ```bash
+# use Node.js v22 LTS
+nvm use
+
 # Use npm or whatever you like to install the dependencies
 npm install
 
-# Generate auth-related schema based on Better Auth config
-npm run auth:schema
+# Setup env
+cp .env.example .env
 
 # Generate database migration based on database schema
 npm run db:generate
@@ -30,13 +28,15 @@ npm run test -- -t="should submit valid signup form"
 # Build the application for production
 npm run build
 
-# Locally preview production build
-npm run preview
+# Starting the Production Server
+npm run serve
+
+# Deploy to Cloudflare Worker
+cp wrangler.example.toml wrangler.toml
+npm run deploy
 ```
 
 ##### Documentation
-* [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction)
+* [Nuxt](https://nuxt.com/docs/getting-started/introduction)
 * [Better Auth](https://better-auth.vercel.app/docs)
-
-##### Reference
-* [atinux/nuxthub-better-auth](https://github.com/atinux/nuxthub-better-auth)
+* [Drizzle](https://orm.drizzle.team/docs/overview)
