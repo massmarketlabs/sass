@@ -113,7 +113,7 @@ export default defineNuxtConfig({
         { rel: 'manifest', href: '/favicons/site.webmanifest' }
       ],
       meta: [
-        { name: 'apple-mobile-web-app-title', content: 'NuxSaaS' }
+        { name: 'apple-mobile-web-app-title', content: process.env.NUXT_APP_NAME }
       ]
     }
   },
