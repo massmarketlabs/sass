@@ -2,7 +2,7 @@
 
 <script setup lang="ts">
 const { t } = useI18n()
-const { data: dbStats } = await useFetch('/api/maintenance/db-stats')
+const { data: dbStats } = await useFetch('/api/admin/maintenance/db-stats')
 
 // Format bytes to human readable format
 function formatBytes(bytes: number) {
@@ -18,65 +18,6 @@ function formatBytes(bytes: number) {
 
 <template>
   <NuxtLayout name="admin">
-    <UCard>
-      <template #header>
-        <div class="flex items-center gap-2">
-          <Icon name="lucide:database" />
-          <span>{{ t('dbStats.title') }}</span>
-        </div>
-      </template>
-
-      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <UCard>
-          <div class="flex flex-col gap-2">
-            <div class="flex items-center gap-2 text-primary-500">
-              <Icon name="lucide:database" />
-              <span class="text-xl">{{ dbStats?.pool.totalCount || 0 }}</span>
-            </div>
-            <p class="text-sm text-gray-500 dark:text-gray-400">
-              {{ t('dbStats.totalConnections') }}
-            </p>
-          </div>
-        </UCard>
-
-        <UCard>
-          <div class="flex flex-col gap-2">
-            <div class="flex items-center gap-2 text-info-500">
-              <Icon name="lucide:activity" />
-              <span class="text-xl">{{ dbStats?.pool.activeConnections || 0 }}</span>
-            </div>
-            <p class="text-sm text-gray-500 dark:text-gray-400">
-              {{ t('dbStats.activeConnections') }}
-            </p>
-          </div>
-        </UCard>
-
-        <UCard>
-          <div class="flex flex-col gap-2">
-            <div class="flex items-center gap-2 text-success-500">
-              <Icon name="lucide:pause" />
-              <span class="text-xl">{{ dbStats?.pool.idleCount || 0 }}</span>
-            </div>
-            <p class="text-sm text-gray-500 dark:text-gray-400">
-              {{ t('dbStats.idleConnections') }}
-            </p>
-          </div>
-        </UCard>
-
-        <UCard>
-          <div class="flex flex-col gap-2">
-            <div class="flex items-center gap-2 text-warning-500">
-              <Icon name="lucide:clock" />
-              <span class="text-xl">{{ dbStats?.pool.waitingCount || 0 }}</span>
-            </div>
-            <p class="text-sm text-gray-500 dark:text-gray-400">
-              {{ t('dbStats.waitingConnections') }}
-            </p>
-          </div>
-        </UCard>
-      </div>
-    </UCard>
-
     <UCard class="mt-4">
       <template #header>
         <div class="flex items-center gap-2">
