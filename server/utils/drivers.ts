@@ -13,11 +13,48 @@ export const newPgPool = () => new pg.Pool({
 
 export const pgPool = newPgPool()
 
-let redisInstance
+let redisClient: Redis | undefined
 if (runtimeConfig.preset == 'node-server') {
-  redisInstance = new Redis(runtimeConfig.redisUrl)
+  redisClient = new Redis(runtimeConfig.redisUrl)
 }
-export const redisClient = redisInstance
+
+export const cacheClient = {
+  get: async (key: string) => {
+    if (redisClient) {
+      const value = await redisClient.get(key)
+      return value
+    } else {
+      const value = await hubKV().get(key)
+      if (!value) {
+        return null
+      }
+      return JSON.stringify(value)
+    }
+  },
+  set: async (key: string, value: string, ttl: number | undefined) => {
+    const stringValue = typeof value === 'string' ? value : JSON.stringify(value)
+    if (redisClient) {
+      if (ttl) {
+        await redisClient.set(key, stringValue, 'EX', ttl)
+      } else {
+        await redisClient.set(key, stringValue)
+      }
+    } else {
+      if (ttl) {
+        await hubKV().set(key, stringValue, { ttl })
+      } else {
+        await hubKV().set(key, stringValue)
+      }
+    }
+  },
+  delete: async (key: string) => {
+    if (redisClient) {
+      await redisClient.del(key)
+    } else {
+      await hubKV().del(key)
+    }
+  }
+}
 
 export const resendInstance = new Resend(runtimeConfig.resendApiKey)
 

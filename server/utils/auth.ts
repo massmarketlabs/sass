@@ -6,7 +6,7 @@ import { admin, openAPI } from 'better-auth/plugins'
 import { v7 as uuidv7 } from 'uuid'
 import * as schema from '../database/schema'
 import { db, newDB } from './db'
-import { redisClient, resendInstance, stripeClient } from './drivers'
+import { cacheClient, resendInstance, stripeClient } from './drivers'
 
 const runtimeConfig = useRuntimeConfig()
 console.log(`Base URL is ${runtimeConfig.public.baseURL}`)
@@ -28,43 +28,7 @@ const newAuth = () => betterAuth({
       }
     }
   },
-  secondaryStorage: {
-    get: async (key) => {
-      if (redisClient) {
-        const value = await redisClient.get(key)
-        return value
-      } else {
-        const value = await hubKV().get(key)
-        if (!value) {
-          return null
-        }
-        return JSON.stringify(value)
-      }
-    },
-    set: async (key, value, ttl) => {
-      const stringValue = typeof value === 'string' ? value : JSON.stringify(value)
-      if (redisClient) {
-        if (ttl) {
-          await redisClient.set(key, stringValue, 'EX', ttl)
-        } else {
-          await redisClient.set(key, stringValue)
-        }
-      } else {
-        if (ttl) {
-          await hubKV().set(key, stringValue, { ttl })
-        } else {
-          await hubKV().set(key, stringValue)
-        }
-      }
-    },
-    delete: async (key) => {
-      if (redisClient) {
-        await redisClient.del(key)
-      } else {
-        await hubKV().del(key)
-      }
-    }
-  },
+  secondaryStorage: cacheClient,
   emailAndPassword: {
     enabled: true,
     requireEmailVerification: true,
