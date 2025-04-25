@@ -1,3 +1,4 @@
+import type { H3Event } from 'h3'
 import { stripe } from '@better-auth/stripe'
 import { betterAuth } from 'better-auth'
 import { drizzleAdapter } from 'better-auth/adapters/drizzle'
@@ -10,7 +11,7 @@ import { redisClient, resendInstance, stripeClient } from './drivers'
 const runtimeConfig = useRuntimeConfig()
 console.log(`Base URL is ${runtimeConfig.public.baseURL}`)
 
-export const newAuth = () => betterAuth({
+const newAuth = () => betterAuth({
   baseURL: runtimeConfig.public.baseURL,
   secret: runtimeConfig.betterAuthSecret,
   database: drizzleAdapter(
@@ -179,4 +180,34 @@ export const newAuth = () => betterAuth({
   ]
 })
 
-export const auth = newAuth()
+const auth = newAuth()
+
+export const useServerAuth = () => {
+  if (runtimeConfig.preset == 'node-server') {
+    return auth
+  } else {
+    return newAuth()
+  }
+}
+
+export const getAuthSession = async (event: H3Event) => {
+  const headers = event.headers
+  const serverAuth = useServerAuth()
+  const session = await serverAuth.api.getSession({
+    headers
+  })
+  return session
+}
+
+export const requireAuth = async (event: H3Event) => {
+  const session = await getAuthSession(event)
+  if (!session) {
+    throw createError({
+      statusCode: 401,
+      statusMessage: 'Unauthorized'
+    })
+  }
+  // Save the session to the event context for later use
+  event.context.auth = session!
+  return session!
+}
