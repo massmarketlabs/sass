@@ -1,3 +1,4 @@
+import type { Subscription } from '@better-auth/stripe'
 import type {
   ClientOptions,
   InferSessionFromClient
@@ -34,6 +35,7 @@ export function useAuth() {
   })
   const session = useState<InferSessionFromClient<ClientOptions> | null>('auth:session', () => null)
   const user = useState<UserWithRole | null>('auth:user', () => null)
+  const subscriptions = useState<Subscription[]>('auth:subscriptions', () => [])
   const sessionFetching = import.meta.server ? ref(false) : useState('auth:sessionFetching', () => false)
 
   const fetchSession = async () => {
@@ -42,13 +44,22 @@ export function useAuth() {
       return
     }
     sessionFetching.value = true
-    const { data } = await client.getSession({
+    const { data, error } = await client.getSession({
       fetchOptions: {
         headers
       }
     })
+    if (error) {
+      console.log('fetchSession error', error)
+    }
     session.value = data?.session || null
     user.value = data?.user ? { ...data.user, role: data.user.role ?? undefined } : null
+    if (user.value) {
+      const { data: subscriptionData } = await client.subscription.list()
+      subscriptions.value = subscriptionData || []
+    } else {
+      subscriptions.value = []
+    }
     sessionFetching.value = false
     return data
   }
@@ -64,13 +75,18 @@ export function useAuth() {
   return {
     session,
     user,
+    subscriptions,
     loggedIn: computed(() => !!session.value),
+    activeSubscription: computed(() => {
+      return subscriptions.value.find(
+        sub => sub.status === 'active' || sub.status === 'trialing'
+      )
+    }),
     signIn: client.signIn,
     signUp: client.signUp,
     forgetPassword: client.forgetPassword,
     resetPassword: client.resetPassword,
     sendVerificationEmail: client.sendVerificationEmail,
-    subscription: client.subscription,
     errorCodes: client.$ERROR_CODES,
     async signOut({ redirectTo }: { redirectTo?: RouteLocationRaw } = {}) {
       const res = await client.signOut()

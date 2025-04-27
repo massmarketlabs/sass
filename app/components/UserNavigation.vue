@@ -1,15 +1,7 @@
 <script setup lang="ts">
 const localePath = useLocalePath()
 const { t } = useI18n()
-const { loggedIn, signOut, user, subscription } = useAuth()
-
-const { data: subscriptions } = await useAsyncData('/subscriptions', () => subscription.list())
-
-const activeSubscription = computed(() => {
-  return subscriptions.value?.data?.find(
-    sub => sub.status === 'active' || sub.status === 'trialing'
-  )
-})
+const { loggedIn, signOut, user, activeSubscription } = useAuth()
 </script>
 
 <template>
