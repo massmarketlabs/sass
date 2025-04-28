@@ -8,6 +8,10 @@ kv_namespaces = [
   { binding = "KV", id = "your_kv_id" }
 ]
 
+routes = [
+  { pattern = "nuxsaas.com", custom_domain = true }
+]
+
 [observability.logs]
 enabled = true
 

@@ -27,10 +27,8 @@ export default defineNuxtRouteMiddleware(async (to) => {
   const { loggedIn, user, options, fetchSession } = useAuth()
   const { unauthenticatedRedirect } = defu(to.meta?.auth, options)
 
-  // If client-side, fetch session between each navigation
-  if (import.meta.client) {
-    await fetchSession()
-  }
+  await fetchSession()
+
   // If not authenticated, redirect to home
   if (!loggedIn.value) {
     // Avoid infinite redirect

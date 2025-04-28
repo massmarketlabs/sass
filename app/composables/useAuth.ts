@@ -5,8 +5,8 @@ import type {
 } from 'better-auth/client'
 import type { RouteLocationRaw } from 'vue-router'
 import { stripeClient } from '@better-auth/stripe/client'
-import { createAuthClient } from 'better-auth/client'
 import { adminClient } from 'better-auth/client/plugins'
+import { createAuthClient } from 'better-auth/vue'
 import { defu } from 'defu'
 
 interface RuntimeAuthConfig {
@@ -44,16 +44,12 @@ export function useAuth() {
       return
     }
     sessionFetching.value = true
-    const { data, error } = await client.getSession({
-      fetchOptions: {
-        headers
-      }
-    })
-    if (error) {
-      console.log('fetchSession error', error)
+    const { data, error } = await client.useSession(useFetch)
+    if (error.value) {
+      console.log('fetchSession error', error.value)
     }
-    session.value = data?.session || null
-    user.value = data?.user ? { ...data.user, role: data.user.role ?? undefined } : null
+    session.value = data.value?.session || null
+    user.value = data.value?.user ? { ...data.value.user, role: data.value.user.role ?? undefined } : null
     if (user.value) {
       const { data: subscriptionData } = await client.subscription.list()
       subscriptions.value = subscriptionData || []
