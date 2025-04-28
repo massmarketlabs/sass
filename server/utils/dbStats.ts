@@ -1,7 +1,7 @@
-import { pgPool } from './drivers'
+import { getPgPool } from './drivers'
 
 export async function getDBStats() {
-  const db = await pgPool.connect()
+  const db = await getPgPool().connect()
   const dbStatsResult = await db.query(`
     SELECT
       numbackends as active_backends,

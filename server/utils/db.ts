@@ -3,11 +3,21 @@ import type { EventHandlerRequest, H3Event } from 'h3'
 import { drizzle } from 'drizzle-orm/node-postgres'
 
 import * as schema from '../database/schema'
-import { newPgPool, pgPool } from './drivers'
+import { getPgPool } from './drivers'
+
+const runtimeConfig = useRuntimeConfig()
 
 // use db without pg pool
-export const newDB = () => drizzle({ client: newPgPool() })
-export const db = drizzle({ client: pgPool })
+const newDB = () => drizzle({ client: getPgPool() })
+const db = newDB()
+
+export const getDB = () => {
+  if (runtimeConfig.preset == 'node-server') {
+    return db
+  } else {
+    return newDB()
+  }
+}
 
 // use db with pg pool
 export const useDB = async (event?: H3Event<EventHandlerRequest>): Promise<NodePgDatabase<typeof schema>> => {
@@ -17,7 +27,7 @@ export const useDB = async (event?: H3Event<EventHandlerRequest>): Promise<NodeP
   }
   // Otherwise, create a new connection to the database
   // const client = await pgPool.connect()
-  const db = drizzle({ client: pgPool, schema })
+  const db = drizzle({ client: getPgPool(), schema })
   if (event) {
     event.context.db = db
   }

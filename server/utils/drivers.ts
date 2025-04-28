@@ -16,14 +16,24 @@ const getDatabaseUrl = () => {
   }
 }
 
-export const newPgPool = () => new pg.Pool({
+const newPgPool = () => new pg.Pool({
   connectionString: getDatabaseUrl(),
   max: 90,
   idleTimeoutMillis: 30000
 })
 
-export const pgPool = newPgPool()
+const pgPool = newPgPool()
 
+// PG Pool
+export const getPgPool = () => {
+  if (runtimeConfig.preset == 'node-server') {
+    return pgPool
+  } else {
+    return newPgPool()
+  }
+}
+
+// Cache Client
 let redisClient: Redis | undefined
 if (runtimeConfig.preset == 'node-server') {
   redisClient = new Redis(runtimeConfig.redisUrl)

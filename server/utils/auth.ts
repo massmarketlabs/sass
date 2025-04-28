@@ -5,7 +5,7 @@ import { drizzleAdapter } from 'better-auth/adapters/drizzle'
 import { admin, openAPI } from 'better-auth/plugins'
 import { v7 as uuidv7 } from 'uuid'
 import * as schema from '../database/schema'
-import { db, newDB } from './db'
+import { getDB } from './db'
 import { cacheClient, resendInstance, stripeClient } from './drivers'
 
 const runtimeConfig = useRuntimeConfig()
@@ -15,7 +15,7 @@ const newAuth = () => betterAuth({
   baseURL: runtimeConfig.public.baseURL,
   secret: runtimeConfig.betterAuthSecret,
   database: drizzleAdapter(
-    runtimeConfig.preset == 'node-server' ? db : newDB(),
+    getDB(),
     {
       provider: 'pg',
       schema
