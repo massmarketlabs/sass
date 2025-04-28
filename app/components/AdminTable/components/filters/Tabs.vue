@@ -60,8 +60,8 @@ watch(
     variant="link"
     :items="items"
     :ui="{
-      list: 'bg-(--ui-bg-elevated) rounded-lg border-b-0',
-      trigger: 'data-[state=active]:text-(--ui-bg) data-[state=active]:bg-(--ui-primary) pl-4 pr-4',
+      list: 'bg-elevated rounded-lg border-b-0',
+      trigger: 'data-[state=active]:text-(--ui-bg) data-[state=active]:bg-primary pl-4 pr-4',
       indicator: 'hidden'
     }"
   >

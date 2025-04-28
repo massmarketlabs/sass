@@ -29,7 +29,7 @@ watch(
 </script>
 
 <template>
-  <div class="w-full flex flex-col sm:flex-row items-center justify-between py-2 text-sm text-[var(--ui-text-muted)] border-t border-[var(--ui-border-accented)]">
+  <div class="w-full flex flex-col sm:flex-row items-center justify-between py-2 text-sm text-muted border-t border-accented">
     <div class="px-4">
       <span
         v-if="canSelect"

@@ -5,7 +5,7 @@
     height="100%"
     viewBox="-6 -6 110 100"
     preserveAspectRatio="xMidYMid meet"
-    class="text-[var(--ui-primary)] dark:text-[var(--ui-primary)]"
+    class="text-primary dark:text-primary"
   >
     <g
       fill="currentColor"
