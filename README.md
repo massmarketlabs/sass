@@ -1,4 +1,8 @@
-# NuxSaaS
+<p align="center">
+  <img src="public/logo.svg" alt="NuxSaaS Logo" width="160" height="160"/>
+</p>
+
+<h1 align="center">NuxSaaS</h1>
 
 <p align="center">
   <a href="https://nuxt.com/" target="_blank">
