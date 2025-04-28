@@ -80,9 +80,23 @@ cp wrangler.example.toml wrangler.toml
 npm run deploy
 ```
 
-## 📜 License
-
-This project is licensed under the [MIT License](LICENSE).
-
 ## 🌟 Support
-If you find this project helpful, please consider giving it a star ⭐
+
+If you find this project helpful, please consider:
+- Giving it a star ⭐
+- [Becoming a sponsor on Patreon](https://patreon.com/NuxSaaS) 💖
+
+Your support helps maintain and improve NuxSaaS!
+
+## 🙏 Credits
+This project is built upon these amazing open source projects:
+- [Nuxt](https://nuxt.com) - The Intuitive Vue Framework
+- [Nuxt UI](https://ui.nuxt.com) - Fully styled and customizable components
+- [Better Auth](https://github.com/better-auth/better-auth) -The most comprehensive authentication framework for TypeScript
+- [Drizzle ORM](https://github.com/drizzle-team/drizzle-orm) - TypeScript ORM
+- [TailwindCSS](https://tailwindcss.com) - Utility-first CSS framework
+- [nuxt-charts](https://github.com/dennisadriaans/vue-chrts): Nuxt module for Unovis
+- [nuxthub-better-auth](https://github.com/atinux/nuxthub-better-auth): A demo of using Better Auth with Nuxt
+
+## 📜 License
+This project is licensed under the [MIT License](LICENSE).
