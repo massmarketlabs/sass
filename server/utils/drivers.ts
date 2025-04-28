@@ -1,3 +1,4 @@
+import type { Hyperdrive } from '@cloudflare/workers-types'
 import Redis from 'ioredis'
 import pg from 'pg'
 import { Resend } from 'resend'
@@ -5,8 +6,18 @@ import Stripe from 'stripe'
 
 const runtimeConfig = useRuntimeConfig()
 
+const getDatabaseUrl = () => {
+// @ts-expect-error globalThis.__env__ is not defined
+  const hyperdrive = (process.env.HYPERDRIVE || globalThis.__env__?.HYPERDRIVE || globalThis.HYPERDRIVE) as Hyperdrive | undefined
+  if (runtimeConfig.preset == 'node-server') {
+    return runtimeConfig.databaseUrl
+  } else {
+    return hyperdrive?.connectionString || runtimeConfig.databaseUrl
+  }
+}
+
 export const newPgPool = () => new pg.Pool({
-  connectionString: runtimeConfig.databaseUrl,
+  connectionString: getDatabaseUrl(),
   max: 90,
   idleTimeoutMillis: 30000
 })

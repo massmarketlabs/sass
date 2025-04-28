@@ -18,7 +18,12 @@ export default defineNuxtConfig({
     ? {
         hub: {
           workers: true,
-          kv: true
+          kv: true,
+          bindings: {
+            hyperdrive: {
+              HYPERDRIVE: process.env.NUXT_CF_HYPERDRIVE_ID
+            }
+          }
         }
       }
     : {}),
