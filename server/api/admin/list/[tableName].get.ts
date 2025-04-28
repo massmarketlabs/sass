@@ -129,7 +129,6 @@ export default eventHandler(async (event) => {
   const columns = getTableColumns(table)
 
   const query = await getValidatedQuery(event, querySchema.parse)
-  console.log(query)
   const db = await useDB(event)
 
   const listQuery = db.select().from(table).$dynamic()
@@ -189,7 +188,6 @@ export default eventHandler(async (event) => {
   const page = query?.page || 1
   const limit = query?.limit || 20
   withPagination(listQuery, page, limit)
-  console.log(listQuery.toSQL())
   const count = await totalQuery
   const result = await listQuery
 
