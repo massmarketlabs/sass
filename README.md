@@ -1,42 +1,84 @@
 # NuxSaaS
 
+<p align="center">
+  <a href="https://nuxt.com/" target="_blank">
+    <img alt="Built with Nuxt 4" src="https://img.shields.io/badge/Built%20with-Nuxt%204-00DC82?style=flat-square&logo=nuxt.js" />
+  </a>
+  <a href="https://www.typescriptlang.org/" target="_blank">
+    <img alt="Language TypeScript" src="https://img.shields.io/badge/Language-TypeScript-blue?style=flat-square&logo=typescript" />
+  </a>
+  <a href="https://www.postgresql.org/" target="_blank">
+    <img alt="Database PostgreSQL" src="https://img.shields.io/badge/Database-PostgreSQL-blue?style=flat-square&logo=postgresql" />
+  </a>
+  <a href="https://tailwindcss.com/" target="_blank">
+    <img alt="Tailwind CSS" src="https://img.shields.io/badge/Styling-Tailwind%20CSS-38B2AC?style=flat-square&logo=tailwind-css" />
+  </a>
+  <a href="https://github.com/NuxSaaS/NuxSaaS/blob/main/LICENSE" target="_blank">
+    <img alt="License MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square" />
+  </a>
+</p>
 
-## Setup
+<p align="center">
+  <b>Nuxt.js Full-Stack SaaS Starter Kit - Free & Open Source</b>
+  <br />
+  Modern, Production-Ready, and Developer-Friendly
+</p>
+
+## ✨ Features
+
+- 🚀 **Modern Tech Stack** - Built with Nuxt 4, Vue 3, TypeScript
+- 🔒 **Secure Auth** - Better Auth with OAuth2 social logins
+- 💾 **Enterprise Database** - PostgreSQL with Drizzle ORM
+- 💳 **Payment Ready** - Stripe integration for subscription
+- 📧 **Email Integration** - Built-in Resend support
+- 📊 **Beautiful Dashboard** - Admin panel with charts
+- 🌐 **I18n Ready** - Multi-language support out of the box
+- 📱 **Responsive** - Mobile-first design approach
+- 🎯 **Developer Experience** - ESLint + TypeScript for better DX
+
+## 🚀 Quick Start
+
 ```bash
-# use Node.js v22 LTS
+# 1. Clone the repository
+git clone https://github.com/NuxSaaS/NuxSaaS.git
+cd NuxSaaS
+
+# 2. Use Node.js v22 LTS
 nvm use
 
-# Use npm or whatever you like to install the dependencies
+# 3. Install dependencies
 npm install
 
-# Setup env
+# 4. Setup environment variables
 cp .env.example .env
 
-# Generate database migration based on database schema
+# 5. Generate and apply database migrations
 npm run db:generate
-
-# Apply database migrations to PostgreSQL
 npm run db:migrate
 
-# Development Server
+# 6. Start development server
 npm run dev
+```
 
-# Run test
-npm run test
-npm run test -- -t="should submit valid signup form"
-
-# Build the application for production
+## 🚀 Deployment
+#### Node.js Server
+```bash
+# Deploy to self host server
 npm run build
-
-# Starting the Production Server
 npm run serve
+```
 
+#### Cloudflare Worker
+```bash
 # Deploy to Cloudflare Worker
+npm run build
 cp wrangler.example.toml wrangler.toml
 npm run deploy
 ```
 
-##### Documentation
-* [Nuxt](https://nuxt.com/docs/getting-started/introduction)
-* [Better Auth](https://better-auth.vercel.app/docs)
-* [Drizzle](https://orm.drizzle.team/docs/overview)
+## 📜 License
+
+This project is licensed under the [MIT License](LICENSE).
+
+## 🌟 Support
+If you find this project helpful, please consider giving it a star ⭐
