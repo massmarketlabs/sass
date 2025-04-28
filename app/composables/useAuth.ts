@@ -71,6 +71,7 @@ export function useAuth() {
   return {
     session,
     user,
+    subscription: client.subscription,
     subscriptions,
     loggedIn: computed(() => !!session.value),
     activeSubscription: computed(() => {

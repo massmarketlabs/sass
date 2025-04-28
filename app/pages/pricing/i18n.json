@@ -20,6 +20,7 @@
         "description": "For growing businesses",
         "price": "${price}",
         "period": "per month",
+        "yearPeriod": "per year",
         "feature1": "All features",
         "feature2": "Priority support"
       },
@@ -63,6 +64,7 @@
         "description": "适合成长中的企业",
         "price": "${price}",
         "period": "每月",
+        "yearPeriod": "每年",
         "feature1": "所有功能",
         "feature2": "优先支持"
       },
@@ -106,6 +108,7 @@
         "description": "成長中の企業向け",
         "price": "${price}",
         "period": "月額",
+        "yearPeriod": "年額",
         "feature1": "全機能",
         "feature2": "優先サポート"
       },
@@ -149,6 +152,7 @@
         "description": "Pour les entreprises en croissance",
         "price": "${price}",
         "period": "par mois",
+        "yearPeriod": "par an",
         "feature1": "Toutes les fonctionnalités",
         "feature2": "Support prioritaire"
       },

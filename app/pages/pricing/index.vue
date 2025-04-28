@@ -35,6 +35,7 @@ const plans = [
     price: t('pricing.pro.price', { price: 10 }),
     yearPrice: t('pricing.pro.price', { price: 100 }),
     period: t('pricing.pro.period'),
+    yearPeriod: t('pricing.pro.yearPeriod'),
     features: [
       t('pricing.pro.feature1'),
       t('pricing.pro.feature2')
@@ -142,7 +143,7 @@ const plans = [
                   {{ billingPeriod === 'yearly' ? plan.yearPrice || plan.price : plan.price }}
                 </div>
                 <div class="text-sm text-gray-500 dark:text-gray-400">
-                  {{ plan.period }}
+                  {{ billingPeriod === 'yearly' ? plan.yearPeriod || plan.period : plan.period }}
                 </div>
               </div>
 
