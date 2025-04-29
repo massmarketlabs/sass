@@ -87,6 +87,7 @@ const clickSignOut = () => {
           <UTooltip
             :ui="{ content: 'w-54 flex flex-col h-auto p-0 gap-0' }"
             :delay-duration="100"
+            :disable-closing-trigger="true"
           >
             <template #content>
               <UButton

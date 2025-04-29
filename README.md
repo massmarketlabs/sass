@@ -99,7 +99,7 @@ Your support helps maintain and improve NuxSaaS!
 
 ## 🙏 Credits
 This project is built upon these amazing open source projects:
-- [Nuxt](https://nuxt.com) - The Intuitive Vue Framework
+- [Nuxt](https://nuxt.com) - The Progressive Web Framework
 - [Nuxt UI](https://ui.nuxt.com) - Fully styled and customizable components
 - [Better Auth](https://github.com/better-auth/better-auth) -The most comprehensive authentication framework for TypeScript
 - [Drizzle ORM](https://github.com/drizzle-team/drizzle-orm) - TypeScript ORM

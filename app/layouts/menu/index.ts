@@ -39,7 +39,6 @@ export const getMenus = (t: TranFunction, localePath: LocalePathFunction, appRep
       {
         label: 'GitHub',
         icon: 'i-lucide-github',
-        badge: '1k',
         to: appRepo,
         target: '_blank'
       }
