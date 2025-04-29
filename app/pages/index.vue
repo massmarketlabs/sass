@@ -147,6 +147,7 @@ const screenshots = [
     src: '/screenshots/signin.webp'
   }
 ]
+const activeScreenshot = ref('0')
 </script>
 
 <template>
@@ -217,7 +218,7 @@ const screenshots = [
           </div>
           <UTabs
             :items="screenshots"
-            class="w-full"
+            class="w-full hidden sm:block"
           >
             <template #content="{ item }">
               <div class="rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 shadow-lg">
@@ -230,6 +231,22 @@ const screenshots = [
               </div>
             </template>
           </UTabs>
+          <UAccordion
+            v-model="activeScreenshot"
+            :items="screenshots"
+            class="w-full block sm:hidden"
+          >
+            <template #content="{ item }">
+              <div class="rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 shadow-lg">
+                <img
+                  :src="item.src"
+                  :alt="item.name"
+                  class="w-full h-auto"
+                  loading="lazy"
+                >
+              </div>
+            </template>
+          </UAccordion>
         </UContainer>
       </section>
 

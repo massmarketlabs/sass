@@ -13,7 +13,7 @@ import AppNavbar from './components/AppNavbar.vue'
         <slot name="nav-right" />
       </template>
     </AppNavbar>
-    <div class="flex flex-1 pt-16">
+    <div class="flex flex-1 pt-16 w-full sm:w-auto">
       <slot />
     </div>
     <AppFooter />

@@ -32,7 +32,7 @@ export default defineNuxtConfig({
           kv: true,
           bindings: {
             hyperdrive: {
-              HYPERDRIVE: process.env.NUXT_CF_HYPERDRIVE_ID
+              HYPERDRIVE: process.env.NUXT_CF_HYPERDRIVE_ID as string
             }
           }
         }
@@ -129,7 +129,7 @@ export default defineNuxtConfig({
   app: {
     head: {
       charset: 'utf-8',
-      viewport: 'width=device-width, initial-scale=1',
+      viewport: 'width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no',
       link: [
         { rel: 'icon', type: 'image/png', href: '/favicons/favicon-96x96.png', sizes: '96x96' },
         { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' },
