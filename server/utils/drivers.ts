@@ -2,7 +2,6 @@ import type { Hyperdrive } from '@cloudflare/workers-types'
 import Redis from 'ioredis'
 import pg from 'pg'
 import { Resend } from 'resend'
-import Stripe from 'stripe'
 
 const runtimeConfig = useRuntimeConfig()
 
@@ -78,5 +77,3 @@ export const cacheClient = {
 }
 
 export const resendInstance = new Resend(runtimeConfig.resendApiKey)
-
-export const stripeClient = new Stripe(runtimeConfig.stripeSecretKey!)
