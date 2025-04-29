@@ -2,7 +2,17 @@
 const { t } = useI18n()
 
 useHead({
-  titleTemplate: title => (title && title != t('global.appName') ? `${title} | ${t('global.appName')}` : t('global.appName'))
+  titleTemplate: (title) => {
+    if (title) {
+      if (title.includes(t('global.appName'))) {
+        return title
+      } else {
+        return `${title} | ${t('global.appName')}`
+      }
+    } else {
+      return t('global.appName')
+    }
+  }
 })
 useSeoMeta({
   ogSiteName: t('global.appName')

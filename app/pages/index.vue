@@ -10,7 +10,7 @@ const { t } = useI18n()
 const localePath = useLocalePath()
 const runtimeConfig = useRuntimeConfig()
 
-const title = t('global.appName')
+const title = `${t('global.appName')}: ${t('home.slogan')}`
 const desc = t('home.slogan')
 
 useSeoMeta({
