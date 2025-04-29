@@ -11,7 +11,7 @@ import { setupStripe } from './stripe'
 const runtimeConfig = useRuntimeConfig()
 console.log(`Base URL is ${runtimeConfig.public.baseURL}`)
 
-const newAuth = () => betterAuth({
+const createBetterAuth = () => betterAuth({
   baseURL: runtimeConfig.public.baseURL,
   secret: runtimeConfig.betterAuthSecret,
   database: drizzleAdapter(
@@ -81,13 +81,13 @@ const newAuth = () => betterAuth({
   ]
 })
 
-const auth = newAuth()
+const auth = createBetterAuth()
 
 export const useServerAuth = () => {
   if (runtimeConfig.preset == 'node-server') {
     return auth
   } else {
-    return newAuth()
+    return createBetterAuth()
   }
 }
 

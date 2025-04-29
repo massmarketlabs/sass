@@ -15,20 +15,20 @@ const getDatabaseUrl = () => {
   }
 }
 
-const newPgPool = () => new pg.Pool({
+const createPgPool = () => new pg.Pool({
   connectionString: getDatabaseUrl(),
   max: 90,
   idleTimeoutMillis: 30000
 })
 
-const pgPool = newPgPool()
+const pgPool = createPgPool()
 
 // PG Pool
 export const getPgPool = () => {
   if (runtimeConfig.preset == 'node-server') {
     return pgPool
   } else {
-    return newPgPool()
+    return createPgPool()
   }
 }
 

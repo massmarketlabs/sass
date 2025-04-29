@@ -8,14 +8,14 @@ import { getPgPool } from './drivers'
 const runtimeConfig = useRuntimeConfig()
 
 // use db without pg pool
-const newDB = () => drizzle({ client: getPgPool() })
-const db = newDB()
+const createDB = () => drizzle({ client: getPgPool() })
+const db = createDB()
 
 export const getDB = () => {
   if (runtimeConfig.preset == 'node-server') {
     return db
   } else {
-    return newDB()
+    return createDB()
   }
 }
 
