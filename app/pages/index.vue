@@ -10,6 +10,22 @@ const { t } = useI18n()
 const localePath = useLocalePath()
 const runtimeConfig = useRuntimeConfig()
 
+const title = t('global.appName')
+const desc = t('home.slogan')
+
+useSeoMeta({
+  title,
+  description: desc,
+  // Facebook
+  ogTitle: title,
+  ogDescription: desc,
+  ogImage: '/demo.webp',
+  // twitter
+  twitterTitle: title,
+  twitterDescription: desc,
+  twitterImage: '/demo.webp'
+})
+
 const navigation = [
   { name: t('global.nav.features'), href: localePath('/#features') },
   { name: t('global.nav.pricing'), href: localePath('/pricing') }

@@ -1,6 +1,16 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import type { NuxtPage } from 'nuxt/schema'
 
+const locales = [
+  { code: 'en', iso: 'en-US', name: 'English' },
+  { code: 'zh-CN', iso: 'zh-CN', name: '简体中文' },
+  { code: 'ja', iso: 'ja-JP', name: '日本語' },
+  { code: 'fr', iso: 'fr-FR', name: 'Français' }
+]
+const adminExcludes = locales
+  .filter(locale => locale.code !== 'en')
+  .map(locale => `/${locale.code}/admin/**`)
+
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
@@ -10,6 +20,7 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     'nuxt-zod-i18n', // before @nuxtjs/i18n module
     '@nuxtjs/i18n',
+    '@nuxtjs/seo',
     'nuxt-charts',
     '@nuxt/test-utils/module',
     ...(process.env.NUXT_NITRO_PRESET !== 'node-server' ? ['@nuxthub/core'] : [])
@@ -30,16 +41,23 @@ export default defineNuxtConfig({
   i18n: {
     vueI18n: '~/i18n/i18n.config.ts',
     baseUrl: process.env.NUXT_APP_URL,
-    locales: [
-      { code: 'en', iso: 'en-US', name: 'English' },
-      { code: 'zh-CN', iso: 'zh-CN', name: '简体中文' },
-      { code: 'ja', iso: 'ja-JP', name: '日本語' },
-      { code: 'fr', iso: 'fr-FR', name: 'Français' }
-    ],
+    locales,
     defaultLocale: 'en',
     bundle: {
       optimizeTranslationDirective: false
     }
+  },
+  sitemap: {
+    exclude: [
+      '/admin/**',
+      ...adminExcludes
+    ]
+  },
+  robots: {
+    disallow: [
+      '/admin',
+      ...adminExcludes.map(path => path.replace('/**', ''))
+    ]
   },
   eslint: {
     config: {
@@ -110,6 +128,8 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
+      charset: 'utf-8',
+      viewport: 'width=device-width, initial-scale=1',
       link: [
         { rel: 'icon', type: 'image/png', href: '/favicons/favicon-96x96.png', sizes: '96x96' },
         { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' },
