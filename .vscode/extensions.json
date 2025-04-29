@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "Vue.volar",
+    "bradlc.vscode-tailwindcss",
+    "dbaeumer.vscode-eslint",
+    "vitest.explorer",
+    "Cyanhall.close-git-unmodified"
+  ]
+}
