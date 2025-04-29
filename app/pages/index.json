@@ -77,7 +77,7 @@
         }
       },
       "screenshots": {
-        "title": "Product Screenshots",
+        "title": "Screenshots",
         "dashboard": "Dashboard",
         "users": "User Management",
         "pricing": "Pricing Plans",
@@ -164,7 +164,7 @@
         }
       },
       "screenshots": {
-        "title": "产品截图",
+        "title": "截图",
         "dashboard": "仪表盘",
         "users": "用户管理",
         "pricing": "价格方案",

@@ -61,6 +61,7 @@
       },
       "submit": "创建账号",
       "haveAccount": "已有账号？",
+      "signIn": "此处登录",
       "sendEmailSuccess": "验证邮件已发送，请验证您的邮箱地址以继续。"
     }
   },
