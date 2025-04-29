@@ -19,11 +19,11 @@ useSeoMeta({
   // Facebook
   ogTitle: title,
   ogDescription: desc,
-  ogImage: '/demo.webp',
+  ogImage: '/screenshots/home.webp',
   // twitter
   twitterTitle: title,
   twitterDescription: desc,
-  twitterImage: '/demo.webp'
+  twitterImage: '/screenshots/home.webp'
 })
 
 const navigation = [
@@ -119,6 +119,34 @@ const features = {
     }
   ]
 }
+
+const screenshots = [
+  {
+    label: t('home.screenshots.dashboard'),
+    key: 'dashboard',
+    src: '/screenshots/dashboard.webp'
+  },
+  {
+    label: t('home.screenshots.users'),
+    key: 'users',
+    src: '/screenshots/users.webp'
+  },
+  {
+    label: t('home.screenshots.subscription'),
+    key: 'subscription',
+    src: '/screenshots/subscription.webp'
+  },
+  {
+    label: t('home.screenshots.pricing'),
+    key: 'pricing',
+    src: '/screenshots/pricing.webp'
+  },
+  {
+    label: t('home.screenshots.signin'),
+    key: 'signin',
+    src: '/screenshots/signin.webp'
+  }
+]
 </script>
 
 <template>
@@ -150,7 +178,7 @@ const features = {
       <section class="relative overflow-hidden">
         <UContainer class="relative py-24">
           <div class="text-center">
-            <h1 class="text-4xl font-bold tracking-tight sm:text-6xl mb-6">
+            <h1 class="text-4xl font-bold tracking-tight sm:text-7xl mb-6">
               {{ t('global.appName') }}
             </h1>
             <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">
@@ -179,21 +207,43 @@ const features = {
         </UContainer>
       </section>
 
+      <!-- Screenshots Section -->
+      <section class="relative mt-20">
+        <UContainer>
+          <div class="text-center mb-4">
+            <h2 class="text-3xl font-bold">
+              {{ t('home.screenshots.title') }}
+            </h2>
+          </div>
+          <UTabs
+            :items="screenshots"
+            class="w-full"
+          >
+            <template #content="{ item }">
+              <div class="rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 shadow-lg">
+                <img
+                  :src="item.src"
+                  :alt="item.name"
+                  class="w-full h-auto"
+                  loading="lazy"
+                >
+              </div>
+            </template>
+          </UTabs>
+        </UContainer>
+      </section>
+
       <!-- Features Section -->
       <section
         id="features"
         class="relative py-24 bg-gray-50/50 dark:bg-gray-900/50"
       >
         <UContainer>
-          <div class="text-center mb-16">
-            <h2 class="text-3xl font-bold mb-4">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold">
               {{ t('home.features.title') }}
             </h2>
-            <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              {{ t('home.features.subtitle') }}
-            </p>
           </div>
-
           <!-- Feature Groups -->
           <div class="space-y-24">
             <div

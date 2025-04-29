@@ -6,7 +6,6 @@
       "viewOnGithub": "View on GitHub",
       "features": {
         "title": "Solid Foundation for Your SaaS Success",
-        "subtitle": "Offers a complete and scalable solution packed with the essential features you need to build, launch, and grow your SaaS product.",
         "categories": {
           "foundation": "Foundation",
           "integration": "Integration",
@@ -76,6 +75,14 @@
             "description": "Easily extend and customize components"
           }
         }
+      },
+      "screenshots": {
+        "title": "Product Screenshots",
+        "dashboard": "Dashboard",
+        "users": "User Management",
+        "pricing": "Pricing Plans",
+        "subscription": "Subscription Management",
+        "signin": "Sign In"
       }
     }
   },
@@ -86,7 +93,6 @@
       "viewOnGithub": "在 GitHub 上查看",
       "features": {
         "title": "为您的 SaaS 成功打造坚实基础",
-        "subtitle": "提供完整且可扩展的解决方案，包含构建、启动和发展 SaaS 产品所需的所有基本功能。",
         "categories": {
           "foundation": "基础架构",
           "integration": "集成功能",
@@ -156,6 +162,14 @@
             "description": "轻松扩展和自定义组件"
           }
         }
+      },
+      "screenshots": {
+        "title": "产品截图",
+        "dashboard": "仪表盘",
+        "users": "用户管理",
+        "pricing": "价格方案",
+        "subscription": "订阅管理",
+        "signin": "登录"
       }
     }
   },
@@ -166,7 +180,6 @@
       "viewOnGithub": "GitHub で見る",
       "features": {
         "title": "SaaS の成功のための堅固な基盤",
-        "subtitle": "SaaS 製品の構築、立ち上げ、成長に必要な基本機能を備えた完全でスケーラブルなソリューションを提供します。",
         "categories": {
           "foundation": "基盤",
           "integration": "統合機能",
@@ -236,6 +249,14 @@
             "description": "コンポーネントの拡張とカスタマイズが容易"
           }
         }
+      },
+      "screenshots": {
+        "title": "スクリーンショット",
+        "dashboard": "ダッシュボード",
+        "users": "ユーザー管理",
+        "pricing": "価格プラン",
+        "subscription": "サブスクリプション管理",
+        "signin": "ログイン"
       }
     }
   },
@@ -246,7 +267,6 @@
       "viewOnGithub": "Voir sur GitHub",
       "features": {
         "title": "Base solide pour votre succès SaaS",
-        "subtitle": "Offre une solution complète et évolutive avec toutes les fonctionnalités essentielles dont vous avez besoin pour construire, lancer et développer votre produit SaaS.",
         "categories": {
           "foundation": "Fondation",
           "integration": "Intégration",
@@ -316,6 +336,14 @@
             "description": "Étendez et personnalisez facilement les composants"
           }
         }
+      },
+      "screenshots": {
+        "title": "Captures d'écran",
+        "dashboard": "Tableau de bord",
+        "users": "Gestion des utilisateurs",
+        "pricing": "Plans tarifaires",
+        "subscription": "Gestion des abonnements",
+        "signin": "Connexion"
       }
     }
   }
