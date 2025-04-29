@@ -5,6 +5,15 @@
 <h1 align="center">NuxSaaS</h1>
 
 <p align="center">
+  <a href="https://nuxsaas.com" target="_blank">
+    <img alt="Official Website" src="https://img.shields.io/badge/Website-nuxsaas.com-blue?style=flat-square&logo=web" />
+  </a>
+  <a href="https://twitter.com/cyanhall" target="_blank">
+    <img alt="X (formerly Twitter) Follow" src="https://img.shields.io/twitter/follow/cyanhall">
+  </a>
+</p>
+
+<p align="center">
   <a href="https://nuxt.com/" target="_blank">
     <img alt="Built with Nuxt 4" src="https://img.shields.io/badge/Built%20with-Nuxt%204-00DC82?style=flat-square&logo=nuxt.js" />
   </a>
