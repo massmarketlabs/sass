@@ -59,8 +59,8 @@ export default defineNuxtRouteMiddleware(async (to) => {
   }
 
   // Admin Pages
-  const routeParts = (to.name as string).split('___')
-  const routeName = routeParts[0]
+  const routeBaseName = useRouteBaseName()
+  const routeName = routeBaseName(to)
   if (routeName?.startsWith('admin') && user.value?.role != 'admin') {
     return navigateTo(localePath('/403'))
   }
