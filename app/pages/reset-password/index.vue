@@ -2,7 +2,9 @@
 
 <script setup lang="ts">
 definePageMeta({
-  auth: false
+  auth: {
+    only: 'guest'
+  }
 })
 
 const { t } = useI18n()
@@ -52,7 +54,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       title: t('resetPassword.success'),
       color: 'success'
     })
-    navigateTo(localePath(runtimeConfig.public.auth.unauthenticatedRedirect))
+    navigateTo(localePath(runtimeConfig.public.auth.redirectGuestTo))
   }
   loading.value = false
 }

@@ -2,7 +2,9 @@
 
 <script setup lang="ts">
 definePageMeta({
-  auth: false
+  auth: {
+    only: 'guest'
+  }
 })
 
 const { t } = useI18n()

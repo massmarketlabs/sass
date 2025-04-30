@@ -122,7 +122,8 @@ export default defineNuxtConfig({
       appNotifyEmail: process.env.NUXT_APP_NOTIFY_EMAIL,
       appContactEmail: process.env.NUXT_APP_CONTACT_EMAIL,
       auth: {
-        unauthenticatedRedirect: '/signin'
+        redirectUserTo: '/',
+        redirectGuestTo: '/signin'
       }
     }
   },

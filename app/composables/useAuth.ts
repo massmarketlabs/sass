@@ -7,11 +7,6 @@ import type { RouteLocationRaw } from 'vue-router'
 import { stripeClient } from '@better-auth/stripe/client'
 import { adminClient } from 'better-auth/client/plugins'
 import { createAuthClient } from 'better-auth/vue'
-import { defu } from 'defu'
-
-interface RuntimeAuthConfig {
-  unauthenticatedRedirect: RouteLocationRaw | string
-}
 
 export function useAuth() {
   const url = useRequestURL()
@@ -30,9 +25,6 @@ export function useAuth() {
     ]
   })
 
-  const options = defu(useRuntimeConfig().public.auth as Partial<RuntimeAuthConfig>, {
-    unauthenticatedRedirect: '/signin'
-  })
   const session = useState<InferSessionFromClient<ClientOptions> | null>('auth:session', () => null)
   const user = useState<UserWithRole | null>('auth:user', () => null)
   const subscriptions = useState<Subscription[]>('auth:subscriptions', () => [])
@@ -94,7 +86,6 @@ export function useAuth() {
       }
       return res
     },
-    options,
     fetchSession,
     client
   }

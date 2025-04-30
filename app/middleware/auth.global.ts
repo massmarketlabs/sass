@@ -2,9 +2,17 @@ import { defu } from 'defu'
 
 type MiddlewareOptions = false | {
   /**
+   * Only apply auth middleware to guest or user
+   */
+  only?: 'guest' | 'user'
+  /**
+   * Redirect authenticated user to this route
+   */
+  redirectUserTo?: string
+  /**
    * Redirect guest to this route
    */
-  unauthenticatedRedirect?: string
+  redirectGuestTo?: string
 }
 
 declare module '#app' {
@@ -24,22 +32,35 @@ export default defineNuxtRouteMiddleware(async (to) => {
   if (to.meta?.auth === false) {
     return
   }
-  const { loggedIn, user, options, fetchSession } = useAuth()
-  const { unauthenticatedRedirect } = defu(to.meta?.auth, options)
+  const { loggedIn, user, fetchSession } = useAuth()
+  const redirectOptions = useRuntimeConfig().public.auth
+  const { only, redirectUserTo, redirectGuestTo } = defu(to.meta?.auth, redirectOptions)
 
   await fetchSession()
+
+  const localePath = useLocalePath()
+
+  // If guest mode, redirect if authenticated
+  if (only === 'guest' && loggedIn.value) {
+    // Avoid infinite redirect
+    if (to.path === localePath(redirectUserTo)) {
+      return
+    }
+    return navigateTo(localePath(redirectUserTo))
+  }
 
   // If not authenticated, redirect to home
   if (!loggedIn.value) {
     // Avoid infinite redirect
-    if (to.path === unauthenticatedRedirect) {
+    if (to.path === localePath(redirectGuestTo)) {
       return
     }
-    return navigateTo(`${unauthenticatedRedirect}?redirect=${to.fullPath}`)
+    return navigateTo(localePath(`${redirectGuestTo}?redirect=${to.fullPath}`))
   }
+
+  // Admin Pages
   const routeParts = (to.name as string).split('___')
   const routeName = routeParts[0]
-  const localePath = useLocalePath()
   if (routeName?.startsWith('admin') && user.value?.role != 'admin') {
     return navigateTo(localePath('/403'))
   }
