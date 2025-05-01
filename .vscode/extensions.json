@@ -4,6 +4,7 @@
     "bradlc.vscode-tailwindcss",
     "dbaeumer.vscode-eslint",
     "vitest.explorer",
+    "antfu.iconify",
     "Cyanhall.close-git-unmodified"
   ]
 }
