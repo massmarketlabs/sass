@@ -26,12 +26,6 @@ useSeoMeta({
   twitterImage: '/screenshots/home.webp'
 })
 
-const navigation = [
-  { name: t('global.nav.features'), href: localePath('/#features') },
-  { name: t('global.nav.pricing'), href: localePath('/pricing') }
-]
-
-// Convert features keys to i18n keys
 const features = {
   foundation: [
     {
@@ -153,20 +147,12 @@ const activeScreenshot = ref('0')
 <template>
   <NuxtLayout name="default">
     <template #nav-center>
-      <div class="hidden md:flex items-center gap-8">
-        <NuxtLink
-          v-for="item in navigation"
-          :key="item.name"
-          :to="localePath(item.href)"
-          class="text-sm font-medium text-gray-700 hover:text-primary-500 dark:text-gray-300 dark:hover:text-primary-400"
-        >
-          {{ item.name }}
-        </NuxtLink>
-      </div>
+      <SiteNavigation mode="desktop" class="hidden sm:flex"/>
     </template>
     <template #nav-right>
       <div class="flex items-center gap-2">
         <UserNavigation />
+        <SiteNavigation mode="mobile" class="flex sm:hidden"/>
       </div>
     </template>
     <div class="pt-16">

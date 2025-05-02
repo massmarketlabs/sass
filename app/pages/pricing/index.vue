@@ -9,10 +9,6 @@ const { t } = useI18n()
 const { loggedIn, subscription } = useAuth()
 const localePath = useLocalePath()
 const runtimeConfig = useRuntimeConfig()
-const navigation = [
-  { name: t('global.nav.features'), href: localePath('/#features') },
-  { name: t('global.nav.pricing'), href: localePath('/pricing') }
-]
 const billingPeriod = ref('monthly')
 
 const plans = [
@@ -76,20 +72,12 @@ const plans = [
 <template>
   <NuxtLayout name="default">
     <template #nav-center>
-      <div class="hidden md:flex items-center gap-8">
-        <NuxtLink
-          v-for="item in navigation"
-          :key="item.name"
-          :to="localePath(item.href)"
-          class="text-sm font-medium text-gray-700 hover:text-primary-500 dark:text-gray-300 dark:hover:text-primary-400"
-        >
-          {{ item.name }}
-        </NuxtLink>
-      </div>
+      <SiteNavigation mode="desktop" class="hidden sm:flex"/>
     </template>
     <template #nav-right>
       <div class="flex items-center gap-2">
         <UserNavigation />
+        <SiteNavigation mode="mobile" class="flex sm:hidden"/>
       </div>
     </template>
     <UContainer class="space-y-6 pt-8 pb-6">

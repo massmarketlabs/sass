@@ -5,7 +5,8 @@
       "nav": {
         "admin": "Admin",
         "features": "Features",
-        "pricing": "Pricing"
+        "pricing": "Pricing",
+        "docs": "Documentation"
       },
       "auth": {
         "signIn": "Sign In",
@@ -31,7 +32,8 @@
       "nav": {
         "admin": "管理后台",
         "features": "功能特性",
-        "pricing": "定价方案"
+        "pricing": "定价方案",
+        "docs": "文档"
       },
       "auth": {
         "signIn": "登录",
@@ -57,7 +59,8 @@
       "nav": {
         "admin": "管理画面",
         "features": "機能",
-        "pricing": "料金"
+        "pricing": "料金",
+        "docs": "ドキュメント"
       },
       "auth": {
         "signIn": "ログイン",
@@ -83,7 +86,8 @@
       "nav": {
         "admin": "Administration",
         "features": "Fonctionnalités",
-        "pricing": "Tarification"
+        "pricing": "Tarification",
+        "docs": "Documentation"
       },
       "auth": {
         "signIn": "Connexion",
