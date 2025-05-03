@@ -5,11 +5,10 @@
 <h1 align="center">NuxSaaS</h1>
 
 <p align="center">
-  <a href="https://nuxsaas.com" target="_blank">
-    <img alt="Official Website" src="https://img.shields.io/badge/Website-nuxsaas.com-blue?style=flat-square&logo=web" />
-  </a>
-  <a href="https://twitter.com/cyanhall" target="_blank">
-    <img alt="X (formerly Twitter) Follow" src="https://img.shields.io/twitter/follow/cyanhall">
+  <a href="https://nuxsaas.com" target="_blank">Website</a> ·
+  <a href="https://docs.nuxsaas.com" target="_blank">Documentation</a> ·
+  <a href="https://x.com/cyanhall" target="_blank">
+    @Cyanhall
   </a>
 </p>
 
