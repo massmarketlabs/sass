@@ -1,6 +1,6 @@
 <script setup lang="ts">
-const { mode = 'desktop' } = defineProps<{
-  mode:'desktop' | 'mobile'
+const { mode } = defineProps<{
+  mode: 'desktop' | 'mobile'
 }>()
 
 const { t } = useI18n()
@@ -9,15 +9,21 @@ const localePath = useLocalePath()
 const navigation = [
   { label: t('global.nav.features'), to: localePath('/#features') },
   { label: t('global.nav.pricing'), to: localePath('/pricing') },
-  { label: t('global.nav.docs'), to: 'https://docs.nuxsaas.com/', external: true },
+  { label: t('global.nav.docs'), to: 'https://docs.nuxsaas.com/', external: true }
 ]
 </script>
 
 <template>
   <div>
     <!-- Desktop Navigation -->
-    <div v-if="mode === 'desktop'" class="flex items-center gap-8">
-      <template v-for="item in navigation" :key="item.label">
+    <div
+      v-if="mode === 'desktop'"
+      class="flex items-center gap-8"
+    >
+      <template
+        v-for="item in navigation"
+        :key="item.label"
+      >
         <NuxtLink
           v-if="!item.external"
           :to="item.to"
@@ -44,7 +50,7 @@ const navigation = [
           color="neutral"
           variant="ghost"
           icon="i-lucide-menu"
-        />    
+        />
       </UDropdownMenu>
     </div>
   </div>
