@@ -1,7 +1,6 @@
 import { stripe } from '@better-auth/stripe'
 import Stripe from 'stripe'
-
-const runtimeConfig = useRuntimeConfig()
+import { runtimeConfig } from './runtimeConfig'
 
 export const setupStripe = () => stripe({
   stripeClient: new Stripe(runtimeConfig.stripeSecretKey!),

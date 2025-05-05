@@ -6,9 +6,9 @@ import { v7 as uuidv7 } from 'uuid'
 import * as schema from '../database/schema'
 import { getDB } from './db'
 import { cacheClient, resendInstance } from './drivers'
+import { runtimeConfig } from './runtimeConfig'
 import { setupStripe } from './stripe'
 
-const runtimeConfig = useRuntimeConfig()
 console.log(`Base URL is ${runtimeConfig.public.baseURL}`)
 
 const createBetterAuth = () => betterAuth({
@@ -81,7 +81,7 @@ const createBetterAuth = () => betterAuth({
   ]
 })
 
-const auth = createBetterAuth()
+export const auth = createBetterAuth()
 
 export const useServerAuth = () => {
   if (runtimeConfig.preset == 'node-server') {

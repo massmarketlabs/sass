@@ -4,8 +4,7 @@ import { drizzle } from 'drizzle-orm/node-postgres'
 
 import * as schema from '../database/schema'
 import { getPgPool } from './drivers'
-
-const runtimeConfig = useRuntimeConfig()
+import { runtimeConfig } from './runtimeConfig'
 
 // use db without pg pool
 const createDB = () => drizzle({ client: getPgPool() })
