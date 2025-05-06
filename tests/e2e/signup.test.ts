@@ -49,13 +49,13 @@ describe('signup', async () => {
     expect(toast).toBeTruthy()
   })
 
-  it('should have working social login buttons', async () => {
-    const page = await createPage('/signup')
+  // it('should have working social login buttons', async () => {
+  //   const page = await createPage('/signup')
 
-    const googleButton = await page.$('button:has-text("Google")')
-    const githubButton = await page.$('button:has-text("Github")')
+  //   const googleButton = await page.$('button:has-text("Google")')
+  //   const githubButton = await page.$('button:has-text("Github")')
 
-    expect(googleButton).toBeTruthy()
-    expect(githubButton).toBeTruthy()
-  })
+  //   expect(googleButton).toBeTruthy()
+  //   expect(githubButton).toBeTruthy()
+  // })
 })

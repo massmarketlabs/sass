@@ -60,10 +60,10 @@ const createBetterAuth = () => betterAuth({
     }
   },
   socialProviders: {
-    github: {
-      clientId: runtimeConfig.githubClientId!,
-      clientSecret: runtimeConfig.githubClientSecret!
-    },
+    // github: {
+    //   clientId: runtimeConfig.githubClientId!,
+    //   clientSecret: runtimeConfig.githubClientSecret!
+    // },
     google: {
       clientId: runtimeConfig.googleClientId!,
       clientSecret: runtimeConfig.googleClientSecret!

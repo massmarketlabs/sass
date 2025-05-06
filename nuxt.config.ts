@@ -13,7 +13,7 @@ const adminExcludes = locales
   .map(locale => `/${locale.code}/admin/**`)
 
 export default defineNuxtConfig({
-  compatibilityDate: '2024-11-01',
+  compatibilityDate: '2025-04-01',
   devtools: { enabled: true },
   css: ['~/assets/css/main.css'],
   modules: [
@@ -24,6 +24,7 @@ export default defineNuxtConfig({
     '@nuxtjs/seo',
     'nuxt-charts',
     '@nuxt/test-utils/module',
+    'reka-ui/nuxt',
     ...(process.env.NUXT_NITRO_PRESET !== 'node-server' ? ['@nuxthub/core'] : [])
   ],
   ...(process.env.NUXT_NITRO_PRESET !== 'node-server'

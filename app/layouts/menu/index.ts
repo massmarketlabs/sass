@@ -35,13 +35,13 @@ export const getMenus = (t: TranFunction, localePath: LocalePathFunction, appRep
         label: t('menu.home'),
         icon: 'i-lucide-home',
         to: localePath('/')
-      },
-      {
-        label: 'GitHub',
-        icon: 'i-lucide-github',
-        to: appRepo,
-        target: '_blank'
       }
+      // {
+      //   label: 'GitHub',
+      //   icon: 'i-lucide-github',
+      //   to: appRepo,
+      //   target: '_blank'
+      // }
     ]
   ]
 }
