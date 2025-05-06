@@ -72,12 +72,18 @@ const plans = [
 <template>
   <NuxtLayout name="default">
     <template #nav-center>
-      <SiteNavigation mode="desktop" class="hidden sm:flex"/>
+      <SiteNavigation
+        mode="desktop"
+        class="hidden sm:flex"
+      />
     </template>
     <template #nav-right>
       <div class="flex items-center gap-2">
         <UserNavigation />
-        <SiteNavigation mode="mobile" class="flex sm:hidden"/>
+        <SiteNavigation
+          mode="mobile"
+          class="flex sm:hidden"
+        />
       </div>
     </template>
     <UContainer class="space-y-6 pt-8 pb-6">

@@ -1,22 +1,23 @@
 {
-  "name": "nuxt-app",
+  "name": "nuxsaas",
   "type": "module",
   "private": true,
   "scripts": {
-    "build": "nuxt build",
     "dev": "nuxt dev",
     "test": "vitest run --silent=false",
     "coverage": "vitest run --coverage",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "serve": "node .output/server/index.mjs",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "auth:schema": "npx @better-auth/cli generate --config server/utils/auth.ts --output server/database/schema/auth.ts -y",
     "db:generate": "drizzle-kit generate --config ./server/database/drizzle.config.ts",
     "db:migrate": "drizzle-kit migrate --config ./server/database/drizzle.config.ts",
-    "deploy": "wrangler deploy"
+    "build": "nuxt build",
+    "serve": "node .output/server/index.mjs",
+    "deploy": "wrangler deploy",
+    "prepare": "husky"
   },
   "dependencies": {
     "@better-auth/stripe": "^1.2.7",
@@ -58,6 +59,7 @@
     "drizzle-kit": "^0.31.1",
     "eslint": "^9.26.0",
     "happy-dom": "^17.4.6",
+    "husky": "^9.1.7",
     "playwright-core": "^1.52.0",
     "typescript": "^5.8.3",
     "vitest": "^3.1.3",
