@@ -68,7 +68,11 @@ export default defineNuxtConfig({
   fonts: {
     provider: 'local'
   },
+  ogImage: {
+    enabled: false
+  },
   icon: {
+    serverBundle: false,
     clientBundle: {
       scan: {
         globInclude: ['**\/*.{vue,jsx,tsx,md,mdc,mdx}', 'app/**/*.ts']
