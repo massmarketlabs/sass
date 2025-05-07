@@ -36,10 +36,7 @@ export function useAuth() {
       return
     }
     sessionFetching.value = true
-    const { data, error } = await client.useSession(useFetch)
-    if (error.value) {
-      console.log('fetchSession error', error.value)
-    }
+    const { data } = await client.useSession(useFetch)
     session.value = data.value?.session || null
     user.value = data.value?.user ? { ...data.value.user, role: data.value.user.role ?? undefined } : null
     if (user.value) {
