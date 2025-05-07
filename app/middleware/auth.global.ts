@@ -40,13 +40,18 @@ export default defineNuxtRouteMiddleware(async (to) => {
 
   const localePath = useLocalePath()
 
-  // If guest mode, redirect if authenticated
-  if (only === 'guest' && loggedIn.value) {
-    // Avoid infinite redirect
-    if (to.path === localePath(redirectUserTo)) {
+  if (only === 'guest') {
+    if (loggedIn.value) {
+      // Guest-only routes: redirect authenticated users to specified path
+      // Avoid infinite redirect
+      if (to.path === localePath(redirectUserTo)) {
+        return
+      }
+      return navigateTo(localePath(redirectUserTo))
+    } else {
+      // Allow guest access to this route
       return
     }
-    return navigateTo(localePath(redirectUserTo))
   }
 
   // If not authenticated, redirect to home
