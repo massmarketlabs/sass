@@ -216,7 +216,7 @@ const activeScreenshot = ref('0')
               <div class="rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 shadow-lg">
                 <img
                   :src="item.src"
-                  :alt="item.name"
+                  :alt="item.label"
                   class="w-full h-auto"
                   loading="lazy"
                 >
@@ -232,7 +232,7 @@ const activeScreenshot = ref('0')
               <div class="rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 shadow-lg">
                 <img
                   :src="item.src"
-                  :alt="item.name"
+                  :alt="item.label"
                   class="w-full h-auto"
                   loading="lazy"
                 >
