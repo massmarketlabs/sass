@@ -10,37 +10,15 @@
       "home": "Home"
     }
   },
-  "zh-CN": {
+  "ar": {
     "menu": {
-      "search": "搜索",
-      "dashboard": "仪表板",
-      "users": "用户",
-      "subscriptions": "订阅管理",
-      "maintenance": "系统维护",
-      "dbStats": "数据库状态",
-      "home": "首页"
-    }
-  },
-  "ja": {
-    "menu": {
-      "search": "検索",
-      "dashboard": "ダッシュボード",
-      "users": "ユーザー",
-      "subscriptions": "サブスクリプション",
-      "maintenance": "メンテナンス",
-      "dbStats": "データベース状態",
-      "home": "ホーム"
-    }
-  },
-  "fr": {
-    "menu": {
-      "search": "Rechercher",
-      "dashboard": "Tableau de bord",
-      "users": "Utilisateurs",
-      "subscriptions": "Abonnements",
-      "maintenance": "Maintenance",
-      "dbStats": "État de la base de données",
-      "home": "Accueil"
+      "search": "بحث",
+      "dashboard": "لوحة التحكم",
+      "users": "المستخدمون",
+      "subscriptions": "الاشتراكات",
+      "maintenance": "الصيانة",
+      "dbStats": "حالة قاعدة البيانات",
+      "home": "الصفحة الرئيسية"
     }
   }
 }
