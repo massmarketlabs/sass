@@ -11,7 +11,6 @@ const route = useRoute()
 const { t } = useI18n()
 const localePath = useLocalePath()
 const isCollapsed = ref(false)
-const rumtimeConfig = useRuntimeConfig()
 
 defineShortcuts({
   'g-1': () => router.push(localePath('/admin/dashboard')),
@@ -20,7 +19,7 @@ defineShortcuts({
 const pathNameItemMap: StringDict<NavigationMenuItem> = {}
 const pathNameParentMap: StringDict<NavigationMenuItem | undefined> = {}
 
-const menus = getMenus(t, localePath, rumtimeConfig.public.appRepo)
+const menus = getMenus(t, localePath)
 const menuIterator = (menus: NavigationMenuItem[], parent?: NavigationMenuItem) => {
   for (const menu of menus) {
     const to = `${menu.to}`
@@ -56,7 +55,7 @@ const clickSignOut = () => {
           v-if="!isCollapsed"
           class="flex items-center ps-2.5"
         >
-          <Logo class="h-6 w-6" />
+          <!-- <Logo /> -->
           <span
             class="self-center ml-2 text-xl font-semibold whitespace-nowrap dark:text-white overflow-x-hidden overflow-ellipsis"
           >
