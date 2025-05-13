@@ -27,6 +27,23 @@ describe('signup', async () => {
     expect(await errors[3]?.textContent()).toEqual('Passwords don\'t match')
   })
 
+  it('should validate form fields in Français', async () => {
+    const page = await createPage('/fr/signup')
+    await page.fill('input[name="name"]', 'te')
+    await page.fill('input[name="email"]', 'invalid-email')
+    await page.fill('input[name="password"]', '123')
+    await page.fill('input[name="confirmPassword"]', '1234')
+
+    await page.click('h1')
+
+    const errors = await page.$$('[id^="v-"][id$="-error"]')
+    expect(errors.length).toEqual(4)
+    expect(await errors[0]?.textContent()).toEqual('Le nom doit contenir au moins 5 caractères')
+    expect(await errors[1]?.textContent()).toEqual('Adresse email invalide')
+    expect(await errors[2]?.textContent()).toEqual('Le mot de passe doit contenir au moins 8 caractères')
+    expect(await errors[3]?.textContent()).toEqual('Les mots de passe ne correspondent pas')
+  })
+
   it('should submit valid signup form', async () => {
     const page = await createPage('/signup')
 
