@@ -4,35 +4,28 @@ import { describe, expect, it } from 'vitest'
 import ColorModeToggler from '~/components/ColorModeToggler.vue'
 
 describe('colorModeToggler', async () => {
-  // await setup()
-  it('should toggle color mode', () => {
-    expect(true).toBe(true)
-  })
-
   it('should render light mode icon initially', async () => {
     const wrapper = await mountSuspended(ColorModeToggler)
-    console.log(wrapper.text())
-    expect(wrapper).toBeDefined()
+    const lightIcon = wrapper.find('span')
+    expect(lightIcon.element.outerHTML).toBe('<span class="iconify i-lucide:sun shrink-0 size-5" aria-hidden="true"></span>')
   })
 
-  // it('should switch to dark mode when clicked', async () => {
-  //   const wrapper = mount(ColorModeToggler)
-  //   const colorMode = useColorMode()
+  it('should switch to dark mode when clicked', async () => {
+    const wrapper = await mountSuspended(ColorModeToggler)
+    await wrapper.find('button').trigger('click')
+    // TODO: Failed on TypeError: helper.removeColorScheme is not a function
+    // Relative Issue: https://github.com/nuxt-modules/color-mode/issues/228
+    const darkIcon = wrapper.find('span')
+    expect(darkIcon.element.outerHTML).toBe('<span class="iconify i-lucide:moon shrink-0 size-5" aria-hidden="true"></span>')
+  })
 
-  //   await wrapper.find('button').trigger('click')
-
-  //   expect(colorMode.value).toBe('dark')
-  //   expect(wrapper.find('[data-test="dark-mode-icon"]').exists()).toBe(true)
-  // })
-
-  // it('should toggle between light and dark modes', async () => {
-  //   const wrapper = mount(ColorModeToggler)
-  //   const colorMode = useColorMode()
-
-  //   await wrapper.find('button').trigger('click')
-  //   expect(colorMode.value).toBe('dark')
-
-  //   await wrapper.find('button').trigger('click')
-  //   expect(colorMode.value).toBe('light')
-  // })
+  it('should toggle between light and dark modes', async () => {
+    const wrapper = await mountSuspended(ColorModeToggler)
+    await wrapper.find('button').trigger('click')
+    const darkIcon = wrapper.find('span')
+    expect(darkIcon.element.outerHTML).toBe('<span class="iconify i-lucide:moon shrink-0 size-5" aria-hidden="true"></span>')
+    await wrapper.find('button').trigger('click')
+    const lightIcon = wrapper.find('span')
+    expect(lightIcon.element.outerHTML).toBe('<span class="iconify i-lucide:sun shrink-0 size-5" aria-hidden="true"></span>')
+  })
 })

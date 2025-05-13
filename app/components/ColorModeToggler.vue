@@ -1,5 +1,12 @@
 <script setup lang="ts">
 const colorMode = useColorMode()
+const toggleColorMode = () => {
+  if (colorMode.value == 'light') {
+    colorMode.value = 'dark'
+  } else {
+    colorMode.value = 'light'
+  }
+}
 </script>
 
 <template>
@@ -7,6 +14,6 @@ const colorMode = useColorMode()
     :icon="colorMode.value == 'light' ? 'i-lucide-moon' : 'i-lucide-sun'"
     color="neutral"
     variant="ghost"
-    @click="colorMode.value = $colorMode.value == 'light' ? 'dark' : 'light'"
+    @click="toggleColorMode"
   />
 </template>
