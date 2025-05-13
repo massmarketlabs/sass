@@ -1,17 +1,9 @@
 import { createPage, setup } from '@nuxt/test-utils/e2e'
-import { afterEach, beforeEach, describe, expect, it } from 'vitest'
+import { describe, expect, it } from 'vitest'
 
 describe('signup', async () => {
-  await setup()
-  beforeEach(() => {
-    // tell vitest we use mocked time
-    console.log('beforeEach test')
-  })
+  await setup({ host: process.env.NUXT_TEST_APP_URL })
 
-  afterEach(() => {
-    // restoring date after each test run
-    console.log('afterEach test')
-  })
   it('should show signup form', async () => {
     const page = await createPage('/signup')
     const title = await page.$('h1')
@@ -20,7 +12,6 @@ describe('signup', async () => {
 
   it('should validate form fields', async () => {
     const page = await createPage('/signup')
-    console.log(await page.content())
     await page.fill('input[name="name"]', 'te')
     await page.fill('input[name="email"]', 'invalid-email')
     await page.fill('input[name="password"]', '123')
@@ -29,8 +20,11 @@ describe('signup', async () => {
     await page.click('button[type="submit"]')
 
     const errors = await page.$$('[id^="v-"][id$="-error"]')
-    console.log(errors)
-    expect(errors.length).toBeGreaterThan(0)
+    expect(errors.length).toEqual(4)
+    expect(await errors[0]?.textContent()).toEqual('Name must be at least 5 characters')
+    expect(await errors[1]?.textContent()).toEqual('Invalid email address')
+    expect(await errors[2]?.textContent()).toEqual('Password must be at least 8 characters')
+    expect(await errors[3]?.textContent()).toEqual('Passwords don\'t match')
   })
 
   it('should submit valid signup form', async () => {
