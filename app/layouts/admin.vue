@@ -127,7 +127,7 @@ const clickSignOut = () => {
       </div>
     </aside>
     <div
-      class="p-2 h-screen bg-white dark:bg-gray-900"
+      class="p-2 h-screen bg-white dark:bg-gray-900 transition-all duration-300"
       :class="[isCollapsed ? 'sm:ml-15' : 'sm:ml-64']"
     >
       <FlexThreeColumn class="mb-2">
