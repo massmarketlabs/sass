@@ -41,7 +41,7 @@ menus.forEach((group) => {
 })
 
 const clickSignOut = () => {
-  signOut()
+  signOut({ redirectTo: localePath('/signin') })
 }
 </script>
 
@@ -109,6 +109,7 @@ const clickSignOut = () => {
                 <UAvatar
                   :src="user?.image || undefined"
                   size="xs"
+                  class="border border-gray-300 dark:border-gray-700"
                 />
                 <span
                   v-if="!isCollapsed"
