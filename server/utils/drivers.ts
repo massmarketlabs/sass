@@ -20,11 +20,14 @@ const createPgPool = () => new pg.Pool({
   idleTimeoutMillis: 30000
 })
 
-const pgPool = createPgPool()
+let pgPool: pg.Pool
 
 // PG Pool
 export const getPgPool = () => {
   if (runtimeConfig.preset == 'node-server') {
+    if (!pgPool) {
+      pgPool = createPgPool()
+    }
     return pgPool
   } else {
     return createPgPool()

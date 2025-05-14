@@ -81,10 +81,13 @@ const createBetterAuth = () => betterAuth({
   ]
 })
 
-export const auth = createBetterAuth()
+let auth: ReturnType<typeof betterAuth>
 
 export const useServerAuth = () => {
   if (runtimeConfig.preset == 'node-server') {
+    if (!auth) {
+      auth = createBetterAuth()
+    }
     return auth
   } else {
     return createBetterAuth()
