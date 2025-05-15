@@ -23,6 +23,11 @@ export const getMenus = (t: TranFunction, localePath: LocalePathFunction, appRep
         icon: 'i-lucide-wrench',
         children: [
           {
+            label: t('menu.auditLog'),
+            icon: 'i-lucide-history',
+            to: localePath('/admin/maintenance/audit-log')
+          },
+          {
             label: t('menu.dbStats'),
             icon: 'i-lucide-database',
             to: localePath('/admin/maintenance/db-stats')

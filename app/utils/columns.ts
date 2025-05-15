@@ -6,11 +6,28 @@ export const htmlColumn = <T>(cell: ColumnCell<T>, el = 'span') => {
 export const IDColumn = <T>(cell: ColumnCell<T>) => {
   const value = cell.getValue() as string
   return h(UTooltip, {
-    text: value
+    text: value,
+    disableClosingTrigger: true
   }, () => h(
     'span',
     {},
     value.substring(0, 8)
+  ))
+}
+
+export const showMoreColumn = <T>(cell: ColumnCell<T>, length: number) => {
+  const value = cell.getValue() as string || ''
+  if (value.length <= length) {
+    return value
+  }
+
+  return h(UTooltip, {
+    text: value,
+    disableClosingTrigger: true
+  }, () => h(
+    'span',
+    {},
+    `${value.substring(0, length)}...`
   ))
 }
 

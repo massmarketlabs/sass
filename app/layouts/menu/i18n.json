@@ -7,7 +7,8 @@
       "subscriptions": "Subscriptions",
       "maintenance": "Maintenance",
       "dbStats": "Database Status",
-      "home": "Home"
+      "home": "Home",
+      "auditLog": "Audit Log"
     }
   },
   "zh-CN": {
@@ -18,7 +19,8 @@
       "subscriptions": "订阅管理",
       "maintenance": "系统维护",
       "dbStats": "数据库状态",
-      "home": "首页"
+      "home": "首页",
+      "auditLog": "审计日志"
     }
   },
   "ja": {
@@ -29,7 +31,8 @@
       "subscriptions": "サブスクリプション",
       "maintenance": "メンテナンス",
       "dbStats": "データベース状態",
-      "home": "ホーム"
+      "home": "ホーム",
+      "auditLog": "監査ログ"
     }
   },
   "fr": {
@@ -40,7 +43,8 @@
       "subscriptions": "Abonnements",
       "maintenance": "Maintenance",
       "dbStats": "État de la base de données",
-      "home": "Accueil"
+      "home": "Accueil",
+      "auditLog": "Journal d'audit"
     }
   }
 }
