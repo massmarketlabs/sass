@@ -24,9 +24,9 @@ const filters: AdminTableFilter[] = reactive([
     type: 'tabs',
     items: [
       { label: t('global.page.all'), id: '' },
-      { label: 'Auth', id: 'auth' },
-      { label: 'Email', id: 'email' },
-      { label: 'Payment', id: 'payment' }
+      { label: t('auditLog.categories.auth'), id: 'auth' },
+      { label: t('auditLog.categories.email'), id: 'email' },
+      { label: t('auditLog.categories.payment'), id: 'payment' }
     ],
     value: ''
   },
