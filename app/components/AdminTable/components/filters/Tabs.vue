@@ -61,7 +61,7 @@ watch(
     :items="items"
     :ui="{
       root: 'gap-0',
-      list: 'bg-elevated rounded-lg p-0',
+      list: 'bg-elevated rounded-lg p-0 border-0',
       trigger: 'data-[state=active]:text-(--ui-bg) data-[state=active]:bg-primary pl-4 pr-4',
       indicator: 'hidden'
     }"

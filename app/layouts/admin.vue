@@ -128,10 +128,10 @@ const clickSignOut = () => {
       </div>
     </aside>
     <div
-      class="p-2 h-screen bg-white dark:bg-gray-900 transition-all duration-300"
+      class="p-2 h-screen bg-white dark:bg-gray-900 transition-all duration-300 overflow-hidden flex flex-col"
       :class="[isCollapsed ? 'sm:ml-15' : 'sm:ml-64']"
     >
-      <FlexThreeColumn class="mb-2">
+      <FlexThreeColumn class="mb-2 flex-none">
         <template #left>
           <UDrawer
             class="sm:hidden"
@@ -177,10 +177,8 @@ const clickSignOut = () => {
           </ClientOnly>
         </template>
       </FlexThreeColumn>
-      <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
-        <!-- <ClientOnly> -->
+      <div class="p-2 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 flex-1 overflow-auto">
         <slot />
-        <!-- </ClientOnly> -->
       </div>
     </div>
   </div>

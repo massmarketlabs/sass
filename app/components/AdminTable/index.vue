@@ -151,8 +151,8 @@ defineExpose({
 </script>
 
 <template>
-  <div>
-    <FlexThreeColumn class="max-w-full overflow-x-scroll">
+  <div class="max-h-full flex flex-col">
+    <FlexThreeColumn class="max-w-full overflow-x-scroll p-[1px]">
       <template #left>
         <slot name="top-left-before" />
         <template
@@ -218,7 +218,7 @@ defineExpose({
       :columns="canSelect ? [{ id: selectColumnId }, ...columns] : columns"
       :data="data"
       sticky
-      class="max-h-[calc(100vh-140px)]"
+      class="flex-1"
     >
       <template #[`${selectColumnId}-header`]="{ table }">
         <UCheckbox
