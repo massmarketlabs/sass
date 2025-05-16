@@ -96,7 +96,6 @@ const createBetterAuth = () => betterAuth({
   },
   hooks: {
     after: createAuthMiddleware(async (ctx) => {
-      console.log(ctx.path)
       const ipAddress = ctx.getHeader('x-forwarded-for')
         || ctx.getHeader('remoteAddress') || undefined
       const userAgent = ctx.getHeader('user-agent') || undefined

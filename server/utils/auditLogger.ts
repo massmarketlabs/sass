@@ -12,7 +12,6 @@ export async function logAuditEvent(data: {
   status?: 'success' | 'failure' | 'pending'
   details?: string
 }) {
-  console.log('logAuditEvent', data)
   try {
     const db = getDB()
     await db.insert(auditLog).values({
