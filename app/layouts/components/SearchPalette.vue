@@ -2,53 +2,34 @@
 const { t } = defineProps<{
   t: TranFunction
 }>()
-const colorMode = useColorMode()
 const router = useRouter()
+const localePath = useLocalePath()
 const collapsed = defineModel('collapsed', { default: false })
 
 const groups = ref([
   {
     id: 'Routes',
-    label: 'Routes',
+    label: t('menu.navigation'),
     items: [
       {
-        label: 'Dashboard',
+        label: t('menu.dashboard'),
         icon: 'i-lucide-layout-dashboard',
-        to: '/admin/dashboard',
+        to: localePath('/admin/dashboard'),
         kbds: [
           'G',
           '1'
         ]
       },
       {
-        label: 'Table',
-        icon: 'i-lucide-file-text',
-        to: '/admin/table',
+        label: t('menu.users'),
+        icon: 'i-lucide-users',
+        to: localePath('/admin/user'),
         kbds: [
           'G',
           '2'
         ]
       }
     ]
-  },
-  {
-    id: 'theme',
-    label: 'Theme',
-    items: [{
-      id: 'theme-light',
-      label: 'Light',
-      disabled: colorMode.preference === 'light',
-      click: () => {
-        colorMode.preference = 'light'
-      }
-    }, {
-      id: 'theme-dark',
-      label: 'Dark',
-      disabled: colorMode.preference === 'dark',
-      click: () => {
-        colorMode.preference = 'dark'
-      }
-    }]
   }
 ])
 
@@ -117,6 +98,7 @@ function onSelectPalette(item: any) {
         v-model="value"
         close
         :groups="groups"
+        :placeholder="`${t('menu.search')}...`"
         class="flex-1"
         @update:open="onClosePalette"
         @update:model-value="onSelectPalette"

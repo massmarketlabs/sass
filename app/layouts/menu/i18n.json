@@ -1,6 +1,7 @@
 {
   "en": {
     "menu": {
+      "navigation": "Navigation",
       "search": "Search",
       "dashboard": "Dashboard",
       "users": "Users",
@@ -13,6 +14,7 @@
   },
   "zh-CN": {
     "menu": {
+      "navigation": "导航",
       "search": "搜索",
       "dashboard": "仪表板",
       "users": "用户",
@@ -25,6 +27,7 @@
   },
   "ja": {
     "menu": {
+      "navigation": "ナビゲーション",
       "search": "検索",
       "dashboard": "ダッシュボード",
       "users": "ユーザー",
@@ -37,6 +40,7 @@
   },
   "fr": {
     "menu": {
+      "navigation": "Navigation",
       "search": "Rechercher",
       "dashboard": "Tableau de bord",
       "users": "Utilisateurs",
