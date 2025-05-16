@@ -181,6 +181,10 @@ export default eventHandler(async (event) => {
         }
       }
       withSorts(listQuery, sorts)
+    } else if ('id' in columns) {
+      // Fallback sort to id desc
+      const sorts: SQL[] = [desc(columns.id)]
+      withSorts(listQuery, sorts)
     }
   }
 
