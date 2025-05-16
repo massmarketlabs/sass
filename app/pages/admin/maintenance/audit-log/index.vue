@@ -108,14 +108,21 @@ const getStatusColor = (status: string): 'success' | 'warning' | 'error' => {
   }
 }
 
-const { data: statusCount } = await useFetch<ColumnCount[]>('/api/admin/count/auditLog/status')
-statusCount.value?.forEach((item) => {
-  const status = (filters[1] as FilterTabs).items?.find(status => status.id === item.column)
-  if (status)
-    status.count = item.count
-})
+const fetchStatusCount = async (filter: FilterCondition[]) => {
+  const statusCount = await $fetch<ColumnCount[]>('/api/admin/count/auditLog/status', {
+    query: {
+      filter: JSON.stringify(filter)
+    }
+  })
+  const statusFilter = filters[1] as FilterTabs
+  statusFilter.items.forEach((item) => {
+    const status = statusCount.find(status => status.column === item.id)
+    item.count = status ? status.count : 0
+  })
+}
 
 const fetchData: FetchDataFn<AuditLog> = async ({ page, limit, sort, filter }) => {
+  fetchStatusCount(filter)
   const result = await $fetch<PageData<AuditLog>>('/api/admin/list/auditLog', {
     query: {
       page,

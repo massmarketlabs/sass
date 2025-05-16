@@ -142,15 +142,21 @@ const columns: AdminTableColumn<UserWithRole>[] = [
   }
 ]
 
-const { data: roleCount } = await useFetch<ColumnCount[]>('/api/admin/count/user/role')
-roleCount.value?.forEach((item) => {
-  const role = (filters[1] as FilterCheckbox).items?.find(role => role.id === item.column)
-  if (role) {
-    role.count = item.count
-  }
-})
+const fetchRoleCount = async (filter: FilterCondition[]) => {
+  const statusCount = await $fetch<ColumnCount[]>('/api/admin/count/user/role', {
+    query: {
+      filter: JSON.stringify(filter)
+    }
+  })
+  const roleFilter = filters[1] as FilterCheckbox
+  roleFilter.items.forEach((item) => {
+    const status = statusCount.find(status => status.column === item.id)
+    item.count = status ? status.count : 0
+  })
+}
 
 const fetchData: FetchDataFn<UserWithRole> = async ({ page, limit, sort, filter }) => {
+  fetchRoleCount(filter)
   const result = await $fetch<PageData<UserWithRole>>('/api/admin/list/user', {
     query: {
       page,
