@@ -63,7 +63,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
   })
   if (error) {
     toast.add({
-      title: error.message,
+      title: error.message || error.statusText,
       color: 'error'
     })
   }

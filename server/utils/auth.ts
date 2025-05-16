@@ -52,6 +52,10 @@ const createBetterAuth = () => betterAuth({
       })
       if (response.error) {
         console.error(`Failed to send reset password email: ${response.error.message}`)
+        throw createError({
+          statusCode: 500,
+          statusMessage: 'Internal Server Error'
+        })
       }
     }
   },
@@ -76,6 +80,10 @@ const createBetterAuth = () => betterAuth({
       })
       if (response.error) {
         console.error(`Failed to send verification email: ${response.error.message}`)
+        throw createError({
+          statusCode: 500,
+          statusMessage: 'Internal Server Error'
+        })
       }
     }
   },
